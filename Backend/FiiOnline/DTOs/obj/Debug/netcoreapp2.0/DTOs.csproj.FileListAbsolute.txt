@@ -1,0 +1,13 @@
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\obj\Debug\netcoreapp2.0\DTOs.csprojResolveAssemblyReference.cache
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\obj\Debug\netcoreapp2.0\DTOs.csproj.CoreCompileInputs.cache
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\obj\Debug\netcoreapp2.0\DTOs.AssemblyInfoInputs.cache
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\obj\Debug\netcoreapp2.0\DTOs.AssemblyInfo.cs
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\DTOs.deps.json
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\DTOs.dll
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\DTOs.pdb
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\obj\Debug\netcoreapp2.0\DTOs.dll
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\obj\Debug\netcoreapp2.0\DTOs.pdb
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\CreatingModels.dll
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\Data.Domain.dll
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+C:\Users\Ovidiu\source\repos\FiiOnline\DTOs\bin\Debug\netcoreapp2.0\CreatingModels.pdb

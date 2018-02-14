@@ -1,0 +1,15 @@
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Data.Domain.dll
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Data.Persistence.dll
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\obj\Debug\netcoreapp2.0\Business.Repositories.csprojResolveAssemblyReference.cache
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\obj\Debug\netcoreapp2.0\Business.Repositories.csproj.CoreCompileInputs.cache
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\obj\Debug\netcoreapp2.0\Business.Repositories.AssemblyInfoInputs.cache
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\obj\Debug\netcoreapp2.0\Business.Repositories.AssemblyInfo.cs
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Business.Repositories.deps.json
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Business.Repositories.dll
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Business.Repositories.pdb
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\CreatingModels.dll
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\CreatingModels.pdb
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\obj\Debug\netcoreapp2.0\Business.Repositories.dll
+c:\users\ovidiu\source\repos\FiiOnline\Repositories\obj\Debug\netcoreapp2.0\Business.Repositories.pdb

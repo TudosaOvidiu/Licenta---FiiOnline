@@ -1,0 +1,9 @@
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.deps.json
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.dll
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.pdb
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csprojResolveAssemblyReference.cache
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csproj.CoreCompileInputs.cache
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfoInputs.cache
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfo.cs
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.dll
+c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.pdb
