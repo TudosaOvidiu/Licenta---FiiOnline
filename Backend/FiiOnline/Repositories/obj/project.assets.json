@@ -12602,11 +12602,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Repositories\\Business.Repositories.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Repositories\\Business.Repositories.csproj",
       "projectName": "Business.Repositories",
-      "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Repositories\\Business.Repositories.csproj",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Repositories\\Business.Repositories.csproj",
       "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Repositories\\obj\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12625,14 +12625,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj"
             },
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj"
             },
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\CreatingModels.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\CreatingModels.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\CreatingModels.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\CreatingModels.csproj"
             }
           }
         }

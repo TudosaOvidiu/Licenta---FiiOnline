@@ -12581,11 +12581,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj",
       "projectName": "Data.Persistence",
-      "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj",
       "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\obj\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12604,8 +12604,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj"
             }
           }
         }

@@ -673,11 +673,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\CreatingModels.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\CreatingModels.csproj",
       "projectName": "CreatingModels",
-      "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\CreatingModels.csproj",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\CreatingModels.csproj",
       "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\obj\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -13431,11 +13431,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\FiiOnline\\FiiOnline.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\FiiOnline\\FiiOnline.csproj",
       "projectName": "FiiOnline",
-      "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\FiiOnline\\FiiOnline.csproj",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\FiiOnline\\FiiOnline.csproj",
       "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\FiiOnline\\obj\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\FiiOnline\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13454,17 +13454,17 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Persistence\\Data.Persistence.csproj"
             },
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Repositories\\Business.Repositories.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Repositories\\Business.Repositories.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Repositories\\Business.Repositories.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Repositories\\Business.Repositories.csproj"
             },
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj"
             },
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Business.Services\\Business.Services.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Business.Services\\Business.Services.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Business.Services\\Business.Services.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Business.Services\\Business.Services.csproj"
             }
           }
         }

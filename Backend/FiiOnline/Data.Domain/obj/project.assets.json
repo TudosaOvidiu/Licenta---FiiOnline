@@ -12560,11 +12560,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj",
       "projectName": "Data.Domain",
-      "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\Data.Domain.csproj",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\Data.Domain.csproj",
       "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\Data.Domain\\obj\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\Data.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12583,8 +12583,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\CreatingModels.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\source\\repos\\FiiOnline\\CreatingModels\\CreatingModels.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\CreatingModels.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Backend\\FiiOnline\\CreatingModels\\CreatingModels.csproj"
             }
           }
         }

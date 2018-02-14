@@ -27,9 +27,9 @@ namespace Business.Repositories.Implementations
             var profCourse = UserCourse.CreateUserCourse(profId, professor, coursId, course);
 //            _databaseContext.Users.Remove(professor);
 //            _databaseContext.Courses.Remove(course);
-            _databaseContext.UserCourses.Add(profCourse);
+//            _databaseContext.UserCourses.Add(profCourse);
             professor.Update(profCourse);
-//            _databaseContext.Users.Update(professor);
+            _databaseContext.Users.Update(professor);
 //            course.Update(profCourse);
 //            _databaseContext.Courses.Update(course);
             _databaseContext.SaveChanges();

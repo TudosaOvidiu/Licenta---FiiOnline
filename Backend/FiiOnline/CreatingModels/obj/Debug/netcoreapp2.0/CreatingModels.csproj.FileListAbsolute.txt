@@ -7,3 +7,12 @@ c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\Cr
 c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfo.cs
 c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.dll
 c:\users\ovidiu\source\repos\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.pdb
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.deps.json
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.dll
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.pdb
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csprojResolveAssemblyReference.cache
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csproj.CoreCompileInputs.cache
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfoInputs.cache
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfo.cs
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.dll
+C:\Users\Ovidiu\Documents\GitHub\Licenta---FiiOnline\Backend\FiiOnline\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.pdb
