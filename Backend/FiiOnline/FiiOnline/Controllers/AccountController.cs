@@ -93,7 +93,7 @@ namespace FiiOnline.Controllers
 
             if (result.Succeeded)
             {
-                return Json(new {token = _generator.GenerateJwtToken(model.Email, appUser)});
+                return Json(new {token = _generator.GenerateJwtToken(model.Email, appUser), appUser});
             }
 
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
@@ -110,31 +110,31 @@ namespace FiiOnline.Controllers
             }
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var callbackUrl = Url.Action("ResetPassword", "Account", new {userId = user.Id, code = code},
-                protocol: HttpContext.Request.Scheme);
+
+            var callbackUrl = String.Format("http://localhost:4200/#/reset-password?userId={0}&code={1}", user.Id,
+                code);
+//            var callbackUrl = new Uri(Url.Link("ResetPasswordRoute", new {userId = user.Id, code = code}));
             await _emailSender.SendEmailAsync(model.Email, "Reset Password",
                 $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+
             return StatusCode((int) HttpStatusCode.OK);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("ResetPassword", Name = "ResetPasswordRoute")]
-        public async Task<IActionResult> ResetPassword(string userId = "", string code = "")
+        public async Task<IActionResult> ResetPassword([FromBody] LoginCreatingModel model, string userId = "", string code = "")
         {
             try
             {
-//                _databaContext.
-//                var user = _usersService.GetById(userId);
                 var user = _userManager.FindByIdAsync(userId);
-                await _userManager.ResetPasswordAsync(user.Result, code, "Newpass1@");
-                return StatusCode((int)HttpStatusCode.OK);
+                await _userManager.ResetPasswordAsync(user.Result, code, model.Password);
+
+                return StatusCode((int) HttpStatusCode.OK);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-            
         }
-        
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Business.Repositories.Intefaces;
-using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -22,16 +21,17 @@ namespace Business.Repositories.Implementations
 
         public void AddCoursToProfessor(string profId, Guid coursId)
         {
-            var professor = _databaseContext.Users.AsNoTracking().FirstOrDefault(u => u.Id.Equals(profId));
+            var professor = _databaseContext.Users.Include(u => u.UserCourses).FirstOrDefault(u => u.Id.Equals(profId));
             var course = GetById(coursId);
             var profCourse = UserCourse.CreateUserCourse(profId, professor, coursId, course);
-//            _databaseContext.Users.Remove(professor);
+            //            _databaseContext.Users.Remove(professor);
 //            _databaseContext.Courses.Remove(course);
-//            _databaseContext.UserCourses.Add(profCourse);
+            //            _databaseContext.UserCourses.Add(profCourse);
             professor.Update(profCourse);
             _databaseContext.Users.Update(professor);
-//            course.Update(profCourse);
-//            _databaseContext.Courses.Update(course);
+            //            course.Update(profCourse);
+            //            _databaseContext.Courses.Update(course);
+//            _databaseContext.Courses.Remove(course);
             _databaseContext.SaveChanges();
         }
 
