@@ -5,7 +5,7 @@ import {DataService} from '../../services/data.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./../login/login.component.scss', './forgot-password.component.scss']
+  styleUrls: ['./../login/login.component.scss', './forgot-password.component.scss', '../../app.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
 

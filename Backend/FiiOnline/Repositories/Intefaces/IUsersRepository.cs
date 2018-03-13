@@ -11,6 +11,7 @@ namespace Business.Repositories.Intefaces
     {
         Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager);
         List<User> GetUsers();
-        User GetByName(string name);
+        User GetByUserName(string name);
+        int GetNumberOfSimiliarNames(string name);
     }
 }

@@ -10,6 +10,7 @@ import {DataService} from './services/data.service';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MaterializeModule } from 'angular2-materialize';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MaterializeModule } from 'angular2-materialize';
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    UserRegisterComponent,
   ],
   imports: [
     BrowserModule,

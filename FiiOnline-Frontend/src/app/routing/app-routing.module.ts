@@ -4,6 +4,7 @@ import {LoginComponent} from '../components/login/login.component';
 import {ForgotPasswordComponent} from '../components/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from '../components/reset-password/reset-password.component';
 import {isNullOrUndefined} from 'util';
+import {UserRegisterComponent} from '../components/user-register/user-register.component';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'login',  component: LoginComponent},
   { path: 'forgot-password',  component: ForgotPasswordComponent},
   { path: 'reset-password',  component: ResetPasswordComponent},
+  { path: 'register',  component: UserRegisterComponent},
   // { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
   // { path: 'signup', component: SignupPageComponent},
   // { path: 'edit', component: EditPageComponent},

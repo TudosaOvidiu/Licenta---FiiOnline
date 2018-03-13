@@ -1,0 +1,46 @@
+$borderColor: #aaaaaa;
+$themeColor: #3388cb;
+$errorColor: #f44336;
+
+/* label focus color */
+.input-field input[type]:focus + label {
+  color: $borderColor;
+}
+
+/* label underline focus color */
+.input-field input[type]:focus {
+  border-bottom: 1px solid $themeColor;
+  box-shadow: 0 1px 0 0 $themeColor;
+}
+
+/* valid color */
+//.input-field input[type].valid {
+//  border-bottom: 1px solid $borderColor;
+//  box-shadow: 0 0px 0 0 $themeColor;
+//}
+
+
+
+.waves-effect {
+  background-color: $themeColor;
+}
+
+.error-border{
+  border-bottom: 1px solid $errorColor !important;
+  box-shadow: 0 1px 0 0 $errorColor !important;
+}
+
+.error{
+  font-size: 12px;
+  color: $errorColor;
+  margin-top: -15px;
+}
+
+.input-field {
+  padding: 0% 3%;
+}
+
+label {
+  padding-left: 3%;
+
+}

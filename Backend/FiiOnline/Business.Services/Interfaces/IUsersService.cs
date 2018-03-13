@@ -12,6 +12,7 @@ namespace Business.Services.Interfaces
     {
         Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager);
         List<User> GetUsers();
-        User GetByName(string name);
+        User GetByUserName(string name);
+        int GetNumberOfSimilarNames(string firstName);
     }
 }

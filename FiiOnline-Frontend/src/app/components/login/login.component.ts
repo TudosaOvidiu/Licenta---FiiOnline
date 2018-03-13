@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Credentials} from '../../models/credentials';
 import {AuthenticationService} from '../../services/authentication.services';
-import $ from 'jquery';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss', '../../app.component.scss']
 })
 export class LoginComponent implements OnInit {
   model = new Credentials(null, null);

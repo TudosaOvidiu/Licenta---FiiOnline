@@ -9,7 +9,7 @@ import {ChangePassword} from '../../models/changePassword';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./../login/login.component.scss', './reset-password.component.scss']
+  styleUrls: ['./../login/login.component.scss', './reset-password.component.scss', '../../app.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
   id: string;

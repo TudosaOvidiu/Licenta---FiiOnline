@@ -149,8 +149,8 @@ namespace FiiOnline
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
 
-
-                DbSeeder.Seed(dbContext, roleManager, userManager);
+                //Coment this when adding migration
+//                DbSeeder.Seed(dbContext, roleManager, userManager);
             }
 
             app.UseAuthentication();

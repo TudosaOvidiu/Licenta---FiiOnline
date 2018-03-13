@@ -13,34 +13,52 @@ namespace Data.Domain.Entities
         {
         }
 
-        public String Name { get; private set; }
+        public String FirstName { get; private set; }
+
+        public String LastName { get; private set; }
+
+
+        public int Year { get; private set; }
+
+        public int Semester { get; private set; }
+
         public ICollection<UserCourse> UserCourses { get; private set; }
 
-        public static User Create(string name, string username, string email)
+        public static User Create(string firstName, string lastName, string username, string email, int year, int semester)
         {
             var instance = new User
             {
                 Id = Guid.NewGuid().ToString(),
 //                UserCourses = new List<UserCourse>()
             };
-            instance.Update(name, username, email);
+            instance.Update(firstName, lastName, username, email, year, semester);
             return instance;
         }
 
-        public void Update(string name, string username, string email)
+        public void Update(string firstName, string lastName, string username, string email, int year, int semester)
         {
-            Name = name;
+            FirstName = firstName;
+            LastName = lastName;
             UserName = username;
             Email = email;
+            Year = year;
+            Semester = semester;
         }
 
         public void Update(UserCreatingModel model)
         {
             this.UserName = model.Username;
 
-            this.Name = model.Name;
+            this.FirstName = model.FirstName;
+
+            this.LastName = model.LastName;
 
             this.Email = model.Email;
+
+            this.Year = model.Year;
+
+            this.Semester = model.Semester;
+
         }
 
         public void Update(UserCourse userCourse)

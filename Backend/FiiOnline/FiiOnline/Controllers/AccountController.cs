@@ -46,16 +46,18 @@ namespace FiiOnline.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserCreatingModel userModel)
         {
+            var userNameNumber = _usersService.GetNumberOfSimilarNames(userModel.FirstName);
+            userModel.Username = String.Format("{0}{1}", userModel.FirstName, (userNameNumber+1).ToString());
             try
             {
                 var result = await _usersService.CreateAsync(userModel, _userManager);
                 if (result.Succeeded)
                 {
-                    var user = _usersService.GetByName(userModel.Name);
+                    var user = _usersService.GetByUserName(userModel.Username);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new {userId = user.Id, code = code}));
                     await _emailSender.SendEmailAsync(userModel.Email, "Confirm your account",
-                        $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                        $"Please confirm your account by clicking here: <a href='{callbackUrl}'>link</a>");
                     return StatusCode((int) (HttpStatusCode.Created));
                 }
 

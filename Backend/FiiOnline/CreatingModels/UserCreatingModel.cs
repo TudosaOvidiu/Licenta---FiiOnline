@@ -11,9 +11,15 @@ namespace CreatingModels
 
         public String ConfirmPassword { get; set; }
 
-        public String Name { get; set; }
+        public String FirstName { get; set; }
+
+        public String LastName { get; set; }
 
         public String Email { get; set; }
+
+        public int Year { get; set; }
+
+        public int Semester { get; set; }
 
         public String Role { get; set; }
 

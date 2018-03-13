@@ -25,7 +25,11 @@ namespace Business.Services.Implementations
 
         public List<User> GetUsers() => _usersRepository.GetUsers();
 
-        public User GetByName(string name) => _usersRepository.GetByName(name);
+        public User GetByUserName(string name) => _usersRepository.GetByUserName(name);
+
+        public int GetNumberOfSimilarNames(string firstName) => _usersRepository.GetNumberOfSimiliarNames(firstName);
+
+
         public User GetById(string id) => _usersRepository.GetById(id);
 
         public void Update(UserCreatingModel model, string id)
