@@ -17,10 +17,7 @@ namespace Data.Domain.Entities
         {
             var instance = new UserCourse
             {
-                UserId = userId,
-                User = user,
-                CourseId = coursId,
-                Course = course
+                User = user
             };
             return instance;
         }

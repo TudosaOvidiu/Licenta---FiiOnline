@@ -1,0 +1,78 @@
+<div class="lesson-form">
+  <div class="center-align">
+    <h1 class="title"> Upload lesson</h1>
+  </div>
+  <form method="post" #uploadLessonForm="ngForm">
+
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" name="lesson" [(ngModel)]="model.title" #lesson="ngModel">
+        <label class="active">Lesson</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea class="materialize-textarea" name="description" [(ngModel)]="model.description" #description="ngModel"></textarea>
+        <label class="active">Description</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+      <input type="text" class="datepicker" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" name="date" [(ngModel)]="model.date" #date="ngModel">
+      <label class="active">Date</label>
+    </div>
+    </div>
+
+
+    <div class="row">
+      <div id="panel-body" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+        <div class="upload-drop-zone" [class.drop-zone-hover]="mouseOvered" id="drop-zone"
+             (mouseover)="mouseOvered=true" (mouseout)="mouseOvered=false">
+          <i class="fas fa-cloud-upload-alt upload-icon"></i>
+          <label class="on-click-upload">
+            <input type="file" (change)="onDrop($event)">
+            <strong>Choose a file</strong>
+            <span> or drag it here</span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row" id="display-uploaded-files">
+
+    </div>
+
+    <div class="center-align">
+
+      <button class="btn waves-effect waves-light" type="submit" name="action" (click)="onSubmit()"
+              [disabled]="!uploadLessonForm.valid">
+        Submit
+      </button>
+
+    </div>
+
+  </form>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>Delete file</h4>
+    <hr>
+    <br>
+    <p>Are you sure you want to delete {{fileName}}?</p>
+    <button class="btn waves-effect waves-light" name="close" (click)="closeModal()">
+        Cancel
+      </button>
+    <button class="btn waves-effect waves-light"  name="delete" (click)="deleteFile()">
+        Yes, delete it!
+      </button>
+  </div>
+
+</div>

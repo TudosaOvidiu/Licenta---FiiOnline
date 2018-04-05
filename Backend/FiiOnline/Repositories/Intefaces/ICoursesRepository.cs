@@ -7,6 +7,6 @@ namespace Business.Repositories.Intefaces
     public interface ICoursesRepository: ICrudRepository<Course, Guid>
     {
         void AddCoursToProfessor(string profId, Guid coursId);
-
+        Course RemoveUserCoursesList(Course course);
     }
 }

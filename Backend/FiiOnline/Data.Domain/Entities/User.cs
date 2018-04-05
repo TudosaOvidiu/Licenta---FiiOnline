@@ -22,20 +22,22 @@ namespace Data.Domain.Entities
 
         public int Semester { get; private set; }
 
+        public string Role { get; private set; }
+
         public ICollection<UserCourse> UserCourses { get; private set; }
 
-        public static User Create(string firstName, string lastName, string username, string email, int year, int semester)
+        public static User Create(string firstName, string lastName, string username, string email, int year, int semester, string role)
         {
             var instance = new User
             {
                 Id = Guid.NewGuid().ToString(),
 //                UserCourses = new List<UserCourse>()
             };
-            instance.Update(firstName, lastName, username, email, year, semester);
+            instance.Update(firstName, lastName, username, email, year, semester, role);
             return instance;
         }
 
-        public void Update(string firstName, string lastName, string username, string email, int year, int semester)
+        public void Update(string firstName, string lastName, string username, string email, int year, int semester, string role)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -43,6 +45,7 @@ namespace Data.Domain.Entities
             Email = email;
             Year = year;
             Semester = semester;
+            Role = role;
         }
 
         public void Update(UserCreatingModel model)

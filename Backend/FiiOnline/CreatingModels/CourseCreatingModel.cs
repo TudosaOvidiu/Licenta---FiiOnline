@@ -5,12 +5,11 @@ namespace CreatingModels
 {
     public class CourseCreatingModel
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
         public int Semester { get; set; }
-        public List<LessonCreatingModel> Lessons { get; set; }
-
+        public string Description { get; set; }
+        public List<string> ProfessorsGUIDs { get; set; }
         
     }
 }

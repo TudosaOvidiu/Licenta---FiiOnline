@@ -25,7 +25,17 @@ namespace FiiOnline.Controllers
         public IActionResult GetUsers()
         {
 
-            var users = _usersService.GetAll();
+            var users = _usersService.GetUsers().Result;
+            if (users == null)
+                return NotFound("There are no users");
+            return Ok(users);
+        }
+
+        [HttpGet("professors")]
+        public IActionResult GetProfessors()
+        {
+
+            var users = _usersService.GetProfessors().Result;
             if (users == null)
                 return NotFound("There are no users");
             return Ok(users);

@@ -24,7 +24,7 @@ namespace FiiOnline
                 var dbContext = scope.ServiceProvider.GetService<DatabaseContext>();
                 var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
-                DbSeeder.Seed(dbContext, roleManager, userManager);
+//                DbSeeder.Seed(dbContext, roleManager, userManager);
             }
             host.Run();
         }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Business.Repositories.Intefaces;
 using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 
 namespace Business.Services.Implementations
 {
@@ -20,29 +22,24 @@ namespace Business.Services.Implementations
         public void Create(CourseCreatingModel entity)
         {
             var course = Course.Create(entity.Name, entity.Year, entity.Semester);
-            List<Lesson> listOfLessons = new List<Lesson>();
-            foreach (var lesson in entity.Lessons)
-            {
-                var instance = Lesson.Create(lesson.Name, lesson.Path, lesson.Date, course.Id, course);
-                listOfLessons.Add(instance);
-            }
-
-            course.Update(listOfLessons);
+           
             _coursesRepository.Create(course);
+            foreach (var prof in entity.ProfessorsGUIDs)
+            {
+                _coursesRepository.AddCoursToProfessor(prof, course.Id);
+            }
         }
 
         public void Update(CourseCreatingModel entity, Guid id)
         {
             var course = _coursesRepository.GetById(id);
 
-            List<Lesson> UpdatedLessons = new List<Lesson>();
-
-            foreach (var lesson in entity.Lessons)
+            course.Update(entity.Name, entity.Year, entity.Semester);
+            course =_coursesRepository.RemoveUserCoursesList(course);
+            foreach (var prof in entity.ProfessorsGUIDs)
             {
-                UpdatedLessons.Add(Lesson.Create(lesson, course));
+                _coursesRepository.AddCoursToProfessor(prof, course.Id);
             }
-            course.Update(entity.Name, entity.Year, entity.Semester, UpdatedLessons);
-
             _coursesRepository.Update(course);
         }
 
@@ -51,9 +48,20 @@ namespace Business.Services.Implementations
             return _coursesRepository.GetAll();
         }
 
-        public Course GetById(Guid id)
+
+        public CourseDTO GetById(Guid id)
         {
-            return _coursesRepository.GetById(id);
+            var course = _coursesRepository.GetById(id);
+            List<string> profNames = new List<string>();
+            List<string> profGuids = new List<string>();
+            foreach (var userCourse in course.UserCourses)
+            {
+                profNames.Add(string.Format("{0} {1}", userCourse.User.FirstName, userCourse.User.LastName));
+                profGuids.Add(userCourse.UserId);
+            }
+            CourseDTO courseDTO = new CourseDTO(course.Id, course.Name, "Description", course.Year, course.Semester, profNames, profGuids);
+
+            return courseDTO;
         }
 
         public void Delete(Guid id)

@@ -17,8 +17,26 @@ namespace Data.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Data.Domain.Entities.AppFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("LessonId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
+
+                    b.ToTable("Files");
+                });
 
             modelBuilder.Entity("Data.Domain.Entities.Course", b =>
                 {
@@ -45,9 +63,9 @@ namespace Data.Persistence.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Description");
 
-                    b.Property<string>("Path");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -90,6 +108,8 @@ namespace Data.Persistence.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("Role");
 
                     b.Property<string>("SecurityStamp");
 
@@ -234,6 +254,14 @@ namespace Data.Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Data.Domain.Entities.AppFile", b =>
+                {
+                    b.HasOne("Data.Domain.Entities.Lesson", "Lesson")
+                        .WithMany("Files")
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Data.Domain.Entities.Lesson", b =>

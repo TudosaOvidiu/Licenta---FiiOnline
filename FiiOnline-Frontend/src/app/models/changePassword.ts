@@ -1,6 +1,9 @@
 export class ChangePassword {
-  constructor(
-    public password: string,
-    public confirmPassword: string
-  ) {}
+  public password: string;
+  public confirmPassword: string;
+
+  constructor() {
+    this.password = '';
+    this.confirmPassword = '';
+  }
 }

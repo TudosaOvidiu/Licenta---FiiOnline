@@ -9,6 +9,7 @@ namespace Data.Persistence
         DbSet<Course> Courses { get; set; }
         DbSet<Lesson> Lessons { get; set; }
         DbSet<UserCourse> UserCourses { get; set; }
+        DbSet<AppFile> Files { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();
     }

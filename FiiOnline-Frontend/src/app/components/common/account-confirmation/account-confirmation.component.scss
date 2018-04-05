@@ -1,0 +1,15 @@
+$borderColor: #aaaaaa;
+$themeColor: #3388cb;
+
+.confirmation-panel {
+  width: 35%;
+  border: 1px solid $borderColor;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 5%;
+
+}
+
+.panel-title{
+  color: $themeColor;
+}

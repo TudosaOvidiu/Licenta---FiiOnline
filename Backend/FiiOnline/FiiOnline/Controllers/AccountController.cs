@@ -55,7 +55,9 @@ namespace FiiOnline.Controllers
                 {
                     var user = _usersService.GetByUserName(userModel.Username);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new {userId = user.Id, code = code}));
+                    //                    var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new {userId = user.Id, code = code}));
+                    var callbackUrl = String.Format("http://localhost:4200/#/account-confirmation?userId={0}&code={1}", user.Id,
+                        code);
                     await _emailSender.SendEmailAsync(userModel.Email, "Confirm your account",
                         $"Please confirm your account by clicking here: <a href='{callbackUrl}'>link</a>");
                     return StatusCode((int) (HttpStatusCode.Created));
@@ -70,14 +72,14 @@ namespace FiiOnline.Controllers
         }
 
         [HttpGet]
-        [Route("ConfirmEmail", Name = "ConfirmEmailRoute")]
+        [Route("ConfirmAccount", Name = "ConfirmAccountRoute")]
         public async Task<IActionResult> ConfirmEmail(string userId = "", string code = "")
         {
             try
             {
                 var user = _userManager.FindByIdAsync(userId).Result;
-                await _userManager.ConfirmEmailAsync(user, code);
-                return StatusCode((int) HttpStatusCode.OK);
+                var result = await _userManager.ConfirmEmailAsync(user, code);
+                return Ok(result);
             }
             catch (Exception e)
             {

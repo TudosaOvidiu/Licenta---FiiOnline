@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Business.Repositories.Intefaces;
 using Business.Services.Interfaces;
@@ -6,6 +7,7 @@ using CreatingModels;
 using Data.Domain.Entities;
 using DTOs;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services.Implementations
 {
@@ -13,26 +15,61 @@ namespace Business.Services.Implementations
 
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly UserManager<User> _userManager;
 
-        public UsersService(IUsersRepository usersRepository)
+        public UsersService(IUsersRepository usersRepository, UserManager<User>userManager)
         {
             _usersRepository = usersRepository;
+            _userManager = userManager;
         }
 
         public async Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager) =>
             await _usersRepository.CreateAsync(model, userManager);
  
 
-        public List<User> GetUsers() => _usersRepository.GetUsers();
+        public async Task<List<UserDTO>> GetUsers()
+        {
+            var users = _usersRepository.GetAll();
+            List<UserDTO> userDTOs = new List<UserDTO>();
+
+            foreach (var user in users)
+            {
+                var role = await _userManager.GetRolesAsync(user);
+                userDTOs.Add(new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email,
+                    role[0]));
+            }
+
+            return userDTOs;
+        }
+
+        public async Task<List<UserDTO>> GetProfessors()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("Professor");
+            List<UserDTO> userDTOs = new List<UserDTO>();
+
+            foreach (var user in users)
+            {
+                userDTOs.Add(new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email,
+                    "Professor"));
+            }
+
+            return userDTOs;
+        }
+
 
         public User GetByUserName(string name) => _usersRepository.GetByUserName(name);
 
         public int GetNumberOfSimilarNames(string firstName) => _usersRepository.GetNumberOfSimiliarNames(firstName);
 
 
-        public User GetById(string id) => _usersRepository.GetById(id);
+        public UserDTO GetById(string id)
+        {
+            var user = _usersRepository.GetById(id);
+            UserDTO userDto = new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email, user.Role);
+            return userDto;
+        }
 
-        public void Update(UserCreatingModel model, string id)
+    public void Update(UserCreatingModel model, string id)
         {
             var user = _usersRepository.GetById(id);
             user.Update(model);

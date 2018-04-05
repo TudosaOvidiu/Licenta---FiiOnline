@@ -27,8 +27,10 @@ namespace Services
 
             string username = _configuration.GetValue<string>("Email:Username");
             string password = _configuration.GetValue<string>("Email:Password");
+            string provider = _configuration.GetValue<string>("Email:Provider");
+            int port = _configuration.GetValue<int>("Email:Port");
 
-            var client = new SmtpClient("smtp.gmail.com", 587)
+            var client = new SmtpClient(provider, port)
             {
                 
                 Credentials = new NetworkCredential(username, password),

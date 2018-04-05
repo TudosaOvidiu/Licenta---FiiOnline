@@ -1,56 +1,28 @@
 import {Injectable, NgModule} from '@angular/core';
 import {CanActivate, Router, RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from '../components/login/login.component';
-import {ForgotPasswordComponent} from '../components/forgot-password/forgot-password.component';
-import {ResetPasswordComponent} from '../components/reset-password/reset-password.component';
+import {LoginComponent} from '../components/common/login/login.component';
+import {ForgotPasswordComponent} from '../components/common/forgot-password/forgot-password.component';
+import {ResetPasswordComponent} from '../components/common/reset-password/reset-password.component';
 import {isNullOrUndefined} from 'util';
 import {UserRegisterComponent} from '../components/user-register/user-register.component';
-
-@Injectable()
-export class LoginGuard implements CanActivate {
-  constructor(private router: Router) {}
-  canActivate() {
-    //console.log(sessionStorage.getItem('authorization'));
-    if (sessionStorage.getItem('authorization') !== null) {
-      return true;
-    }
-    this.router.navigate(['/']);
-    return false;
-  }
-}
-
-@Injectable()
-export class NotLoginGuard implements CanActivate {
-  constructor(private router: Router) {}
-  canActivate() {
-    if (isNullOrUndefined(sessionStorage.getItem('authorization'))){
-      //console.log(sessionStorage.getItem('authorization'));
-      return true;
-    }
-    this.router.navigate(['']);
-    return false;
-  }
-}
-@Injectable()
-export class AdminGuard implements CanActivate {
-  constructor(private router: Router) {}
-  canActivate() {
-    let user = JSON.parse(sessionStorage.getItem('user'))
-    if (user.username === 'Admin'){
-      //console.log('Admin');
-      return true;
-    }
-    this.router.navigate(['']);
-    return false;
-  }
-}
+import {AccountConfirmationComponent} from '../components/common/account-confirmation/account-confirmation.component';
+import {UploadCourseComponent} from '../components/admin/upload-course/upload-course.component';
+import {UploadLessonComponent} from '../components/professor/upload-lesson/upload-lesson.component';
+import {EditCourseComponent} from '../components/admin/upload-course/edit-course.component';
 
 
 const routes: Routes = [
-  { path: 'login',  component: LoginComponent},
-  { path: 'forgot-password',  component: ForgotPasswordComponent},
-  { path: 'reset-password',  component: ResetPasswordComponent},
-  { path: 'register',  component: UserRegisterComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'register', component: UserRegisterComponent},
+  {path: 'account-confirmation', component: AccountConfirmationComponent},
+  {path: 'upload-course', component: UploadCourseComponent},
+  {path: 'upload-lesson', component: UploadLessonComponent},
+  {path: 'edit-course', component: EditCourseComponent},
+  {path: 'edit-lesson/:id', component: UploadLessonComponent},
+
+
   // { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
   // { path: 'signup', component: SignupPageComponent},
   // { path: 'edit', component: EditPageComponent},
@@ -58,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

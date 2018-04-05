@@ -27,6 +27,8 @@ namespace Data.Persistence
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<AppFile> Files { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +36,11 @@ namespace Data.Persistence
             modelBuilder.Entity<Lesson>()
                 .HasOne(p => p.Course)
                 .WithMany(b => b.Lessons)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AppFile>()
+                .HasOne(f => f.Lesson)
+                .WithMany(l => l.Files)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserCourse>()

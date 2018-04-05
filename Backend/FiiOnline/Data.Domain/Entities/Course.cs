@@ -43,6 +43,7 @@ namespace Data.Domain.Entities
             Name = name;
             Year = year;
             Semester = semester;
+            Lessons = new List<Lesson>();
         }
 
         public void Update(UserCourse userCourse)
@@ -57,9 +58,22 @@ namespace Data.Domain.Entities
             }
         }
 
-        public void Update(List<Lesson> lessons)
+        public void AddLesson(Lesson lesson)
         {
-            this.Lessons = lessons;
+            if (Lessons == null)
+            {
+                this.Lessons = new List<Lesson>(){lesson};
+            }
+            else
+            {
+                this.Lessons.Add(lesson);
+            }
         }
+
+        public void RemoveProfFromCourse(UserCourse userCourse)
+        {
+            this.UserCourses.Remove(userCourse);
+        }
+
     }
 }

@@ -8,20 +8,23 @@ using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Repositories.Implementations
 {
     public class UsersRepository: ACrudRepository<User, string>, IUsersRepository
     {
+        private readonly UserManager<User> _userManager;
 
-        public UsersRepository(IDatabaseContext databaseContext) : base(databaseContext)
+        public UsersRepository(IDatabaseContext databaseContext, UserManager<User> userManager) : base(databaseContext)
         {
+            _userManager = userManager;
         }
 
         public async Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
-            var user = User.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Year, model.Semester);
+            var user = User.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Year, model.Semester, model.Role);
             if (model.Password != model.ConfirmPassword)
                 throw new ArgumentException("Passwords do not match!");
             // Add the user to the Db with the choosen password
@@ -53,5 +56,6 @@ namespace Business.Repositories.Implementations
 
             return max;
         }
+
     }
 }
