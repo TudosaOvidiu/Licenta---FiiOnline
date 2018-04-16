@@ -46,7 +46,7 @@ export class EditCourseComponent implements OnInit {
   }
 
   onSubmit(model: CourseModel) {
-    this.dataService.postData('http://localhost:63944/Courses', model).subscribe(response => {
+    this.dataService.putData('http://localhost:63944/Courses/02a69dc4-64fe-4cbc-85a4-6f207207a9fb', model).subscribe(response => {
       },
       err => {
       }

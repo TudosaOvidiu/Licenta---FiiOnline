@@ -47,6 +47,21 @@ namespace FiiOnline.Controllers
             return Ok(courses);
         }
 
+        [HttpGet("course-weeks/{id}")]
+        public IActionResult GetCourseWeeks([FromRoute] Guid id)
+        {
+            try
+            {
+                var weeks = _coursesService.GetCourseWeeks(id);
+                return Ok(weeks);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteCours([FromRoute] Guid id)
         {

@@ -1,0 +1,60 @@
+<div class="week-form center-align">
+  <div>
+    <h1 [hidden]="onEdit" class="title"> Create lesson</h1>
+    <h1 [hidden]="!onEdit" class="title"> Edit lesson</h1>
+  </div>
+  <form method="post" #weekForm="ngForm">
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" name="title" [(ngModel)]="model.title" #title="ngModel">
+        <label class="active">Title</label>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="input-field col s6">
+        <select materialize="material_select" name="weekNr" [(ngModel)]="model.weekNr" #weekNr="ngModel">
+          <option value="" disabled selected>Choose week</option>
+          <option *ngFor="let i of week_number" [value]=i>{{i}}</option>
+        </select>
+        <label>Lesson for week</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input type="text" class="datepicker" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]"
+               name="date" [(ngModel)]="model.date" #date="ngModel">
+        <label class="active">Date</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea class="materialize-textarea" name="description" [(ngModel)]="model.description"
+                  #description="ngModel"></textarea>
+        <label class="active">Description</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn waves-effect waves-light" type="submit" name="action" (click)="onSubmit(weekForm.value)"
+              [disabled]="!weekForm.valid">
+        Submit
+      </button>
+
+    </div>
+
+  </form>
+</div>
+
+
+<!-- Modal Structure -->
+<!--<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"-->
+<!--[materializeActions]="modalActions">-->
+<!--<div class="modal-content">-->
+<!--<h4>{{modalHeader}}</h4>-->
+<!--<br>-->
+<!--<p>{{modalText}}</p>-->
+<!--</div>-->
+
+<!--</div>-->

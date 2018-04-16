@@ -19,6 +19,12 @@ export class DataService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
+  fetchFile(url){
+    return this.http.get(`${url}`, {responseType: 'blob'}).catch((error: any) => Observable.throw(error || 'Server error'))
+    .map((res) => res)
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
+
   postData(url, jsonObject) {
     let headers = new HttpHeaders();
     // if (sessionStorage.getItem('authorization') !== '') {
@@ -34,7 +40,7 @@ export class DataService {
     return this.http.put(url, jsonObject).catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-  deleteData(url, jsonObject) {
+  deleteData(url) {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     return this.http.delete(url, {headers: headers}).catch((error: any) => Observable.throw(error || 'Server error'));

@@ -24,18 +24,26 @@ namespace Data.Persistence
                 .EnableSensitiveDataLogging();
 
         public new DbSet<User> Users { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Professor> Professors { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Lesson> Lessons { get; set; }
-        public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<Week> Weeks { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ProfessorCourse> ProfessorCourses { get; set; }
         public DbSet<AppFile> Files { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Lesson>()
-                .HasOne(p => p.Course)
-                .WithMany(b => b.Lessons)
+            modelBuilder.Entity<Resource>()
+                .HasOne(l => l.Week)
+                .WithMany(w => w.Resources)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Week>()
+                .HasOne(w => w.Course)
+                .WithMany(c => c.Weeks)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<AppFile>()
@@ -43,15 +51,15 @@ namespace Data.Persistence
                 .WithMany(l => l.Files)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<UserCourse>()
-                .HasKey(uc => new {uc.UserId, uc.CourseId});
+            modelBuilder.Entity<ProfessorCourse>()
+                .HasKey(uc => new {uc.ProfessorId, uc.CourseId});
 
-            modelBuilder.Entity<UserCourse>()
-                .HasOne(uc => uc.User)
-                .WithMany(u => u.UserCourses)
-                .HasForeignKey(uc => uc.UserId);
+            modelBuilder.Entity<ProfessorCourse>()
+                .HasOne(uc => uc.Professor)
+                .WithMany(p => p.UserCourses)
+                .HasForeignKey(uc => uc.ProfessorId);
 
-            modelBuilder.Entity<UserCourse>()
+            modelBuilder.Entity<ProfessorCourse>()
                 .HasOne(uc => uc.Course)
                 .WithMany(c => c.UserCourses)
                 .HasForeignKey(uc => uc.CourseId);

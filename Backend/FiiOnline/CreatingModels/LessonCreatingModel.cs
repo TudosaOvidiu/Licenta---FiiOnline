@@ -9,8 +9,9 @@ namespace CreatingModels
         public string Title { get;  set; }
         public string Description { get; set; }
         public DateTime Date { get;  set; }
-        public Guid CourseId { get;  set; }
+        public Guid WeekId { get;  set; }
         public List<IFormFile> files { get; set; }
+        public string Type { get; set; }
 
     }
 }

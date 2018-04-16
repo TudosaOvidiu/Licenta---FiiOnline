@@ -1,0 +1,54 @@
+<app-sidebar></app-sidebar>
+
+<div class="content">
+  <div class="row">
+    <div *ngFor="let course of courses" class="col s12 m10 l10 offset-m1 offset-l1">
+      <div class="card sticky-action">
+        <div class="card-content grey-text">
+          <span class="card-title grey-text text-darken-4 activator">{{course.name}}<i class="material-icons right">more_vert</i></span>
+          <p class="truncate">{{course.description}} </p>
+        </div>
+
+        <div [hidden]="page!=='admin'" class="card-action">
+          <a class="edit-btn" routerLink="/edit-course/{{course.id}}">Edit</a>
+          <a class="delete-btn" (click)="openModal(course)">Delete</a>
+        </div>
+
+        <div [hidden]="page!=='student'" class="card-action">
+          <a (click)="saveCourseId(course.id)" class="theme-color-btn">Lessons</a>
+          <a (click)="saveCourseId(course.id)" class="theme-color-btn">Seminars</a>
+        </div>
+
+        <div [hidden]="page!=='professor'" class="card-action">
+          <a routerLink="/professor-lessons/{{course.id}}"  class="theme-color-btn">Lessons</a>
+          <a routerLink="/create-lesson" (click)="saveCourseId(course.id)" class="theme-color-btn">Create Lesson</a>
+        </div>
+
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Authors<i class="material-icons right">close</i></span>
+          <p *ngFor="let prof of course.professors">{{prof.firstName}} {{prof.lastName}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>Delete course</h4>
+    <hr>
+    <br>
+    <p>Are you sure you want to delete {{courseName}}?</p>
+    <button class="btn waves-effect waves-light" name="close" (click)="closeModal()">
+      Cancel
+    </button>
+    <button class="btn waves-effect waves-light" name="delete" (click)="deleteCourse(courseName)">
+      Yes, delete it!
+    </button>
+  </div>
+
+</div>
+
+

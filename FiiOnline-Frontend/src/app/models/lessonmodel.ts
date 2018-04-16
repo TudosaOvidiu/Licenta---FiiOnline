@@ -2,12 +2,12 @@ export class LessonModel {
   public title: string;
   public files: FormData;
   public description: string;
-  public date: Date;
+  public type: string;
 
   constructor() {
     this.title = '';
     this.files = new FormData();
     this.description = '';
-    this.date = null;
+    this.type = '';
   }
 }

@@ -25,7 +25,7 @@ namespace FiiOnline.Controllers
         public IActionResult GetUsers()
         {
 
-            var users = _usersService.GetUsers().Result;
+            var users = _usersService.GetAll();
             if (users == null)
                 return NotFound("There are no users");
             return Ok(users);
@@ -35,7 +35,7 @@ namespace FiiOnline.Controllers
         public IActionResult GetProfessors()
         {
 
-            var users = _usersService.GetProfessors().Result;
+            var users = _usersService.GetProfessors();
             if (users == null)
                 return NotFound("There are no users");
             return Ok(users);

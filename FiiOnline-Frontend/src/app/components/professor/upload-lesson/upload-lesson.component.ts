@@ -22,6 +22,7 @@ export class UploadLessonComponent implements OnInit {
   private event;
   private files_on_server = {};
   private lesson_id;
+  private course_id; //from sesion storage
 
   modalActions = new EventEmitter<string | MaterializeAction>();
 
@@ -31,6 +32,9 @@ export class UploadLessonComponent implements OnInit {
 
 
   ngOnInit() {
+    this.course_id = sessionStorage.getItem('weekId');
+    console.log(this.course_id);
+    // sessionStorage.removeItem('courseId');
     this.route.params.subscribe(params => {
       this.lesson_id = params['id'];
       if (this.lesson_id !== undefined) {
@@ -38,15 +42,11 @@ export class UploadLessonComponent implements OnInit {
             console.log(response);
             this.model.title = response.title;
             this.model.description = response.description;
-            this.model.date = response.date;
+            // this.model.date = response.date;
             //dictionary of fileName/filePath of files on server
-            for (let file_name of response.filesNames) {
-              for (let file_path of response.filesPaths) {
-                if (file_path.includes(file_name.substring(0, file_name.lastIndexOf('.')))) {
-                  this.files_on_server[file_name] = file_path;
-                }
-              }
-              this.showFile(file_name);
+            for (let file of response.fileDtos) {
+              this.files_on_server[file.fileName] = file.filePath;
+              this.showFile(file.fileName);
             }
           },
           err => {
@@ -56,6 +56,11 @@ export class UploadLessonComponent implements OnInit {
       }
       ;
     });
+  }
+
+  setType(type){
+    this.model.type = type;
+    console.log(this.model.type);
   }
 
 
@@ -207,8 +212,9 @@ export class UploadLessonComponent implements OnInit {
   onSubmit() {
     this.model.files.append('title', this.model.title);
     this.model.files.append('description', this.model.description);
-    this.model.files.append('courseId', '02a69dc4-64fe-4cbc-85a4-6f207207a9fb');
-    // this.model.files.append('date', this.model.date);
+    this.model.files.append('weekId', this.course_id);
+    this.model.files.append('type', this.model.type);
+
 
     console.log(this.model);
 

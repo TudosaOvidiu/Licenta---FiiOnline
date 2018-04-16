@@ -22,18 +22,37 @@ namespace Business.Repositories.Implementations
             _userManager = userManager;
         }
 
-        public async Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager)
+        public async Task<IdentityResult> CreateAsync(UserCreatingModel model)
         {
-            var user = User.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Year, model.Semester, model.Role);
-            if (model.Password != model.ConfirmPassword)
-                throw new ArgumentException("Passwords do not match!");
-            // Add the user to the Db with the choosen password
-            var response = await userManager.CreateAsync(user, model.Password);
+            if (model.Role.Equals("Student"))
+            {
+                var user = Student.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Role,
+                    model.Year, model.Semester);
 
-            await userManager.AddToRoleAsync(user, model.Role);
-            _databaseContext.SaveChanges();
+                if (model.Password != model.ConfirmPassword)
+                    throw new ArgumentException("Passwords do not match!");
+                // Add the user to the Db with the choosen password
+                var response = await _userManager.CreateAsync(user, model.Password);
 
-            return response;
+                await _userManager.AddToRoleAsync(user, model.Role);
+                _databaseContext.SaveChanges();
+
+                return response;
+            }
+            else
+            {
+                var user = Professor.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Role);
+
+                if (model.Password != model.ConfirmPassword)
+                    throw new ArgumentException("Passwords do not match!");
+                // Add the user to the Db with the choosen password
+                var response = await _userManager.CreateAsync(user, model.Password);
+
+                await _userManager.AddToRoleAsync(user, model.Role);
+                _databaseContext.SaveChanges();
+
+                return response;
+            }
         }
 
         public List<User> GetUsers() =>
@@ -56,6 +75,8 @@ namespace Business.Repositories.Implementations
 
             return max;
         }
+
+        public List<Professor> GetProfessors() => _databaseContext.Professors.ToList();
 
     }
 }

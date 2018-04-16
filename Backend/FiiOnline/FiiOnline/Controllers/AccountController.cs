@@ -50,7 +50,7 @@ namespace FiiOnline.Controllers
             userModel.Username = String.Format("{0}{1}", userModel.FirstName, (userNameNumber+1).ToString());
             try
             {
-                var result = await _usersService.CreateAsync(userModel, _userManager);
+                var result = await _usersService.CreateAsync(userModel);
                 if (result.Succeeded)
                 {
                     var user = _usersService.GetByUserName(userModel.Username);

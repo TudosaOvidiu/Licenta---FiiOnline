@@ -51,7 +51,7 @@ namespace Data.Persistence
             }
 
             // Create the "Admin" ApplicationUser account
-            var userAdmin = User.Create("Admin", "", "Admin", "admin@fiionline.com", 0, 0, "Administrator");
+            var userAdmin = User.Create("Admin", "", "Admin", "admin@fiionline.com", "Administrator");
             // Insert "Admin" into the Database and assign the "Administrator" and "Registered" roles to him.
             if (await userManager.FindByIdAsync(userAdmin.Id) == null)
             {

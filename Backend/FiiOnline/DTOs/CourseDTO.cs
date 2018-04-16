@@ -15,20 +15,17 @@ namespace DTOs
 
         public int Semester { get; set; }
 
-        public List<String> ProfNames { get; set; }
-
-        public List<String> ProfGuids { get; set; }
+        public List<UserDTO> Professors { get; set; }
 
 
-        public CourseDTO(Guid id, String name, String description, int year, int semester, List<String> profNames, List<string> profGuids)
+        public CourseDTO(Guid id, String name, String description, int year, int semester, List<UserDTO> professors)
         {
             Id = id;
             Name = name;
             Description = description;
             Year = year;
             Semester = semester;
-            ProfNames = profNames;
-            ProfGuids = profGuids;
+            Professors = professors;
         }
     }
 }

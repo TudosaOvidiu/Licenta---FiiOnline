@@ -1,0 +1,42 @@
+$borderColor: #aaaaaa;
+$themeColor: #3388cb;
+
+.materials {
+  padding-bottom: 0px;
+  .files {
+    margin-top: 50px;
+    .file-box {
+      vertical-align: text-bottom;
+      margin-bottom: 30px;
+      .file-name {
+        display: inline-block;
+        font-size: medium;
+        width: 95%;
+        vertical-align: bottom;
+
+      }
+
+      .file-icon {
+        font-size: 30px;
+        margin-right: 5px;
+        padding-bottom: 3px;
+      }
+      .file_button {
+        display: inline-block;
+        margin: 10px 10px 0px 0px;
+        color: rgba(51, 136, 203, 0.71);
+      }
+      .file_button:hover {
+        cursor: pointer;
+        color: $themeColor;
+      }
+      .file_button:active {
+        cursor: pointer;
+        color: rgba(51, 136, 203, 0.85);
+      }
+    }
+
+  }
+}
+
+

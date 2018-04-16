@@ -12,16 +12,20 @@ namespace Business.Services.Implementations
     public class CoursesService: ICoursesService
     {
         private readonly ICoursesRepository _coursesRepository;
+        private readonly IUsersService _usersService;
+        private readonly IWeeksService _weeksService;
 
-        public CoursesService(ICoursesRepository coursesRepository)
+        public CoursesService(ICoursesRepository coursesRepository, IUsersService usersService, IWeeksService weeksService)
         {
             _coursesRepository = coursesRepository;
+            _usersService = usersService;
+            _weeksService = weeksService;
         }
 
 
         public void Create(CourseCreatingModel entity)
         {
-            var course = Course.Create(entity.Name, entity.Year, entity.Semester);
+            var course = Course.Create(entity.Name, entity.Year, entity.Semester, entity.Description);
            
             _coursesRepository.Create(course);
             foreach (var prof in entity.ProfessorsGUIDs)
@@ -34,7 +38,7 @@ namespace Business.Services.Implementations
         {
             var course = _coursesRepository.GetById(id);
 
-            course.Update(entity.Name, entity.Year, entity.Semester);
+            course.Update(entity.Name, entity.Year, entity.Semester, entity.Description);
             course =_coursesRepository.RemoveUserCoursesList(course);
             foreach (var prof in entity.ProfessorsGUIDs)
             {
@@ -43,25 +47,42 @@ namespace Business.Services.Implementations
             _coursesRepository.Update(course);
         }
 
-        public IEnumerable<Course> GetAll()
+        public IEnumerable<CourseDTO> GetAll()
         {
-            return _coursesRepository.GetAll();
+            var courses = _coursesRepository.GetAll();
+            List<CourseDTO> courseDtos = new List<CourseDTO>();
+            foreach (var course in courses)
+            {
+                courseDtos.Add(GetById(course.Id));
+            }
+
+            return courseDtos;
         }
 
 
         public CourseDTO GetById(Guid id)
         {
             var course = _coursesRepository.GetById(id);
-            List<string> profNames = new List<string>();
-            List<string> profGuids = new List<string>();
-            foreach (var userCourse in course.UserCourses)
+            List < UserDTO > professors= new List<UserDTO>();
+            foreach (var profCourse in course.UserCourses)
             {
-                profNames.Add(string.Format("{0} {1}", userCourse.User.FirstName, userCourse.User.LastName));
-                profGuids.Add(userCourse.UserId);
+                professors.Add(_usersService.GetById(profCourse.ProfessorId));
             }
-            CourseDTO courseDTO = new CourseDTO(course.Id, course.Name, "Description", course.Year, course.Semester, profNames, profGuids);
+            CourseDTO courseDTO = new CourseDTO(course.Id, course.Name, course.Description, course.Year, course.Semester, professors);
 
             return courseDTO;
+        }
+
+        public List<WeekDTO> GetCourseWeeks(Guid id)
+        {
+            var course = _coursesRepository.GetById(id);
+            List<WeekDTO> weeksDtos = new List<WeekDTO>();
+            foreach (var week in course.Weeks)
+            {
+                weeksDtos.Add(_weeksService.GetById(week.Id));
+            }
+
+            return weeksDtos;
         }
 
         public void Delete(Guid id)

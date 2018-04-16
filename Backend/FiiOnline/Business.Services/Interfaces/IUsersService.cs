@@ -10,10 +10,9 @@ namespace Business.Services.Interfaces
 {
     public interface IUsersService: ICrudService<User, UserCreatingModel, UserDTO, string>
     {
-        Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager);
-        Task<List<UserDTO>> GetUsers();
+        Task<IdentityResult> CreateAsync(UserCreatingModel model);
         User GetByUserName(string name);
         int GetNumberOfSimilarNames(string firstName);
-        Task<List<UserDTO>> GetProfessors();
+        List<UserDTO> GetProfessors();
     }
 }

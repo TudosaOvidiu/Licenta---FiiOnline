@@ -12,45 +12,49 @@ namespace Data.Domain.Entities
         public string Name { get; private set; }
         public int Year { get; private set; }
         public int Semester { get; private set; }
-        public List<Lesson> Lessons { get; private set; }
-        public ICollection<UserCourse> UserCourses { get; private set; }
+        public string Description { get; private set; }
 
-        public static Course Create(string name, int year, int semester, List<Lesson> lessons, List<User> professors)
+        public List<Week> Weeks { get; private set; }
+        public ICollection<ProfessorCourse> UserCourses { get; private set; }
+
+        public static Course Create(string name, int year, int semester, List<Week> weeks, List<User> professors, string description)
         {
             var instance = new Course { Id = Guid.NewGuid() };
-            instance.Update(name, year, semester, lessons);
+            instance.Update(name, year, semester, weeks, description);
             return instance;
         }
 
-        public static Course Create(string name, int year, int semester)
+        public static Course Create(string name, int year, int semester, string description)
         {
             var instance = new Course { Id = Guid.NewGuid() };
-            instance.Update(name, year, semester);
+            instance.Update(name, year, semester, description);
             return instance;
         }
 
       
 
-        public void Update(string name, int year, int semester, List<Lesson> lessons)
+        public void Update(string name, int year, int semester, List<Week> weeks, string description)
         {
             Name = name;
             Year = year;
             Semester = semester;
-            Lessons = lessons;
+            Weeks = weeks;
+            Description = description;
         }
-        public void Update(string name, int year, int semester)
+        public void Update(string name, int year, int semester, string description)
         {
             Name = name;
             Year = year;
             Semester = semester;
-            Lessons = new List<Lesson>();
+            Weeks = new List<Week>();
+            Description = description;
         }
 
-        public void Update(UserCourse userCourse)
+        public void Update(ProfessorCourse userCourse)
         {
             if (UserCourses == null)
             {
-                UserCourses = new List<UserCourse>(){userCourse};
+                UserCourses = new List<ProfessorCourse>(){userCourse};
             }
             else
             {
@@ -58,19 +62,21 @@ namespace Data.Domain.Entities
             }
         }
 
-        public void AddLesson(Lesson lesson)
+        public void AddWeek(Week week)
         {
-            if (Lessons == null)
+            if (Weeks == null)
             {
-                this.Lessons = new List<Lesson>(){lesson};
+                this.Weeks = new List<Week>() { week };
             }
             else
             {
-                this.Lessons.Add(lesson);
+                this.Weeks.Add(week);
             }
         }
 
-        public void RemoveProfFromCourse(UserCourse userCourse)
+        
+
+        public void RemoveProfFromCourse(ProfessorCourse userCourse)
         {
             this.UserCourses.Remove(userCourse);
         }

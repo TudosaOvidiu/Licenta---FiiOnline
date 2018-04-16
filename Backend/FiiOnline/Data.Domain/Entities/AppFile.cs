@@ -14,7 +14,7 @@ namespace Data.Domain.Entities
         public string Path { get; private set; }
 
         public Guid LessonId { get; private set; }
-        public Lesson Lesson { get; private set; }
+        public Resource Lesson { get; private set; }
 
         public static AppFile Create(Guid id, string name, string path)
         {
@@ -28,7 +28,7 @@ namespace Data.Domain.Entities
             return instance;
         }
 
-        public void Update(Guid lessonId, Lesson lesson)
+        public void Update(Guid lessonId, Resource lesson)
         {
             this.LessonId = lessonId;
             this.Lesson = lesson;

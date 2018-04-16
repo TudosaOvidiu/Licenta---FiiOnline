@@ -8,7 +8,7 @@ namespace Business.Services.Interfaces
     {
         void Create(TCreatingModel entity);
         void Update(TCreatingModel entity, ID id);
-        IEnumerable<T> GetAll();
+        IEnumerable<TDTO> GetAll();
         TDTO GetById(ID id);
         void Delete(ID id);
     }

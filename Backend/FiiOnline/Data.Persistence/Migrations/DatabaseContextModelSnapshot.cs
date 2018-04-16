@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
 namespace Data.Persistence.Migrations
@@ -43,6 +44,8 @@ namespace Data.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("Semester");
@@ -54,24 +57,37 @@ namespace Data.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Data.Domain.Entities.Lesson", b =>
+            modelBuilder.Entity("Data.Domain.Entities.ProfessorCourse", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("ProfessorId");
 
                     b.Property<Guid>("CourseId");
 
-                    b.Property<DateTime>("Date");
+                    b.HasKey("ProfessorId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("ProfessorCourses");
+                });
+
+            modelBuilder.Entity("Data.Domain.Entities.Resource", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("Type");
+
+                    b.Property<Guid>("WeekId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("WeekId");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Resources");
                 });
 
             modelBuilder.Entity("Data.Domain.Entities.User", b =>
@@ -83,6 +99,9 @@ namespace Data.Persistence.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -113,14 +132,10 @@ namespace Data.Persistence.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int>("Semester");
-
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<int>("Year");
 
                     b.HasKey("Id");
 
@@ -133,19 +148,30 @@ namespace Data.Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
-            modelBuilder.Entity("Data.Domain.Entities.UserCourse", b =>
+            modelBuilder.Entity("Data.Domain.Entities.Week", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("CourseId");
 
-                    b.HasKey("UserId", "CourseId");
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("WeekNr");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("UserCourses");
+                    b.ToTable("Weeks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -256,32 +282,63 @@ namespace Data.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Data.Domain.Entities.Professor", b =>
+                {
+                    b.HasBaseType("Data.Domain.Entities.User");
+
+
+                    b.ToTable("Professor");
+
+                    b.HasDiscriminator().HasValue("Professor");
+                });
+
+            modelBuilder.Entity("Data.Domain.Entities.Student", b =>
+                {
+                    b.HasBaseType("Data.Domain.Entities.User");
+
+                    b.Property<int>("Semester");
+
+                    b.Property<int>("Year");
+
+                    b.ToTable("Student");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
             modelBuilder.Entity("Data.Domain.Entities.AppFile", b =>
                 {
-                    b.HasOne("Data.Domain.Entities.Lesson", "Lesson")
+                    b.HasOne("Data.Domain.Entities.Resource", "Lesson")
                         .WithMany("Files")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Data.Domain.Entities.Lesson", b =>
+            modelBuilder.Entity("Data.Domain.Entities.ProfessorCourse", b =>
                 {
                     b.HasOne("Data.Domain.Entities.Course", "Course")
-                        .WithMany("Lessons")
+                        .WithMany("UserCourses")
                         .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.Domain.Entities.Professor", "Professor")
+                        .WithMany("UserCourses")
+                        .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Data.Domain.Entities.UserCourse", b =>
+            modelBuilder.Entity("Data.Domain.Entities.Resource", b =>
+                {
+                    b.HasOne("Data.Domain.Entities.Week", "Week")
+                        .WithMany("Resources")
+                        .HasForeignKey("WeekId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Data.Domain.Entities.Week", b =>
                 {
                     b.HasOne("Data.Domain.Entities.Course", "Course")
-                        .WithMany("UserCourses")
+                        .WithMany("Weeks")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Data.Domain.Entities.User", "User")
-                        .WithMany("UserCourses")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

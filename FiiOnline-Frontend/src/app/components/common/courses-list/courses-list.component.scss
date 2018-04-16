@@ -1,0 +1,30 @@
+$borderColor: #aaaaaa;
+$themeColor: #3388cb;
+$errorColor: #f44336;
+
+.content{
+  margin-left: 310px;
+}
+@media only screen and (max-width : 992px) {
+      .content {
+        margin-left: 0;
+      }
+    }
+
+a.delete-btn{
+  color: red !important;
+}
+
+a.delete-btn:hover{
+  color: rgba(255, 27, 12, 0.48) !important;
+  cursor: pointer;
+}
+
+a.theme-color-btn{
+  color: $themeColor !important;
+}
+
+a.theme-color-btn:hover{
+  color: rgba(51, 136, 203, 0.54) !important;
+  cursor: pointer;
+}

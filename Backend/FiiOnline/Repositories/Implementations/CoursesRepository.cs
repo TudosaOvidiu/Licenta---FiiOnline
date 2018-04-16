@@ -14,14 +14,14 @@ namespace Business.Repositories.Implementations
         {
         }
 
-        public override IReadOnlyList<Course> GetAll() => _databaseContext.Courses.Include(c => c.Lessons).ThenInclude(c => c.Files).Include(p => p.UserCourses).ThenInclude(uc =>uc.User).ToList();
+        public override IReadOnlyList<Course> GetAll() => _databaseContext.Courses.Include(c => c.Weeks).ThenInclude(w => w.Resources).ThenInclude(c => c.Files).Include(p => p.UserCourses).ThenInclude(uc =>uc.Professor).ToList();
 
         public override Course GetById(Guid id) 
-            => _databaseContext.Courses.Include(c => c.Lessons).Include(c => c.UserCourses).ThenInclude(uc => uc.User).FirstOrDefault(c => c.Id.Equals(id));
+            => _databaseContext.Courses.Include(c => c.Weeks).ThenInclude(w => w.Resources).Include(c => c.UserCourses).ThenInclude(uc => uc.Professor).FirstOrDefault(c => c.Id.Equals(id));
 
         public Course RemoveUserCoursesList(Course course)
         {
-            var userCourses = new List<UserCourse>(course.UserCourses);
+            var userCourses = new List<ProfessorCourse>(course.UserCourses);
             foreach (var userCourse in userCourses)
             {
                 course.RemoveProfFromCourse(userCourse);
@@ -33,10 +33,10 @@ namespace Business.Repositories.Implementations
 
         public void AddCoursToProfessor(string profId, Guid coursId)
         {
-            var professor = _databaseContext.Users.Include(u => u.UserCourses).FirstOrDefault(u => u.Id.Equals(profId));
+            var professor = _databaseContext.Professors.Include(u => u.UserCourses).FirstOrDefault(u => u.Id.Equals(profId));
             var course = GetById(coursId);
             
-            var profCourse = UserCourse.CreateUserCourse(profId, professor, coursId, course);
+            var profCourse = ProfessorCourse.CreateUserCourse(profId, professor, coursId, course);
 
             course.Update(profCourse);
 

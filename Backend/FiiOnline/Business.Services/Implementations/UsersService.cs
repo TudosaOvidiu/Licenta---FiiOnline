@@ -23,34 +23,19 @@ namespace Business.Services.Implementations
             _userManager = userManager;
         }
 
-        public async Task<IdentityResult> CreateAsync(UserCreatingModel model, UserManager<User> userManager) =>
-            await _usersRepository.CreateAsync(model, userManager);
+        public async Task<IdentityResult> CreateAsync(UserCreatingModel model) =>
+            await _usersRepository.CreateAsync(model);
  
 
-        public async Task<List<UserDTO>> GetUsers()
+
+        public List<UserDTO> GetProfessors()
         {
-            var users = _usersRepository.GetAll();
+            var users = _usersRepository.GetProfessors();
             List<UserDTO> userDTOs = new List<UserDTO>();
 
             foreach (var user in users)
             {
-                var role = await _userManager.GetRolesAsync(user);
-                userDTOs.Add(new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email,
-                    role[0]));
-            }
-
-            return userDTOs;
-        }
-
-        public async Task<List<UserDTO>> GetProfessors()
-        {
-            var users = await _userManager.GetUsersInRoleAsync("Professor");
-            List<UserDTO> userDTOs = new List<UserDTO>();
-
-            foreach (var user in users)
-            {
-                userDTOs.Add(new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email,
-                    "Professor"));
+                userDTOs.Add(GetById(user.Id));
             }
 
             return userDTOs;
@@ -81,9 +66,18 @@ namespace Business.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserDTO> GetAll()
         {
-            return _usersRepository.GetAll();
+            var users = _usersRepository.GetAll();
+            List<UserDTO> userDTOs = new List<UserDTO>();
+
+            foreach (var user in users)
+            {
+                userDTOs.Add(new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email,
+                    user.Role));
+            }
+
+            return userDTOs;
         }
 
 
