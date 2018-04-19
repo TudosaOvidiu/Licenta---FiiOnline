@@ -22,7 +22,11 @@ export class UploadLessonComponent implements OnInit {
   private event;
   private files_on_server = {};
   private lesson_id;
-  private course_id; //from sesion storage
+  private weekId; //from sesion storage
+  public lectureExists = false;
+  public seminarExists = false;
+  public homeworkExists = false;
+  public onEdit = false;
 
   modalActions = new EventEmitter<string | MaterializeAction>();
 
@@ -32,18 +36,21 @@ export class UploadLessonComponent implements OnInit {
 
 
   ngOnInit() {
-    this.course_id = sessionStorage.getItem('weekId');
-    console.log(this.course_id);
-    // sessionStorage.removeItem('courseId');
+    this.weekId = sessionStorage.getItem('weekId');
+    if (this.weekId !== null) {
+      this.setupRadioButtons(this.weekId);
+    }
     this.route.params.subscribe(params => {
       this.lesson_id = params['id'];
       if (this.lesson_id !== undefined) {
+        this.onEdit = true;
         this.dataService.fetchData(`http://localhost:63944/Lessons/${this.lesson_id}`).subscribe(response => {
             console.log(response);
             this.model.title = response.title;
             this.model.description = response.description;
-            // this.model.date = response.date;
-            //dictionary of fileName/filePath of files on server
+            this.weekId = response.weekId;
+            this.model.type = response.type;
+            this.setupRadioButtons(this.weekId);
             for (let file of response.fileDtos) {
               this.files_on_server[file.fileName] = file.filePath;
               this.showFile(file.fileName);
@@ -58,7 +65,29 @@ export class UploadLessonComponent implements OnInit {
     });
   }
 
-  setType(type){
+  setupRadioButtons(weekId) {
+    if (this.model.type !== '') {
+      this.renderer.setAttribute(document.getElementById(this.model.type), 'checked', '');
+    }
+    this.dataService.fetchData(`http://localhost:63944/Weeks/${weekId}`).subscribe(response => {
+        console.log(response, this.model.type);
+        let resources = response.resourcesDtos;
+        if (resources[0] !== null && this.model.type !== 'Lecture') {
+          this.lectureExists = true;
+        }
+        if (resources[1] !== null && this.model.type !== 'Seminar') {
+          this.seminarExists = true;
+        }
+        if (resources[2] !== null && this.model.type !== 'Homework') {
+          this.homeworkExists = true;
+        }
+      },
+      err => {
+      }
+    );
+  }
+
+  setType(type) {
     this.model.type = type;
     console.log(this.model.type);
   }
@@ -95,18 +124,10 @@ export class UploadLessonComponent implements OnInit {
     this.renderer.setAttribute(div, 'class', 'file-box');
     this.renderer.setAttribute(div, 'id', file);
 
-    // let div_file_elements = this.renderer.createElement('div');
-    // this.renderer.setAttribute(div_file_elements, 'class', 'tooltip');
-
     let p = this.renderer.createElement('p');
     this.renderer.setAttribute(p, 'class', 'file-name tooltipped');
     let p_content = document.createTextNode((file.length > 25) ? `${file.substring(0, 25)}...` : file);
     p.appendChild(p_content);
-
-    // let span = this.renderer.createElement('span');
-    // this.renderer.setAttribute(span, 'class', 'tooltiptext');
-    // let span_text = document.createTextNode(file);
-    // span.appendChild(span_text);
 
     let i = this.renderer.createElement('i');
     switch (file_extension) {
@@ -145,16 +166,8 @@ export class UploadLessonComponent implements OnInit {
     let p_delete_text = document.createTextNode('Delete');
     p_delete.appendChild(p_delete_text);
 
-
-    // div_file_elements.appendChild(i);
-    // div_file_elements.appendChild(span);
-    // // div_file_elements.appendChild(br);
-    // div_file_elements.appendChild(p);
-
     div.appendChild(i);
-    // div.appendChild(span);
     div.appendChild(p);
-    // div.appendChild(div_file_elements);
     div.appendChild(p_delete);
     document.getElementById('display-uploaded-files').appendChild(div);
 
@@ -189,15 +202,6 @@ export class UploadLessonComponent implements OnInit {
 
   }
 
-  createProgressBar() {
-    let child_div = this.renderer.createElement('div');
-    child_div.setAttribute('class', 'determinate');
-    child_div.setAttribute('style', 'width: 70%');
-    let parent_div = this.renderer.createElement('div');
-    parent_div.setAttribute('class', 'progress');
-    parent_div.appendChild(child_div);
-    return parent_div;
-  }
 
   openModal(event) {
     this.event = event;
@@ -212,7 +216,7 @@ export class UploadLessonComponent implements OnInit {
   onSubmit() {
     this.model.files.append('title', this.model.title);
     this.model.files.append('description', this.model.description);
-    this.model.files.append('weekId', this.course_id);
+    this.model.files.append('weekId', this.weekId);
     this.model.files.append('type', this.model.type);
 
 
@@ -222,7 +226,7 @@ export class UploadLessonComponent implements OnInit {
       this.model.files.append('files', file);
     }
 
-    if (this.lesson_id !== undefined) {
+    if (this.onEdit) {
       this.dataService.putData(`http://localhost:63944/Lessons/${this.lesson_id}`, this.model.files).subscribe(response => {
         },
         err => {

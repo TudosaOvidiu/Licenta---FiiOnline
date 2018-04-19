@@ -15,12 +15,11 @@
         </div>
 
         <div [hidden]="page!=='student'" class="card-action">
-          <a (click)="saveCourseId(course.id)" class="theme-color-btn">Lessons</a>
-          <a (click)="saveCourseId(course.id)" class="theme-color-btn">Seminars</a>
+          <a routerLink="/lessons/{{course.id}}"  class="theme-color-btn">Lessons</a>
         </div>
 
         <div [hidden]="page!=='professor'" class="card-action">
-          <a routerLink="/professor-lessons/{{course.id}}"  class="theme-color-btn">Lessons</a>
+          <a routerLink="/professor-lessons/{{course.id}}" class="theme-color-btn">Lessons</a>
           <a routerLink="/create-lesson" (click)="saveCourseId(course.id)" class="theme-color-btn">Create Lesson</a>
         </div>
 
@@ -32,6 +31,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"

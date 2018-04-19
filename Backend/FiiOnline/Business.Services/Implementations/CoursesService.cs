@@ -14,12 +14,14 @@ namespace Business.Services.Implementations
         private readonly ICoursesRepository _coursesRepository;
         private readonly IUsersService _usersService;
         private readonly IWeeksService _weeksService;
+        private readonly IUsersRepository _usersRepository;
 
-        public CoursesService(ICoursesRepository coursesRepository, IUsersService usersService, IWeeksService weeksService)
+        public CoursesService(ICoursesRepository coursesRepository, IUsersService usersService, IWeeksService weeksService, IUsersRepository usersRepository)
         {
             _coursesRepository = coursesRepository;
             _usersService = usersService;
             _weeksService = weeksService;
+            _usersRepository = usersRepository;
         }
 
 
@@ -54,6 +56,30 @@ namespace Business.Services.Implementations
             foreach (var course in courses)
             {
                 courseDtos.Add(GetById(course.Id));
+            }
+
+            return courseDtos;
+        }
+
+        public IEnumerable<CourseDTO> GetCoursesByYearAndSemester(string year, int semester)
+        {
+            var courses = _coursesRepository.GetCoursesByYearAndSemester(year, semester);
+            List<CourseDTO> courseDtos = new List<CourseDTO>();
+            foreach (var course in courses)
+            {
+                courseDtos.Add(GetById(course.Id));
+            }
+
+            return courseDtos;
+        }
+
+        public IEnumerable<CourseDTO> GetProfessorCourses(string id)
+        {
+            var user = _usersRepository.GetProfessorById(id);
+            List<CourseDTO> courseDtos = new List<CourseDTO>();
+            foreach (var profCourse in user.UserCourses)
+            {
+                courseDtos.Add(GetById(profCourse.CourseId));
             }
 
             return courseDtos;

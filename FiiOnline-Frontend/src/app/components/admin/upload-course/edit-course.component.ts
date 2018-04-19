@@ -12,6 +12,7 @@ import {CourseModel} from '../../../models/coursemodel';
 export class EditCourseComponent implements OnInit {
   public professors = new Array();
   public model = new CourseModel();
+  public onEdit = true;
 
   constructor(private dataService: DataService) {
   }

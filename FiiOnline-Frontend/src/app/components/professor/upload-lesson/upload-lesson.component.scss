@@ -1,33 +1,43 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.lesson-form {
-  width: 70%;
-  border: 1px solid $borderColor;
-  border-radius: 10px;
-  margin: 5% 5% 0% 0%;
-  float: right;
-}
 
-.title {
-  color: $themeColor;
-}
+  .lesson-form {
+    width: 90%;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin: 5% 5% 0% 0%;
+    float: right;
+  }
 
-.radio{
-  margin-left: 3%!important;
+  .title {
+    color: $themeColor;
+  }
+
+
+
+
+.radio {
+  margin-left: 3% !important;
   margin-bottom: 2%;
-  p{
+  p {
     color: #9e9e9e;
   }
+  label {
+    padding-left: 25px;
+    margin-right: 20px;
+
+  }
+
 }
 
-[type="radio"].with-gap:checked+label:before,
-[type="radio"].with-gap:checked+label:after {
-border: 2px solid $themeColor !important;
+[type="radio"].with-gap:checked + label:before,
+[type="radio"].with-gap:checked + label:after {
+  border: 2px solid $themeColor !important;
 }
 
-[type="radio"].with-gap:checked+label:after {
-background-color: $themeColor !important;
+[type="radio"].with-gap:checked + label:after {
+  background-color: $themeColor !important;
 }
 
 //--------------------------
@@ -138,7 +148,6 @@ input[type="file"] {
   font-size: 17px;
 }
 
-
 .delete {
   margin-top: 3%;
   display: inline-block;
@@ -146,7 +155,6 @@ input[type="file"] {
   font-weight: bold;
   float: right;
 }
-
 
 .delete:hover {
   cursor: pointer;

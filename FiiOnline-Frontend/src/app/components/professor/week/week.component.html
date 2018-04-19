@@ -14,15 +14,15 @@
     <div class="row">
 
       <div class="input-field col s6">
-        <select materialize="material_select" name="weekNr" [(ngModel)]="model.weekNr" #weekNr="ngModel">
+        <select materialize="material_select" name="weekNr" [(ngModel)]="model.weekNr" #weekNr="ngModel" >
           <option value="" disabled selected>Choose week</option>
           <option *ngFor="let i of week_number" [value]=i>{{i}}</option>
         </select>
         <label>Lesson for week</label>
       </div>
 
-      <div class="input-field col s6">
-        <input type="text" class="datepicker" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]"
+      <div class="input-field col s6 ">
+        <input type="text" class="datepicker blue-text darken-1" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]"
                name="date" [(ngModel)]="model.date" #date="ngModel">
         <label class="active">Date</label>
       </div>

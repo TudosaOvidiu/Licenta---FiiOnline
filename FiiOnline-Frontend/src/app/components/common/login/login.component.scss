@@ -1,36 +1,29 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-
-
 .login-form {
+  margin-top: 10%;
   border: solid 1px $borderColor;
   border-radius: 10px;
-
-  display: inline-block;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 25%;
-  height: 70%;
   padding: 0% 3%;
-  margin: auto;
+  .fii-img {
+    margin: 5% 0%;
+  }
+
+
+  .login-title {
+    color: #3388cb;
+    margin-top: -5%;
+    margin-bottom: 10%;
+  }
+
+  .waves-effect{
+    margin-top: 5%;
+    margin-bottom: 3%;
+  }
 }
 
-.fii-img{
-  margin: 5% 0%;
-}
-
-.login-title{
-  color: #3388cb;
-  margin-top: -5%;
-  margin-bottom: 10%;
-}
-
-
-.error-message{
+.error-message {
   font-size: 12px;
   margin-bottom: 5%;
   color: #a00000;
@@ -49,9 +42,7 @@ input:-webkit-autofill {
     border-radius: 0px;
   }
 
-
-
-  &:focus + hr, &:active +hr {
+  &:focus + hr, &:active + hr {
     width: 100%;
     background-color: #61acff;
     -webkit-transition: all 0.3s ease !important;
@@ -59,20 +50,17 @@ input:-webkit-autofill {
   }
 }
 
-
-
-div .text-center button{
+div .text-center button {
   margin-top: 10%;
   margin-bottom: 15%;
 }
 
-.waves-effect{
-  margin-top: 20%;
-  margin-bottom: 10%;
-  background-color: $themeColor;
+.waves-effect {
+  //margin-top: 20%;
+  //margin-bottom: 10%;
+  //background-color: $themeColor;
 }
 
-
-.login-footer a{
+.login-footer a {
   display: inline-block;
 }

@@ -23,11 +23,15 @@ export class UserRegisterComponent implements OnInit {
   public modalHeader: string;
   public modalText: string;
   public register_professor = false;
+  public isAdmin = false;
 
   constructor(private dataService: DataService, private router: Router) {
   }
 
   ngOnInit() {
+    if (sessionStorage.getItem('user') !== null) {
+      this.isAdmin = true;
+    }
     if (this.router.url === '/register-professor') {
       this.register_professor = true;
     }
@@ -72,9 +76,9 @@ export class UserRegisterComponent implements OnInit {
   openModal() {
     this.modalActions.emit({action: 'modal', params: ['open']});
     setTimeout((router: Router) => {
-          this.closeModal();
-          this.router.navigate(['login']);
-        }, 2500);
+      this.closeModal();
+      this.router.navigate(['login']);
+    }, 2500);
   }
 
   closeModal() {

@@ -1,17 +1,20 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.week-form{
+.week-form {
   width: 70%;
   border: 1px solid grey;
   border-radius: 10px;
   margin: 5% 5% 0% 0%;
   float: right;
+
+  .title {
+    color: $themeColor;
+  }
+
 }
 
-.title{
-  color: $themeColor;
-}
+
 
 
 

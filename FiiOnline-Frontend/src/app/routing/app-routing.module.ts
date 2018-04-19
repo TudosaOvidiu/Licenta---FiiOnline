@@ -11,6 +11,7 @@ import {EditCourseComponent} from '../components/admin/upload-course/edit-course
 import {CoursesListComponent} from '../components/common/courses-list/courses-list.component';
 import {LessonListComponent} from '../components/common/lessons-list/lessons-list.component';
 import {WeekComponent} from '../components/professor/week/week.component';
+import {CoursesMenuComponent} from '../components/common/courses-menu/courses-menu.component';
 
 
 const routes: Routes = [
@@ -19,19 +20,20 @@ const routes: Routes = [
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'register', component: UserRegisterComponent},
   {path: 'account-confirmation', component: AccountConfirmationComponent},
-  {path: 'upload-course', component: UploadCourseComponent},
+  {path: 'create-course', component: UploadCourseComponent},
   {path: 'upload-material', component: UploadLessonComponent},
   {path: 'edit-course/:id', component: EditCourseComponent},
   {path: 'edit-material/:id', component: UploadLessonComponent},
   {path: 'register-professor', component: UserRegisterComponent},
   {path: 'admin-courses', component: CoursesListComponent},
   {path: 'professor-courses', component: CoursesListComponent},
-  {path: 'courses', component: CoursesListComponent},
+  {path: 'courses', component: CoursesMenuComponent},
   {path: 'professor-lessons/:id', component: LessonListComponent},
+  {path: 'lessons/:id', component: LessonListComponent},
   {path: 'lessons/:id', component: LessonListComponent},
   {path: 'create-lesson', component: WeekComponent},
   {path: 'edit-lesson/:id', component: WeekComponent},
-
+  {path: 'courses-list', component: CoursesListComponent},
 
   // { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
   // { path: 'signup', component: SignupPageComponent},

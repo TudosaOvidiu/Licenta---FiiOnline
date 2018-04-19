@@ -2,12 +2,19 @@ $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
 .confirmation-panel {
-  width: 35%;
   border: 1px solid $borderColor;
   border-radius: 10px;
   margin: auto;
   margin-top: 5%;
 
+}
+@media (max-width: 600px) {
+  .panel-title{
+    font-size: 25px;
+  }
+  p{
+    font-size: 12px;
+  }
 }
 
 .panel-title{

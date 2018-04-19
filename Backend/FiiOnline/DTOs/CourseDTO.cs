@@ -11,14 +11,14 @@ namespace DTOs
 
         public String Description { get; set; }
 
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         public int Semester { get; set; }
 
         public List<UserDTO> Professors { get; set; }
 
 
-        public CourseDTO(Guid id, String name, String description, int year, int semester, List<UserDTO> professors)
+        public CourseDTO(Guid id, string name, string description, string year, int semester, List<UserDTO> professors)
         {
             Id = id;
             Name = name;

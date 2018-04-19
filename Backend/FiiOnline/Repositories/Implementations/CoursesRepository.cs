@@ -19,6 +19,11 @@ namespace Business.Repositories.Implementations
         public override Course GetById(Guid id) 
             => _databaseContext.Courses.Include(c => c.Weeks).ThenInclude(w => w.Resources).Include(c => c.UserCourses).ThenInclude(uc => uc.Professor).FirstOrDefault(c => c.Id.Equals(id));
 
+        public IEnumerable<Course> GetCoursesByYearAndSemester(string year, int semester)
+        {
+            return _databaseContext.Courses.Include(c => c.Weeks).ThenInclude(w => w.Resources).Include(c => c.UserCourses).ThenInclude(uc => uc.Professor).Where(c => c.Year.Equals(year) && c.Semester == semester);
+        }
+
         public Course RemoveUserCoursesList(Course course)
         {
             var userCourses = new List<ProfessorCourse>(course.UserCourses);

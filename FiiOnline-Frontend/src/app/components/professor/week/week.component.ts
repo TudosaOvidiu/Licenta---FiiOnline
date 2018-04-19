@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Renderer2} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {WeekModel} from '../../../models/weekmodel';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,7 +18,7 @@ export class WeekComponent implements OnInit {
   public onEdit = false;
   private lesson_id: string;
 
-  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute, private renderer: Renderer2) {
   }
 
 
@@ -43,6 +43,8 @@ export class WeekComponent implements OnInit {
       }
     });
   }
+
+
 
   onSubmit(model: WeekModel) {
 

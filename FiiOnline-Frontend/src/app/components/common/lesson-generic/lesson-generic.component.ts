@@ -34,6 +34,10 @@ export class LessonGenericComponent implements OnInit {
   @Input() index;
 
   ngOnInit() {
+    let role = JSON.parse(sessionStorage.getItem('user')).role;
+    if (role === 'Student') {
+      this.studentPage = true;
+    }
     this.route.params.subscribe(params => {
       this.courseId = params['id'];
     });

@@ -1,13 +1,22 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.course-form{
-  width: 70%;
+.course-form {
+  //width: 90%;
   border: 1px solid grey;
   border-radius: 10px;
-  margin: 5% 5% 0% 0%;
-  float: right;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5%;
+
+  .title {
+    color: $themeColor;
+  }
+
 }
+
+
+
 
 
 

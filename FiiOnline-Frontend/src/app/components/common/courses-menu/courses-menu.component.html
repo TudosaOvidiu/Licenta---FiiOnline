@@ -1,0 +1,13 @@
+<app-sidebar></app-sidebar>
+
+<div class="content">
+
+  <ul class="collapsible" data-collapsible="accordion" materialize="collapsible">
+    <li *ngFor="let degree of degrees">
+      <div class="collapsible-header">{{degree}}</div>
+      <div class="collapsible-body">
+        <a [routerLink]="['/courses-list']" [queryParams]="{year: degree, semester: 1}"><p>Semester 1</p></a>
+        <a [routerLink]="['/courses-list']" [queryParams]="{year: degree, semester: 2}"><p>Semester 2</p></a></div>
+    </li>
+  </ul>
+</div>

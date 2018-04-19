@@ -22,6 +22,7 @@ import { WeekComponent } from './components/professor/week/week.component';
 import {MyTabsComponent} from './components/common/Wrappers/mytab.component';
 import { MaterialGenericComponent } from './components/common/material-generic/material-generic.component';
 import { LessonGenericComponent } from './components/common/lesson-generic/lesson-generic.component';
+import { CoursesMenuComponent } from './components/common/courses-menu/courses-menu.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { LessonGenericComponent } from './components/common/lesson-generic/lesso
     MyTabsComponent,
     MaterialGenericComponent,
     LessonGenericComponent,
+    CoursesMenuComponent,
   ],
   imports: [
     BrowserModule,

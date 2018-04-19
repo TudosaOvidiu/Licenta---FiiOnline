@@ -14,7 +14,7 @@ export class AuthenticationService{
     this.token = currentUser && currentUser.token;
   }
 
-  login(loginModel: any): Observable<boolean> {
+  login(loginModel: any) {
     console.log(loginModel);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/javascript');
@@ -33,10 +33,10 @@ export class AuthenticationService{
           // sessionStorage.setItem('currentUser', JSON.stringify(loginModel));
 
           sessionStorage.setItem('authorization', token);
-          sessionStorage.setItem('user', user);
+          sessionStorage.setItem('user', JSON.stringify(user));
 
           // return true to indicate successful login
-          return true;
+          return user;
         } else {
           // return false to indicate failed login
           return false;

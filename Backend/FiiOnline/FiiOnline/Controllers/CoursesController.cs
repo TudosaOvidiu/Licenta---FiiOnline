@@ -6,6 +6,7 @@ using Business.Services.Interfaces;
 using CreatingModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FiiOnline.Controllers
 {
@@ -60,6 +61,34 @@ namespace FiiOnline.Controllers
                 return BadRequest(e);
             }
 
+        }
+
+        [HttpGet("course-by-semester")]
+        public IActionResult GetCoursesBySemester(string year = "", int semester = 0)
+        {
+            try
+            {
+                var courses = _coursesService.GetCoursesByYearAndSemester(year, semester);
+                return Ok(courses);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet("professor-courses/{id}")]
+        public IActionResult GetProfessorCourses([FromRoute] string id)
+        {
+            try
+            {
+                var courses = _coursesService.GetProfessorCourses(id);
+                return Ok(courses);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
         [HttpDelete("{id}")]

@@ -12,5 +12,9 @@ namespace Business.Services.Interfaces
 
         List<WeekDTO> GetCourseWeeks(Guid id);
 
+        IEnumerable<CourseDTO> GetCoursesByYearAndSemester(string year, int semester);
+
+        IEnumerable<CourseDTO> GetProfessorCourses(string id);
+
     }
 }

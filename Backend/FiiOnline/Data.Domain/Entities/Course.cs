@@ -10,21 +10,21 @@ namespace Data.Domain.Entities
 
         public Guid Id { get; private set; }
         public string Name { get; private set; }
-        public int Year { get; private set; }
+        public string Year { get; private set; }
         public int Semester { get; private set; }
         public string Description { get; private set; }
 
         public List<Week> Weeks { get; private set; }
         public ICollection<ProfessorCourse> UserCourses { get; private set; }
 
-        public static Course Create(string name, int year, int semester, List<Week> weeks, List<User> professors, string description)
+        public static Course Create(string name, string year, int semester, List<Week> weeks, List<User> professors, string description)
         {
             var instance = new Course { Id = Guid.NewGuid() };
             instance.Update(name, year, semester, weeks, description);
             return instance;
         }
 
-        public static Course Create(string name, int year, int semester, string description)
+        public static Course Create(string name, string year, int semester, string description)
         {
             var instance = new Course { Id = Guid.NewGuid() };
             instance.Update(name, year, semester, description);
@@ -33,7 +33,7 @@ namespace Data.Domain.Entities
 
       
 
-        public void Update(string name, int year, int semester, List<Week> weeks, string description)
+        public void Update(string name, string year, int semester, List<Week> weeks, string description)
         {
             Name = name;
             Year = year;
@@ -41,7 +41,7 @@ namespace Data.Domain.Entities
             Weeks = weeks;
             Description = description;
         }
-        public void Update(string name, int year, int semester, string description)
+        public void Update(string name, string year, int semester, string description)
         {
             Name = name;
             Year = year;

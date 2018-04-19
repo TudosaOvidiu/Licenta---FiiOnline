@@ -10,6 +10,7 @@ import {CourseModel} from '../../../models/coursemodel';
 export class UploadCourseComponent implements OnInit {
   public professors = new Array();
   public model = new CourseModel();
+  public onEdit = false;
 
   constructor(private dataService: DataService) {
   }

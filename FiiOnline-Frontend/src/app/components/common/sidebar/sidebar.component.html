@@ -12,13 +12,45 @@
 </nav>
 
 <ul class="dropdown-content" id="mobile-demo">
-  <li *ngFor="let routeName of routeNames" routerLinkActive="active"><a [routerLink]="[routeName]">{{routeName}}</a>
-  </li>
+  <div *ngIf="role === 'Administrator'">
+    <li><a routerLink="/courses"> Courses</a>
+    </li>
+    <li><a routerLink="">Add Professor</a></li>
+    <li><a routerLink="/create-course">Create course</a></li>
+    <li><a (click)="logout()">Log out</a></li>
+
+  </div>
+
+  <div *ngIf="role === 'Professor'">
+    <li><a routerLink="/professor-courses"> My courses</a></li>
+    <li><a (click)="logout()">Log out</a></li>
+
+  </div>
+
+  <div *ngIf="role === 'Student'">
+    <li><a routerLink="/courses"> Courses</a></li>
+    <li><a (click)="logout()">Log out</a></li>
+
+  </div>
 </ul>
 
 <ul id="slide-out" class="side-nav fixed">
-  <li *ngFor="let routeName of routeNames" routerLinkActive="active"><a [routerLink]="[routeName]">{{routeName}}</a>
-  </li>
+  <div *ngIf="role === 'Administrator'">
+    <li><a routerLink="/courses"> Courses</a></li>
+    <li><a routerLink="/register-professor">Add Professor</a></li>
+    <li><a routerLink="/create-course">Create course</a></li>
+    <li><a (click)="logout()">Log out</a></li>
+  </div>
+
+  <div *ngIf="role === 'Professor'">
+    <li><a routerLink="/professor-courses"> My courses</a></li>
+    <li><a (click)="logout()">Log out</a></li>
+  </div>
+
+  <div *ngIf="role === 'Student'">
+    <li><a routerLink="/courses"> Courses</a></li>
+    <li><a (click)="logout()">Log out</a></li>
+  </div>
 </ul>
 <a materialize="sideNav" [materializeParams]="[{edge:'left'}]" href="#" data-activates="slide-out"
    class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
