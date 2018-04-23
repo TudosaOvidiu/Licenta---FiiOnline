@@ -1,7 +1,7 @@
 <div class="card-content materials" [attr.id]="material.description">
   <div class="card-content grey-text">
     <span class="card-title grey-text text-darken-4 activator">{{material.title}}</span>
-    <p class="truncate">{{material.description}}</p>
+    <div [innerHTML]="material.description" class="description-content truncate"></div>
     <div id="files" class="files"></div>
   </div>
 </div>

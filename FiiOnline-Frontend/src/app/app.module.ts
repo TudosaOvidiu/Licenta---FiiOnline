@@ -23,6 +23,8 @@ import {MyTabsComponent} from './components/common/Wrappers/mytab.component';
 import { MaterialGenericComponent } from './components/common/material-generic/material-generic.component';
 import { LessonGenericComponent } from './components/common/lesson-generic/lesson-generic.component';
 import { CoursesMenuComponent } from './components/common/courses-menu/courses-menu.component';
+import {NgxEditorModule} from 'ngx-editor';
+
 
 
 @NgModule({
@@ -50,9 +52,11 @@ import { CoursesMenuComponent } from './components/common/courses-menu/courses-m
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    MaterializeModule
+    MaterializeModule,
+    NgxEditorModule,
   ],
   providers: [AuthenticationService, DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,12 +1,10 @@
-import {Component, ElementRef, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {LessonModel} from '../../../models/lessonmodel';
-import {Credentials} from '../../../models/credentials';
 import {DataService} from '../../../services/data.service';
-import {HttpHeaders} from '@angular/common/http';
 import {Renderer2} from '@angular/core';
-import {split} from 'ts-node/dist';
-import {MaterializeAction, MaterializeDirective, MaterializeModule} from 'angular2-materialize';
-import {ActivatedRoute, Router} from '@angular/router';
+import {MaterializeAction} from 'angular2-materialize';
+import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-upload-lesson',
@@ -29,13 +27,26 @@ export class UploadLessonComponent implements OnInit {
   public onEdit = false;
 
   modalActions = new EventEmitter<string | MaterializeAction>();
-
+  public toolbar = [
+        ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
+        ["fontName", "fontSize", "color"],
+        ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"],
+        ["cut", "copy", "delete", "removeFormat", "undo", "redo"],
+        ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
+        ["link", "unlink"],
+        ["code"]
+    ];
 
   constructor(private dataService: DataService, private renderer: Renderer2, private route: ActivatedRoute) {
   }
 
+  prepareEditor(){
+    let scisors = document.getElementsByClassName("fa-scissors")[0];
+    console.log(scisors);
+  }
 
   ngOnInit() {
+    this.prepareEditor();
     this.weekId = sessionStorage.getItem('weekId');
     if (this.weekId !== null) {
       this.setupRadioButtons(this.weekId);

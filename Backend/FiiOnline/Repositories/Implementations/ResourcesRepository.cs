@@ -90,24 +90,30 @@ namespace Business.Repositories.Implementations
             var absolutePath = "C:\\Users\\Ovidiu\\Documents\\GitHub\\Licenta---FiiOnline\\Files";
             var filePath = "";
             List<AppFile> files = new List<AppFile>();
-            foreach (var formFile in model.files)
+            if (model.files != null)
             {
-                if (formFile.Length > 0)
+                foreach (var formFile in model.files)
                 {
-                    var fileName = formFile.FileName;
-                    var fileGuid = Guid.NewGuid();
-                    filePath = Path.Combine(absolutePath, fileName);
-                    fileName = String.Format("{0}{1}{2}", Path.GetFileNameWithoutExtension(filePath), fileGuid, Path.GetExtension(filePath));
-                    filePath = Path.Combine(absolutePath, fileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    if (formFile.Length > 0)
                     {
-                        await formFile.CopyToAsync(stream);
-                    }
-                    files.Add(AppFile.Create(fileGuid, formFile.FileName, filePath));
+                        var fileName = formFile.FileName;
+                        var fileGuid = Guid.NewGuid();
+                        filePath = Path.Combine(absolutePath, fileName);
+                        fileName = String.Format("{0}{1}{2}", Path.GetFileNameWithoutExtension(filePath), fileGuid,
+                            Path.GetExtension(filePath));
+                        filePath = Path.Combine(absolutePath, fileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
 
+                        files.Add(AppFile.Create(fileGuid, formFile.FileName, filePath));
+
+                    }
                 }
+
+                lesson.AddFiles(files);
             }
-            lesson.AddFiles(files);
 
             _databaseContext.SaveChanges();
         }
