@@ -8,9 +8,10 @@ import {CourseModel} from '../../../models/coursemodel';
   styleUrls: ['./upload-course.component.scss', '../../../app.component.scss']
 })
 export class UploadCourseComponent implements OnInit {
-  public professors = new Array();
+  public professors = [];
   public model = new CourseModel();
   public onEdit = false;
+  public showTeachersDropdown = false;
 
   constructor(private dataService: DataService) {
   }
@@ -18,12 +19,14 @@ export class UploadCourseComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.fetchData('http://localhost:63944/Users/professors').subscribe(response => {
-        for (let prof of response) {
+        response.forEach((prof) => {
           this.professors.push({
             name: `${prof.firstName} ${prof.lastName}`,
             id: prof.id
           });
-        }
+        });
+
+        this.showTeachersDropdown = true;
         console.log(this.professors);
       },
       err => {

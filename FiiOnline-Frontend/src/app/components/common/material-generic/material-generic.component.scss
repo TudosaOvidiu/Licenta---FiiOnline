@@ -40,3 +40,18 @@ $themeColor: #3388cb;
 }
 
 
+@media (max-width: 600px){
+  .materials {
+    padding: 0px !important;
+  }
+  .file-name{
+    width: 80%!important;
+    font-size: 12px!important;
+  }
+  .material-title{
+    font-size: 16px;
+  }
+  .material-description{
+    font-size: 14px;
+  }
+}

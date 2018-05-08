@@ -2,7 +2,13 @@ $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 $errorColor: #f44336;
 
-
-
+@media (max-width: 600px) {
+  .card .card-content{
+    padding: 0px;
+  }
+  .card-content .materials{
+    padding-left: 0px;
+  }
+}
 
 

@@ -1,60 +1,67 @@
-<div class="week-form center-align">
-  <div>
-    <h1 [hidden]="onEdit" class="title"> Create lesson</h1>
-    <h1 [hidden]="!onEdit" class="title"> Edit lesson</h1>
-  </div>
-  <form method="post" #weekForm="ngForm">
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" name="title" [(ngModel)]="model.title" #title="ngModel">
-        <label class="active">Title</label>
-      </div>
+<app-sidebar></app-sidebar>
+<div class="content row">
+  <div class="center-align card col s8 offset-s2">
+    <div>
+      <h1 [hidden]="onEdit" class="title"> Create lesson</h1>
+      <h1 [hidden]="!onEdit" class="title"> Edit lesson</h1>
     </div>
-
-    <div class="row">
-
-      <div class="input-field col s6">
-        <select materialize="material_select" name="weekNr" [(ngModel)]="model.weekNr" #weekNr="ngModel" >
-          <option value="" disabled selected>Choose week</option>
-          <option *ngFor="let i of week_number" [value]=i>{{i}}</option>
-        </select>
-        <label>Lesson for week</label>
+    <form method="post" #weekForm="ngForm">
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" name="title" [(ngModel)]="model.title" #title="ngModel" required
+                 [class.error-border]="!title.valid && title.touched">
+          <label [class.active]="title.value">Title</label>
+          <div *ngIf="!title.valid && title.touched" class="error-message">
+            <p class="error">*The lesson must have a title</p>
+          </div>
+        </div>
       </div>
 
-      <div class="input-field col s6 ">
-        <input type="text" class="datepicker blue-text darken-1" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]"
-               name="date" [(ngModel)]="model.date" #date="ngModel">
-        <label class="active">Date</label>
-      </div>
-    </div>
+      <div class="row">
 
-    <div class="row">
-      <div class="input-field col s12">
+        <div class="input-field col s6">
+          <select materialize="material_select" name="weekNr" [(ngModel)]="model.weekNr" #weekNr="ngModel" required>
+            <option value="" disabled selected>Choose week</option>
+            <option *ngFor="let i of week_number" [value]=i>{{i}}</option>
+          </select>
+          <label>Lesson for week</label>
+        </div>
+
+        <div class="input-field col s6 ">
+          <input type="text" class="datepicker" materialize="pickadate"
+                 name="date" [(ngModel)]="model.date" #date="ngModel">
+          <label class="active">Date</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
         <textarea class="materialize-textarea" name="description" [(ngModel)]="model.description"
                   #description="ngModel"></textarea>
-        <label class="active">Description</label>
+          <label [class.active]="description.value">Description</label>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <button class="btn waves-effect waves-light" type="submit" name="action" (click)="onSubmit(weekForm.value)"
-              [disabled]="!weekForm.valid">
-        Submit
-      </button>
+      <div class="row">
+        <button class="btn waves-effect waves-light" type="submit" name="action" (click)="onSubmit(weekForm.value)"
+                [disabled]="!weekForm.valid">
+          Submit
+        </button>
 
-    </div>
+      </div>
 
-  </form>
+    </form>
+  </div>
 </div>
 
-
 <!-- Modal Structure -->
-<!--<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"-->
-<!--[materializeActions]="modalActions">-->
-<!--<div class="modal-content">-->
-<!--<h4>{{modalHeader}}</h4>-->
-<!--<br>-->
-<!--<p>{{modalText}}</p>-->
-<!--</div>-->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>{{modal_header}}</h4>
+    <hr>
+    <br>
+    <p>{{modal_content}}</p>
+  </div>
 
-<!--</div>-->
+</div>

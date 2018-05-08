@@ -3,24 +3,71 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-html{
+body {
   font-family: 'Roboto', sans-serif;
+  background-color: #f2f5f8;
+
+}
+
+.active {
+  padding-left: 2% !important;
 }
 
 /* label focus color */
-   .input-field input[type]:focus + label {
-     color: $borderColor;
+.input-field input[type]:focus + label {
+  color: $borderColor;
 }
-/* label underline focus color */
-   .input-field input[type]:focus {
-     border-bottom: 1px solid $themeColor;
-     box-shadow: 0 1px 0 0 $themeColor;
-   }
 
-   /* valid color */
-   .input-field input[type].valid {
-     border-bottom: 1px solid $borderColor;
-     box-shadow: 0 0px 0 0 $themeColor;
-   }
+/* label underline focus color */
+.input-field input[type]:focus {
+  border-bottom: 1px solid $themeColor;
+  box-shadow: 0 1px 0 0 $themeColor;
+}
+
+/* valid color */
+.input-field input[type].valid {
+  border-bottom: 1px solid $borderColor;
+  box-shadow: 0 0px 0 0 $themeColor;
+}
+
+.select-wrapper {
+  li {
+    span {
+      color: $themeColor !important;
+    }
+    label {
+      transform: translateY(0);
+    }
+  }
+}
+
+.select-dropdown li.disabled, .select-dropdown li.disabled > span, .select-dropdown li.optgroup {
+  color: rgba(0, 0, 0, 0.3) !important;
+}
+
+//------------Date Picker colors----------------------
+.picker__date-display {
+  background-color: $themeColor !important;
+}
+
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  background-color: $themeColor !important;
+}
+
+.picker__day.picker__day--today {
+  color: $themeColor !important;
+}
+
+.picker__day.picker__day--today.picker__day--selected {
+  color: white !important;
+}
+
+.picker__close, .picker__today, .picker__clear {
+  color: $themeColor !important;
+}
+
+.indicator {
+  background-color: white !important;
+}
 
 

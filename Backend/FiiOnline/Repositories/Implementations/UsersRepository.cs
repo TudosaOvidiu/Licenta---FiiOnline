@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Business.Repositories.Implementations
 {
-    public class UsersRepository: ACrudRepository<User, string>, IUsersRepository
+    public class UsersRepository : ACrudRepository<User, string>, IUsersRepository
     {
         private readonly UserManager<User> _userManager;
 
@@ -30,7 +30,7 @@ namespace Business.Repositories.Implementations
             if (model.Role.Equals("Student"))
             {
                 var user = Student.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Role,
-                    model.Year, model.Semester);
+                    model.Year, model.Semester, model.ImageURL);
 
                 if (model.Password != model.ConfirmPassword)
                     throw new ArgumentException("Passwords do not match!");
@@ -44,7 +44,8 @@ namespace Business.Repositories.Implementations
             }
             else
             {
-                var user = Professor.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Role);
+                var user = Professor.Create(model.FirstName, model.LastName, model.Username, model.Email, model.Role,
+                    model.ImageURL);
 
                 if (model.Password != model.ConfirmPassword)
                     throw new ArgumentException("Passwords do not match!");
@@ -61,7 +62,8 @@ namespace Business.Repositories.Implementations
         public List<User> GetUsers() =>
             _databaseContext.Users.ToList();
 
-        public User GetByUserName(string userName) => _databaseContext.Users.FirstOrDefault(u => u.UserName.Equals(userName));
+        public User GetByUserName(string userName) =>
+            _databaseContext.Users.FirstOrDefault(u => u.UserName.Equals(userName));
 
         public int GetNumberOfSimiliarNames(string firstName)
         {
@@ -80,6 +82,40 @@ namespace Business.Repositories.Implementations
         }
 
         public List<Professor> GetProfessors() => _databaseContext.Professors.ToList();
+
+        public void UpdateStudent(string id, UserCreatingModel model)
+        {
+            var student = _databaseContext.Students.FirstOrDefault(u => u.Id.Equals(id));
+            student.Update(model.FirstName, model.LastName, student.UserName, model.Email, student.Role,
+                model.ImageURL);
+            student.Update(model.Year, model.Semester);
+
+            _databaseContext.Students.Update(student);
+            _databaseContext.SaveChanges();
+        }
+
+        public void UpdateProfessor(string id, UserCreatingModel model)
+        {
+            var professor = _databaseContext.Professors.FirstOrDefault(p => p.Id.Equals(id));
+            professor.Update(model.FirstName, model.LastName, professor.UserName, model.Email, professor.Role,
+                model.ImageURL);
+
+            _databaseContext.Professors.Update(professor);
+            _databaseContext.SaveChanges();
+        }
+
+        public List<Guid> GetStudentFollowedCourses(string id)
+        {
+            var student = _databaseContext.Students.Include(s => s.FollowingCourses).ThenInclude(sc => sc.Course)
+                .FirstOrDefault(s => s.Id.Equals(id));
+            List<Guid> coursesGuids = new List<Guid>();
+            foreach (var studentCourse in student.FollowingCourses)
+            {
+                coursesGuids.Add(studentCourse.CourseId);
+            }
+
+            return coursesGuids;
+        }
 
     }
 }

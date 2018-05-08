@@ -4,18 +4,19 @@
     <a href='#' materialize="dropdown" data-activates="mobile-demo" class="hide-on-large-only"><i
       class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">JavaScript</a></li>
+      <!--<li><a href="sass.html">Sass</a></li>-->
+      <!--<li><a href="badges.html">Components</a></li>-->
+      <!--<li><a href="collapsible.html">JavaScript</a></li>-->
     </ul>
   </div>
 </nav>
 
 <ul class="dropdown-content" id="mobile-demo">
   <div *ngIf="role === 'Administrator'">
-    <li><a routerLink="/courses"> Courses</a>
-    </li>
-    <li><a routerLink="">Add Professor</a></li>
+    <li><a routerLink="/courses"> Courses</a></li>
+    <li><a routerLink="/admin-posts">Posts</a></li>
+    <li><a routerLink="/register-professor">Add Professor</a></li>
+    <li><a routerLink="/add-post">Add Post</a></li>
     <li><a routerLink="/create-course">Create course</a></li>
     <li><a (click)="logout()">Log out</a></li>
 
@@ -23,32 +24,52 @@
 
   <div *ngIf="role === 'Professor'">
     <li><a routerLink="/professor-courses"> My courses</a></li>
+    <li><a routerLink="/professor-posts"> My posts</a></li>
+    <li><a routerLink="/add-post"> Add post</a></li>
+    <li><a routerLink="/edit-prof-profile"> Edit profile</a></li>
     <li><a (click)="logout()">Log out</a></li>
 
   </div>
 
   <div *ngIf="role === 'Student'">
+    <li><a routerLink="/"> News</a></li>
     <li><a routerLink="/courses"> Courses</a></li>
+    <li><a routerLink="/edit-profile"> Edit profile</a></li>
     <li><a (click)="logout()">Log out</a></li>
 
   </div>
 </ul>
 
-<ul id="slide-out" class="side-nav fixed">
+<ul id="slide-out" class="side-nav fixed side-bar">
+  <li *ngIf="this.user.imageURL !== '' && this.user.imageURL !== null"><img [src]="this.user.imageURL"
+                                                                            class="profile-picture"></li>
+  <li *ngIf="this.user.imageURL === '' || this.user.imageURL === null">
+    <div class="picture-replacemnt">
+      <p>{{this.user.firstName[0]}}{{this.user.lastName[0]}}</p>
+    </div>
+  </li>
+  <hr>
   <div *ngIf="role === 'Administrator'">
-    <li><a routerLink="/courses"> Courses</a></li>
+    <li><a routerLink="/courses">Courses</a></li>
+    <li><a routerLink="/admin-posts">Posts</a></li>
     <li><a routerLink="/register-professor">Add Professor</a></li>
+    <li><a routerLink="/add-post">Add Post</a></li>
     <li><a routerLink="/create-course">Create course</a></li>
     <li><a (click)="logout()">Log out</a></li>
   </div>
 
   <div *ngIf="role === 'Professor'">
     <li><a routerLink="/professor-courses"> My courses</a></li>
+    <li><a routerLink="/professor-posts"> My posts</a></li>
+    <li><a routerLink="/add-post"> Add post</a></li>
+    <li><a routerLink="/edit-prof-profile"> Edit profile</a></li>
     <li><a (click)="logout()">Log out</a></li>
   </div>
 
   <div *ngIf="role === 'Student'">
+    <li><a routerLink="/"> News</a></li>
     <li><a routerLink="/courses"> Courses</a></li>
+    <li><a routerLink="/edit-profile"> Edit profile</a></li>
     <li><a (click)="logout()">Log out</a></li>
   </div>
 </ul>

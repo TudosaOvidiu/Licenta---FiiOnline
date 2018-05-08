@@ -1,7 +1,7 @@
 <app-sidebar></app-sidebar>
 
-<div class="content">
-  <div class="lesson-form">
+<div class="content row">
+  <div class="card col s8 offset-s2">
     <div class="center-align">
       <h1 [hidden]="onEdit" class="title"> Upload material</h1>
       <h1 [hidden]="!onEdit" class="title"> Edit material</h1>
@@ -11,8 +11,8 @@
 
       <div class="row">
         <div class="input-field col s12">
-          <input type="text" name="lesson" [(ngModel)]="model.title" #lesson="ngModel">
-          <label class="active">Lesson</label>
+          <input type="text" name="title" [(ngModel)]="model.title" #title="ngModel">
+          <label [class.active]="title.value">Lesson</label>
         </div>
       </div>
 
@@ -29,15 +29,15 @@
           <p>This is a:</p>
           <input [disabled]="lectureExists" class="with-gap" name="group1" type="radio" id="Lecture"
                  (click)="setType('Lecture')"/>
-          <label for="lecture">Lecture</label>
+          <label for="Lecture">Lecture</label>
 
           <input [disabled]="seminarExists" class="with-gap" name="group1" type="radio" id="Seminar"
                  (click)="setType('Seminar')"/>
-          <label for="seminar">Seminar</label>
+          <label for="Seminar">Seminar</label>
 
           <input [disabled]="homeworkExists" class="with-gap" name="group1" type="radio" id="Homework"
                  (click)="setType('Homework')"/>
-          <label for="homework">Homework</label>
+          <label for="Homework">Homework</label>
         </div>
 
       </div>
@@ -78,7 +78,7 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"
      [materializeActions]="modalActions">
-  <div class="modal-content">
+  <div *ngIf="onDelete" class="modal-content">
     <h4>Delete file</h4>
     <hr>
     <br>
@@ -91,4 +91,15 @@
     </button>
   </div>
 
+  <div *ngIf="!onDelete" class="modal-content">
+    <h4>{{modalHeader}}</h4>
+    <hr>
+    <br>
+    <p>{{modalText}}</p>
+  </div>
+
 </div>
+
+
+
+

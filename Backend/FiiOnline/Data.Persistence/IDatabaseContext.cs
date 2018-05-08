@@ -13,6 +13,8 @@ namespace Data.Persistence
         DbSet<Resource> Resources { get; set; }
         DbSet<ProfessorCourse> ProfessorCourses { get; set; }
         DbSet<AppFile> Files { get; set; }
+        DbSet<Post> Posts { get; set; }
+        DbSet<StudentCourse> StudentCourses { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();
     }

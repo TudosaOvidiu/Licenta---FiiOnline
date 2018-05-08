@@ -10,23 +10,7 @@ $themeColor: #3388cb;
   //border-bottom: 2px solid $themeColor;
 }
 
-a.delete-btn {
-  color: red !important;
-}
 
-a.delete-btn:hover {
-  color: rgba(255, 27, 12, 0.48) !important;
-  cursor: pointer;
-}
-
-a.theme-color-btn {
-  color: $themeColor !important;
-}
-
-a.theme-color-btn:hover {
-  color: rgba(51, 136, 203, 0.54) !important;
-  cursor: pointer;
-}
 
 li.tab.show-nothing {
   display: none;
@@ -49,8 +33,6 @@ li.tab.show-nothing {
   color: #8d8d8d;
 }
 
-
-
 .lesson-menu {
   display: inline-block;
   .lesson-btn-div {
@@ -70,6 +52,23 @@ li.tab.show-nothing {
       color: #8d8d8d;
     }
   }
+  .disabled {
+    cursor: not-allowed !important;
+  }
+  .disabled:hover {
+    color: #9e9e9e !important;
+  }
 }
 
+@media (max-width: 600px) {
+  .materials {
+    padding: 0 !important;
+  }
+  .lesson-content{
+    padding: 5px;
+  }
+  .lesson-title{
+    font-size: 18px;
+  }
+}
 

@@ -2,7 +2,7 @@
 
 
 <div class="content row">
-  <div class="course-form center-align col s8 push-s2">
+  <div class="card center-align col s8 push-s2">
     <div>
       <h1 [hidden]="onEdit" class="title"> Create course</h1>
       <h1 [hidden]="!onEdit" class="title"> Edit course</h1>
@@ -10,8 +10,11 @@
     <form method="post" #courseForm="ngForm">
       <div class="row">
         <div class="input-field col s12">
-          <input type="text" name="name" [(ngModel)]="model.name" #name="ngModel">
-          <label class="active">Name</label>
+          <input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" [class.error-border]="!name.valid && name.touched" required>
+          <label [class.active]="name.value">Title</label>
+          <div *ngIf="!name.valid && name.touched" class="error-message">
+          <p class="error">*The course should have a title</p>
+        </div>
         </div>
       </div>
 
@@ -19,14 +22,14 @@
         <div class="input-field col s12">
           <textarea class="materialize-textarea" name="description" [(ngModel)]="model.description"
                     #description="ngModel"></textarea>
-          <label class="active">Description</label>
+          <label [class.active]="description.value">Description</label>
         </div>
       </div>
 
 
       <div class="row">
         <div class="input-field col s12 m6 l6">
-          <select  materialize="material_select" name="year" [(ngModel)]="model.year" #year="ngModel">
+          <select  materialize="material_select" name="year" [(ngModel)]="model.year" #year="ngModel" required>
             <option value="" disabled selected>The course is meant for</option>
             <option  class="blue-text darken-1" [value]="'Bachelor\'s degree year 1'">Bachelor's degree year 1</option>
             <option [value]="'Bachelor\'s degree year 2'">Bachelor's degree year 2</option>
@@ -50,7 +53,7 @@
         </div>
 
         <div class="input-field col s12 m6 l6">
-          <select materialize="material_select" name="semester" [(ngModel)]="model.semester" #semester="ngModel">
+          <select materialize="material_select" name="semester" [(ngModel)]="model.semester" #semester="ngModel" required>
             <option value="" disabled selected>In semester</option>
             <option [value]=1>1</option>
             <option [value]=2>2</option>
@@ -60,10 +63,9 @@
 
       </div>
 
-
-      <div class="input-field col s12">
+      <div class="input-field col s12 select-professors" *ngIf="showTeachersDropdown">
         <select multiple materialize="material_select" name="professorsGUIDs" [(ngModel)]="model.professorsGUIDs"
-                #professorsGUIDs="ngModel">
+                #professorsGUIDs="ngModel" required>
           <option value="" disabled selected>Choose your option</option>
           <option *ngFor="let prof of professors" [value]="prof.id">{{prof.name}}</option>
         </select>

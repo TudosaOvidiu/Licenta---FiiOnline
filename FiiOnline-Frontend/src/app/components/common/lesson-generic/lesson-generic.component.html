@@ -1,9 +1,9 @@
 <div class="card-content">
-  <div class="card-content grey-text">
-          <span class="card-title grey-text text-darken-4">Week {{lesson.weekNr}}: {{lesson.title}}
+  <div class="card-content grey-text lesson-content">
+          <span class="card-title grey-text text-darken-4 lesson-title">Week {{lesson.weekNr}}: {{lesson.title}}
             <div *ngIf="!studentPage"  class="lesson-menu right">
               <div class="lesson-btn-div" (click)="addResource(lesson.id)">
-              <i class="fas fa-plus lesson-button"></i>
+              <i class="fas fa-plus lesson-button" [class.disabled]="lecture && homework && seminar"></i>
               </div>
 
               <div class="lesson-btn-div" (click)="goToEdit(lesson.id)">
@@ -32,7 +32,7 @@
       <li  class="tab show-nothing"><a class="active" [attr.href]="'#none'+lesson.id"></a></li>
     </ul>
   </div>
-  <div class="card-content lighten-4">
+  <div class="card-content lighten-4 materials">
     <div *ngIf="lecture" [hidden]="hideLecture" [attr.id]="lesson.resourcesDtos[0].id">
       <div class="hide-tab" (click)="hideLecture = true; hideIndicator(); hideTab(lesson.resourcesDtos[0].id)">
         <i class="fa fa-angle-up" aria-hidden="true"></i>

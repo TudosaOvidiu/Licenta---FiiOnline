@@ -1,10 +1,7 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.course-form {
-  //width: 90%;
-  border: 1px solid grey;
-  border-radius: 10px;
+.card {
   margin-right: auto;
   margin-left: auto;
   margin-top: 5%;
@@ -12,8 +9,8 @@ $themeColor: #3388cb;
   .title {
     color: $themeColor;
   }
-
 }
+
 
 
 

@@ -16,5 +16,8 @@ namespace Business.Services.Interfaces
 
         IEnumerable<CourseDTO> GetProfessorCourses(string id);
 
+        void FollowCourse(string studentId, Guid courseId);
+
+
     }
 }

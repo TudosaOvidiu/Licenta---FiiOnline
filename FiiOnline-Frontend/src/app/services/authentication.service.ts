@@ -5,7 +5,7 @@ import {DataService} from './data.service';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class AuthenticationService{
+export class AuthenticationService {
   public token: string;
 
   constructor(private http: HttpClient, private router: Router, private dataService: DataService) {
@@ -47,8 +47,10 @@ export class AuthenticationService{
   logout(): void {
     // clear token remove user from local storage to log user out
     this.token = null;
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('authorization');
+    Object.keys(sessionStorage)
+      .forEach(function (k) {
+        sessionStorage.removeItem(k);
+      });
     this.router.navigate(['/']);
   }
 }

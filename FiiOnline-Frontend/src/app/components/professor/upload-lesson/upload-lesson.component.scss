@@ -141,7 +141,7 @@ input[type="file"] {
   margin: 0% 3% 2% 3%;
   border: 1px solid $borderColor;
   padding: 2%;
-  vertical-align: baseline;
+  vertical-align: text-bottom;
 }
 
 .file-icon {
@@ -152,10 +152,13 @@ input[type="file"] {
 .file-name {
   display: inline-block;
   font-size: 17px;
+  width: 65%;
+  vertical-align: bottom;
+  margin-bottom: 0px;
 }
 
 .delete {
-  margin-top: 3%;
+  margin-bottom: 0px;
   display: inline-block;
   color: red;
   font-weight: bold;
@@ -170,57 +173,38 @@ input[type="file"] {
   background-color: $themeColor;
 }
 
-//-------Tooltip-----
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
 
-  position: absolute;
-  z-index: 1000;
-}
+@media (max-width: 600px) {
+  .title{
+    font-size: 30px;
+  }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
+  .radio label{
+    font-size: 12px;
+  }
 
-.tooltip .tooltiptext {
-  width: 120px;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-}
+  .upload-icon{
+    width: 30%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .upload-drop-zone{
+    line-height: 30px;
+  }
+  .on-click-upload{
+    font-size: 15px;
+  }
 
-//--------------- missing icons-----------------------
-.fa-scissors::before {
-  content: "\f0c4"!important;
-  font-family: "FontAwesome";
-}
-
-.fa-files-o::before {
-  content: "\f0c5";
-}
-
-.fa-repeat::before {
-  content: "\f01e"!important;
-}
-
-.fa-chain-broken::before {
-  content: "\f127"!important;
-}
-
-.fa-picture-o::before {
-  content: "\f03e"!important;
-}
-
-.fa-youtube-play::before {
-  content: "\f03d"!important;
+  .file-icon{
+    width: 10%;
+  }
+  .file-name{
+    font-size: 12px;
+    margin-bottom: 6%;
+  }
+  .delete{
+    margin-top: 10%;
+    font-size: 10px;
+  }
 }

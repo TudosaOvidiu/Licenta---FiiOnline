@@ -13,6 +13,8 @@ export class CoursesListComponent implements OnInit {
   public courses;
   public courseName: string;
   public page: string;
+  private user;
+  public studentCourses = [];
 
   modalActions = new EventEmitter<string | MaterializeAction>();
 
@@ -20,8 +22,8 @@ export class CoursesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let role = JSON.parse(sessionStorage.getItem('user')).role;
-    switch (role) {
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    switch (this.user.role) {
       case 'Administrator':
         this.page = 'admin';
         break;
@@ -34,8 +36,7 @@ export class CoursesListComponent implements OnInit {
     }
 
     if (this.page === 'professor') {
-      let prof_id = JSON.parse(sessionStorage.getItem('user')).id;
-      this.dataService.fetchData(`http://localhost:63944/Courses/professor-courses/${prof_id}`).subscribe(response => {
+      this.dataService.fetchData(`http://localhost:63944/Courses/professor-courses/${this.user.id}`).subscribe(response => {
           this.courses = response;
           console.log(this.courses);
         },
@@ -56,9 +57,33 @@ export class CoursesListComponent implements OnInit {
           console.log(err);
         }
       );
+      if (this.page === 'student') {
+        this.dataService.fetchData(`http://localhost:63944/Users/followed-courses/${this.user.id}`).subscribe(response => {
+            this.studentCourses = response;
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }
     }
 
 
+  }
+
+  followCourse(courseId: string, functionCase: string) {
+    console.log(courseId);
+    this.dataService.postData(`http://localhost:63944/Courses/follower?studentId=${this.user.id}&courseId=${courseId}`, {courseId: courseId}).subscribe(response => {
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    if (functionCase === 'follow') {
+      this.studentCourses.push(courseId);
+    } else {
+      this.studentCourses = this.studentCourses.filter(sc => sc !== courseId);
+    }
   }
 
   deleteCourse(courseName) {

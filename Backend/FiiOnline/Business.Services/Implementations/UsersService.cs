@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Repositories.Intefaces;
@@ -15,17 +16,16 @@ namespace Business.Services.Implementations
 
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly UserManager<User> _userManager;
+        private readonly IPostsService _postsService;
 
-        public UsersService(IUsersRepository usersRepository, UserManager<User>userManager)
+        public UsersService(IUsersRepository usersRepository, IPostsService postsService)
         {
             _usersRepository = usersRepository;
-            _userManager = userManager;
+            _postsService = postsService;
         }
 
         public async Task<IdentityResult> CreateAsync(UserCreatingModel model) =>
             await _usersRepository.CreateAsync(model);
- 
 
 
         public List<UserDTO> GetProfessors()
@@ -54,11 +54,21 @@ namespace Business.Services.Implementations
             return userDto;
         }
 
-    public void Update(UserCreatingModel model, string id)
+        public void Update(UserCreatingModel model, string id)
         {
             var user = _usersRepository.GetById(id);
             user.Update(model);
             _usersRepository.Update(user);
+        }
+
+        public void UpdateStudent(string id, UserCreatingModel model)
+        {
+            _usersRepository.UpdateStudent(id, model);
+        }
+
+        public void UpdateProfessor(string id, UserCreatingModel model)
+        {
+            _usersRepository.UpdateProfessor(id, model);
         }
 
         public void Create(UserCreatingModel entity)
@@ -80,6 +90,10 @@ namespace Business.Services.Implementations
             return userDTOs;
         }
 
+        public List<Guid> GetStudentFollowedCourses(string id)
+        {
+            return _usersRepository.GetStudentFollowedCourses(id);
+        }
 
         public void Delete(string id)
         {

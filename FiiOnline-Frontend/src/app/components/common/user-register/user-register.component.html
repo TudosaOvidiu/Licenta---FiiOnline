@@ -1,43 +1,68 @@
-<app-sidebar *ngIf="isAdmin"></app-sidebar>
+<app-sidebar *ngIf="!registerUser"></app-sidebar>
 
-<div class="content row ">
-  <div class="register-form col s8 push-s2">
+<div class="row" [class.content]="!registerUser">
+  <div class="card col s8 push-s2"
+       [ngClass]="{'m8': !registerUser, 'push-m2': !registerUser, 'm6': registerUser, 'push-m3': registerUser}">
     <div>
-      <h1 class="registration-title center-align"> Registration Form</h1>
+      <h1 *ngIf="registerUser || register_professor" class="registration-title center-align"> Registration Form</h1>
+      <h1 *ngIf="editProf || editStudent" class="registration-title center-align"> Edit profile</h1>
     </div>
     <form method="post" #registerForm="ngForm">
       <div class="row">
+        <div class="col s12 m9">
+          <div class="input-field ">
+            <input type="text" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required=""
+                   pattern="[a-zA-Z]+"
+                   [class.error-border]="!firstName.valid && firstName.touched">
+            <label [class.active]="firstName.value">First Name</label>
+            <div *ngIf="!firstName.valid && firstName.touched" class="error-message">
+              <p class="error">*Enter your first name</p>
+            </div>
+          </div>
 
-        <div class="input-field col s12 l6">
-          <input type="text" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required=""
-                 pattern="[a-zA-Z]+"
-                 [class.error-border]="!firstName.valid && firstName.touched">
-          <label class="active">First Name</label>
-          <div *ngIf="!firstName.valid && firstName.touched" class="error-message">
-            <p class="error">*Enter your first name</p>
+          <div class="input-field">
+            <input type="text" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required
+                   pattern="[a-zA-Z]+"
+                   [class.error-border]="!lastName.valid && lastName.touched">
+            <label [class.active]="lastName.value">Last Name</label>
+            <div *ngIf="!lastName.valid && lastName.touched" class="error-message">
+              <p class="error">*Enter your last name</p>
+            </div>
           </div>
 
         </div>
 
-        <div class="input-field col s12 l6">
-          <input type="text" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required
-                 pattern="[a-zA-Z]+"
-                 [class.error-border]="!lastName.valid && lastName.touched">
-          <label class="active">Last Name</label>
-          <div *ngIf="!lastName.valid && lastName.touched" class="error-message">
-            <p class="error">*Enter your last name</p>
+        <div class="col m3">
+          <div *ngIf="imageAvailable || imageStored">
+            <div class="uploaded-image">
+              <input type="file" (change)="uploadProfilePicture($event)">
+              <img *ngIf="imageAvailable" id="image-preview" class="show-image">
+              <img *ngIf="imageStored" [src]="model.imageURL" class="show-image">
+              <div class="bottom center-align">
+                <i class="fas fa-camera"></i>
+                <p>Change photo</p>
+              </div>
+            </div>
           </div>
+
+          <div *ngIf="!imageAvailable && !imageStored" class="profile-picture">
+            <input type="file" (change)="uploadProfilePicture($event)">
+            <p>+</p>
+          </div>
+
+
         </div>
+
 
       </div>
 
-      <div class="row">
+      <div *ngIf="!editStudent && !editProf" class="row">
 
         <div class="input-field col s12 l6">
           <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel"
                  (blur)="comparePasswords(registerForm.value)"
                  [class.error-border]="!password.valid && password.touched"
-                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}" required>
           <label class="active">Password</label>
           <div *ngIf="!password.valid && password.touched" class="error-message">
             <p class="error">*Password must contain
@@ -49,7 +74,7 @@
           <input type="password" name="confirmPassword" [(ngModel)]="model.confirmPassword"
                  #confirmPassword="ngModel"
                  (blur)="comparePasswords(registerForm.value)"
-                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}" required>
           <label class="active">Confirm Password</label>
           <div *ngIf="!passwordsMatch" class="error-message">
             <p class="error">*Passwords don't match</p>
@@ -61,43 +86,54 @@
 
       <div class="row">
         <div class="input-field col s12">
-          <input type="email" name="email" [(ngModel)]="model.email" #email="ngModel"
+          <input type="email" name="email" [(ngModel)]="model.email" #email="ngModel" required
                  pattern="[a-zA-Z]+.[a-zA-Z]+[0-9]*@info.uaic.ro" [class.error-border]="!email.valid && email.touched">
-          <label class="active">Email</label>
+          <label [class.active]="email.value">Email</label>
           <div *ngIf="!email.valid && email.touched" class="error-message">
             <p class="error">*You need to use the email address provided by the University</p>
           </div>
         </div>
       </div>
 
-      <div [hidden]="register_professor" class="row">
+      <div *ngIf="!register_professor && !editProf" class="row">
 
         <div class="input-field col s6">
-          <select materialize="material_select" name="year" [(ngModel)]="model.year" #year="ngModel">
+          <select materialize="material_select" name="year" [(ngModel)]="model.year" #year="ngModel" required>
             <option value="" disabled selected>Choose the year that you are in</option>
-            <option [value]=1>1</option>
-            <option [value]=2>2</option>
-            <option [value]=3>3</option>
+            <option class="blue-text darken-1" [value]="'Bachelor\'s degree year 1'">Bachelor's degree year 1</option>
+            <option [value]="'Bachelor\'s degree year 2'">Bachelor's degree year 2</option>
+            <option [value]="'Bachelor\'s degree year 3'">Bachelor's degree year 3</option>
+            <option [value]="'Masters: Systems software engineering year 1'">Masters: Systems software engineering year
+              1
+            </option>
+            <option [value]="'Masters: Systems software engineering year 2'">Masters: Systems software engineering year
+              2
+            </option>
+            <option [value]="'Masters: Computational optimization year 1'">Masters: Computational optimization year 1
+            </option>
+            <option [value]="'Masters: Computational optimization year 2'">Masters: Computational optimization year 2
+            </option>
+            <option [value]="'Masters: Distributed systems year 1'">Masters: Distributed systems year 1</option>
+            <option [value]="'Masters: Distributed systems year 2'">Masters: Distributed systems year 2</option>
+            <option [value]="'Masters: Information security year 1'">Masters: Information security year 1</option>
+            <option [value]="'Masters: Information security year 2'">Masters: Information security year 2</option>
           </select>
           <label>Year</label>
         </div>
 
         <div class="input-field col s6">
-          <select materialize="material_select" name="semester" [(ngModel)]="model.semester" #semester="ngModel">
+          <select materialize="material_select" name="semester" [(ngModel)]="model.semester" #semester="ngModel"
+                  required>
             <option value="" disabled selected>Choose the semester that you are in</option>
             <option [value]=1>1</option>
             <option [value]=2>2</option>
-            <option [value]=3>3</option>
-            <option [value]=4>4</option>
-            <option [value]=5>5</option>
-            <option [value]=6>6</option>
-
           </select>
           <label>Semester</label>
         </div>
 
 
       </div>
+
 
       <div class="row center-align">
 

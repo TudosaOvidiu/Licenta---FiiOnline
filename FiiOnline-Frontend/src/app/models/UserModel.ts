@@ -5,9 +5,10 @@ export class UserModel {
   public password: string;
   public confirmPassword: string;
   public email: string;
-  public year: number;
+  public year: string;
   public semester: number;
   public role: string;
+  public imageURL: string;
 
   constructor() {
     this.userName = '';
@@ -16,8 +17,9 @@ export class UserModel {
     this.password = '';
     this.confirmPassword = '';
     this.email = '';
-    this.year = null;
+    this.year = '';
     this.semester = null;
     this.role = '';
+    this.imageURL = '';
   }
 }

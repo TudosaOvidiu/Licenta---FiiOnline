@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Business.Repositories.Intefaces;
 using Business.Services.Interfaces;
 using CreatingModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace FiiOnline.Controllers
             _lessonsService = lessonsService;
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpPost]
         public async Task<IActionResult> Post(LessonCreatingModel model)
         {
@@ -36,6 +38,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -49,6 +52,7 @@ namespace FiiOnline.Controllers
             return Ok(lessons);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetLesson([FromRoute] Guid id)
         {
@@ -58,6 +62,7 @@ namespace FiiOnline.Controllers
             return Ok(lesson);
         }
 
+        [Authorize]
         [HttpGet("course-lessons/{id}")]
         public IActionResult GetCourseLessons([FromRoute] Guid id)
         {
@@ -67,6 +72,7 @@ namespace FiiOnline.Controllers
             return Ok(lessons);
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpPut("delete-file")]
         public IActionResult DeleteFile([FromBody] FileCreatingModel file)
         {
@@ -82,6 +88,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("download-file/{id}")]
         public async Task<IActionResult> DownloadFileAsync([FromRoute] Guid id)
         {
@@ -97,6 +104,7 @@ namespace FiiOnline.Controllers
             return File(memory, _lessonsService.GetContentType(file.Path), file.Name);
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(LessonCreatingModel model, [FromRoute] Guid id)
         {
@@ -111,6 +119,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {

@@ -53,6 +53,10 @@ $errorColor: #f44336;
     padding: 0 0.8rem;
     font-size: 10px;
   }
+
+  .title{
+    font-size: 30px;
+  }
 }
 
 .input-field {
@@ -60,7 +64,7 @@ $errorColor: #f44336;
 }
 
 label {
-  padding-left: 3%;
+  padding-left: 3% !important;
 
 }
 
@@ -69,10 +73,33 @@ label {
 }
 
 .content{
+  margin-top: 5%;
   margin-left: 310px;
 }
 @media only screen and (max-width: 992px) {
   .content {
     margin-left: 0;
   }
+}
+
+.title{
+  color: $themeColor;
+}
+
+a.delete-btn {
+  color: red !important;
+}
+
+a.delete-btn:hover {
+  color: rgba(255, 27, 12, 0.48) !important;
+  cursor: pointer;
+}
+
+a.theme-color-btn {
+  color: $themeColor !important;
+}
+
+a.theme-color-btn:hover {
+  color: rgba(51, 136, 203, 0.54) !important;
+  cursor: pointer;
 }

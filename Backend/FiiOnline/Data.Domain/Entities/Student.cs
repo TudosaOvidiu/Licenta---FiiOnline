@@ -8,24 +8,26 @@ namespace Data.Domain.Entities
     {
         private Student() { }
 
-        public int Year { get; private set; }
+        public string Year { get; private set; }
         public int Semester { get; private set; }
+        public ICollection<StudentCourse> FollowingCourses { get; private set; }
 
-        public static Student Create(string firstName, string lastName, string username, string email, string role, int year, int semester)
+        public static Student Create(string firstName, string lastName, string username, string email, string role, string year, int semester, string imageURL)
         {
             var instance = new Student()
             {
                 Id = Guid.NewGuid().ToString(),
             };
-            instance.Update(firstName, lastName, username, email, role);
+            instance.Update(firstName, lastName, username, email, role, imageURL);
             instance.Update(year, semester);
             return instance;
         }
 
-        public void Update(int year, int semester)
+        public void Update(string year, int semester)
         {
             this.Year = year;
             this.Semester = semester;
         }
+
     }
 }

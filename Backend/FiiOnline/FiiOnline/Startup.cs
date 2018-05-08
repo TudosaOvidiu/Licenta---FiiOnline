@@ -47,6 +47,8 @@ namespace FiiOnline
             services.AddTransient<IWeeksService, WeeksService>();
             services.AddTransient<IResourcesService, ResourcesService>();
             services.AddTransient<ICoursesService, CoursesService>();
+            services.AddTransient<IPostsRepository, PostsRepository>();
+            services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IGenerator, Generator>();

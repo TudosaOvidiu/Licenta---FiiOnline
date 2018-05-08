@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Business.Services.Interfaces;
 using CreatingModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace FiiOnline.Controllers
             _weeksService = weeksService;
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpPost]
         public IActionResult PostCourse([FromBody] WeekCreatingModel weekModel)
         {
@@ -35,6 +37,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetWeeks()
         {
@@ -48,6 +51,7 @@ namespace FiiOnline.Controllers
             return Ok(weeks);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetWeekById([FromRoute] Guid id)
         {
@@ -62,6 +66,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpPut("{id}")]
         public IActionResult UpdateWeek([FromBody]WeekCreatingModel model, [FromRoute] Guid id)
         {
@@ -76,6 +81,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] Guid id)
         {

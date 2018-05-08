@@ -31,6 +31,8 @@ namespace Data.Persistence
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ProfessorCourse> ProfessorCourses { get; set; }
         public DbSet<AppFile> Files { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,6 +53,11 @@ namespace Data.Persistence
                 .WithMany(l => l.Files)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.Professor)
+                .WithMany(p => p.Posts)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<ProfessorCourse>()
                 .HasKey(uc => new {uc.ProfessorId, uc.CourseId});
 
@@ -63,6 +70,19 @@ namespace Data.Persistence
                 .HasOne(uc => uc.Course)
                 .WithMany(c => c.UserCourses)
                 .HasForeignKey(uc => uc.CourseId);
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasKey(sc => new {sc.StudentId, sc.CourseId});
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne(uc => uc.Student)
+                .WithMany(s => s.FollowingCourses)
+                .HasForeignKey(uc => uc.StudentId);
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Course)
+                .WithMany(c => c.StudentCourse)
+                .HasForeignKey(sc => sc.CourseId);
         }
     }
 }

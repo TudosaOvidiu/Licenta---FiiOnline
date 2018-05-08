@@ -104,7 +104,14 @@ namespace Business.Services.Implementations
         {
             var types = GetMimeTypes();
             var ext = Path.GetExtension(path).ToLowerInvariant();
-            return types[ext];
+            if (!types.ContainsKey(ext))
+            {
+                return "text/plain";
+            }
+            else
+            {
+                return types[ext];
+            }
         }
 
         private Dictionary<string, string> GetMimeTypes()
@@ -121,7 +128,15 @@ namespace Business.Services.Implementations
                 {".jpg", "image/jpeg"},
                 {".jpeg", "image/jpeg"},
                 {".gif", "image/gif"},
-                {".csv", "text/csv"}
+                {".csv", "text/csv"},
+                {".cpp","text/x-c" },
+                {".css","text/css" },
+                {".html","text/html" },
+                {".js","text/javascript" },
+                {".py","text/x-script.phyton" },
+                {".c","text/x-c" },
+                {".java", "text/x-java-source" }
+
             };
         }
     }

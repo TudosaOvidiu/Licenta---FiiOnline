@@ -1,19 +1,15 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.week-form {
-  width: 70%;
-  border: 1px solid grey;
-  border-radius: 10px;
-  margin: 5% 5% 0% 0%;
-  float: right;
-
-  .title {
-    color: $themeColor;
-  }
-
+.title {
+  color: $themeColor;
 }
 
+@media (max-width: 600px) {
+  .title{
+    font-size: 30px;
+  }
+}
 
 
 

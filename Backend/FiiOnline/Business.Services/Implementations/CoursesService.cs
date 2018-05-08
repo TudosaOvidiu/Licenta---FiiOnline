@@ -99,6 +99,11 @@ namespace Business.Services.Implementations
             return courseDTO;
         }
 
+        public void FollowCourse(string studentId, Guid courseId)
+        {
+            _coursesRepository.FollowCourse(studentId, courseId);
+        }
+
         public List<WeekDTO> GetCourseWeeks(Guid id)
         {
             var course = _coursesRepository.GetById(id);

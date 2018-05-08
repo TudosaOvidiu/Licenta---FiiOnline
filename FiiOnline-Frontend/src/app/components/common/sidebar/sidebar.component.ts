@@ -10,15 +10,17 @@ import {Router} from '@angular/router';
 export class SidebarComponent implements OnInit {
 
   public role: string;
+  public user;
+
   constructor(private auth: AuthenticationService, private router: Router) {
   }
 
   ngOnInit() {
-    this.role = JSON.parse(sessionStorage.getItem('user')).role;
-    console.log(this.role);
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.role = this.user.role;
   }
 
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['login']);
   }

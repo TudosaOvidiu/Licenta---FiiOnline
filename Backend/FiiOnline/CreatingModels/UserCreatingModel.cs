@@ -17,19 +17,14 @@ namespace CreatingModels
 
         public String Email { get; set; }
 
-        public int Year { get; set; }
+        public String Year { get; set; }
 
         public int Semester { get; set; }
 
         public String Role { get; set; }
 
+        public string ImageURL { get; set; }
 
-
-
-        public UserCreatingModel()
-        {
-
-        }
 
     }
 }

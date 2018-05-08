@@ -12,33 +12,37 @@ import {CoursesListComponent} from '../components/common/courses-list/courses-li
 import {LessonListComponent} from '../components/common/lessons-list/lessons-list.component';
 import {WeekComponent} from '../components/professor/week/week.component';
 import {CoursesMenuComponent} from '../components/common/courses-menu/courses-menu.component';
+import {AdminGuard, AdminStudentGuard, LoginGuard, NotLoggedGuard, ProfessorGuard, StudentGuard} from '../services/guards.service';
+import {PostComponent} from '../components/common/post/post.component';
+import {PostsListComponent} from '../components/common/posts-list/posts-list.component';
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [NotLoggedGuard]},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'register', component: UserRegisterComponent},
   {path: 'account-confirmation', component: AccountConfirmationComponent},
-  {path: 'create-course', component: UploadCourseComponent},
-  {path: 'upload-material', component: UploadLessonComponent},
-  {path: 'edit-course/:id', component: EditCourseComponent},
-  {path: 'edit-material/:id', component: UploadLessonComponent},
-  {path: 'register-professor', component: UserRegisterComponent},
-  {path: 'admin-courses', component: CoursesListComponent},
-  {path: 'professor-courses', component: CoursesListComponent},
-  {path: 'courses', component: CoursesMenuComponent},
+  {path: 'create-course', component: UploadCourseComponent, canActivate: [AdminGuard, LoginGuard]},
+  {path: 'upload-material', component: UploadLessonComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'edit-course/:id', component: EditCourseComponent, canActivate: [AdminGuard, LoginGuard]},
+  {path: 'edit-material/:id', component: UploadLessonComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'register-professor', component: UserRegisterComponent, canActivate: [AdminGuard, LoginGuard]},
+  {path: 'admin-courses', component: CoursesListComponent, canActivate: [AdminGuard, LoginGuard]},
+  {path: 'professor-courses', component: CoursesListComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'courses', component: CoursesMenuComponent, canActivate: [AdminStudentGuard, LoginGuard]},
   {path: 'professor-lessons/:id', component: LessonListComponent},
-  {path: 'lessons/:id', component: LessonListComponent},
-  {path: 'lessons/:id', component: LessonListComponent},
-  {path: 'create-lesson', component: WeekComponent},
-  {path: 'edit-lesson/:id', component: WeekComponent},
-  {path: 'courses-list', component: CoursesListComponent},
-
-  // { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
-  // { path: 'signup', component: SignupPageComponent},
-  // { path: 'edit', component: EditPageComponent},
-  // { path: 'update', component: UpdateComponent, canActivate: [AdminGuard]}
+  {path: 'lessons/:id', component: LessonListComponent, canActivate: [StudentGuard, LoginGuard]},
+  {path: 'create-lesson', component: WeekComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'edit-lesson/:id', component: WeekComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'courses-list', component: CoursesListComponent, canActivate: [AdminStudentGuard, LoginGuard]},
+  {path: 'edit-profile', component: UserRegisterComponent, canActivate: [StudentGuard, LoginGuard]},
+  {path: 'edit-prof-profile', component: UserRegisterComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'add-post', component: PostComponent, canActivate: [LoginGuard]},
+  {path: '', component: PostsListComponent, canActivate: [LoginGuard]},
+  {path: 'professor-posts', component: PostsListComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'admin-posts', component: PostsListComponent, canActivate: [AdminGuard, LoginGuard]},
+  {path: 'edit-post/:id', component: PostComponent, canActivate: [ProfessorGuard, LoginGuard]},
 ];
 
 @NgModule({

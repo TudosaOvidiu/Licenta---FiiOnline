@@ -57,6 +57,30 @@ namespace Data.Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("Data.Domain.Entities.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AuthorGuid");
+
+                    b.Property<Guid>("CourseGuid");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ProfessorId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfessorId");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("Data.Domain.Entities.ProfessorCourse", b =>
                 {
                     b.Property<string>("ProfessorId");
@@ -90,6 +114,19 @@ namespace Data.Persistence.Migrations
                     b.ToTable("Resources");
                 });
 
+            modelBuilder.Entity("Data.Domain.Entities.StudentCourse", b =>
+                {
+                    b.Property<string>("StudentId");
+
+                    b.Property<Guid>("CourseId");
+
+                    b.HasKey("StudentId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("StudentCourses");
+                });
+
             modelBuilder.Entity("Data.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -109,6 +146,8 @@ namespace Data.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<string>("ImageURL");
 
                     b.Property<string>("LastName");
 
@@ -298,7 +337,7 @@ namespace Data.Persistence.Migrations
 
                     b.Property<int>("Semester");
 
-                    b.Property<int>("Year");
+                    b.Property<string>("Year");
 
                     b.ToTable("Student");
 
@@ -310,6 +349,14 @@ namespace Data.Persistence.Migrations
                     b.HasOne("Data.Domain.Entities.Resource", "Lesson")
                         .WithMany("Files")
                         .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Data.Domain.Entities.Post", b =>
+                {
+                    b.HasOne("Data.Domain.Entities.Professor", "Professor")
+                        .WithMany("Posts")
+                        .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -331,6 +378,19 @@ namespace Data.Persistence.Migrations
                     b.HasOne("Data.Domain.Entities.Week", "Week")
                         .WithMany("Resources")
                         .HasForeignKey("WeekId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Data.Domain.Entities.StudentCourse", b =>
+                {
+                    b.HasOne("Data.Domain.Entities.Course", "Course")
+                        .WithMany("StudentCourse")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.Domain.Entities.Student", "Student")
+                        .WithMany("FollowingCourses")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

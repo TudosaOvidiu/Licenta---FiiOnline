@@ -1,0 +1,61 @@
+<app-sidebar></app-sidebar>
+<div class="content row">
+  <div class="center-align card col s8 offset-s2">
+    <div>
+      <h1 [hidden]="onEdit" class="title"> New Post</h1>
+      <h1 [hidden]="!onEdit" class="title"> Edit Post</h1>
+    </div>
+    <form method="post" #postForm="ngForm">
+      <div class="row">
+        <div class="input-field col s12" [class.m6]="!adminPage">
+          <input type="text" name="title" [(ngModel)]="model.title" #title="ngModel" required
+                 [class.error-border]="!title.valid && title.touched">
+          <label [class.active]="title.value">Title</label>
+          <div *ngIf="!title.valid && title.touched" class="error-message">
+            <p class="error">*The post must have a title</p>
+          </div>
+        </div>
+
+        <div class="input-field col s12 m6 select-professors" *ngIf="showCoursesDropdown">
+          <select  materialize="material_select" name="courseGuid" [(ngModel)]="model.courseGuid"
+                  #courseGuid="ngModel" required>
+            <option value="" disabled selected>Choose your option</option>
+            <option *ngFor="let course of courses" [value]="course.id">{{course.title}}</option>
+          </select>
+          <label>Post for</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="editor-label">Description</p>
+        <div class="editor">
+          <app-ngx-editor [placeholder]="'Enter text here...'" [toolbar]="toolbar" [minHeight]="2" [spellcheck]="true"
+                          [(ngModel)]="model.description"
+                          name="description"></app-ngx-editor>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <button class="btn waves-effect waves-light" type="submit" name="action" (click)="onSubmit()"
+                [disabled]="!postForm.valid">
+          Submit
+        </button>
+
+      </div>
+
+    </form>
+  </div>
+</div>
+
+Modal Structure
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]"
+     [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>{{modal_header}}</h4>
+    <hr>
+    <br>
+    <p>{{modal_content}}</p>
+  </div>
+
+</div>

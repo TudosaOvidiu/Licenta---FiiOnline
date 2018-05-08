@@ -36,6 +36,7 @@ export class LessonListComponent implements OnInit {
         this.studentPage = true;
       }
       this.dataService.fetchData(`http://localhost:63944/Courses/course-weeks/${this.courseId}`).subscribe(response => {
+          response.sort(function (a, b) {return a.weekNr - b.weekNr; });
           this.lessons = response;
           console.log(this.lessons);
         },

@@ -20,5 +20,13 @@ namespace Business.Repositories.Intefaces
         List<Professor> GetProfessors();
 
         Professor GetProfessorById(string id);
+
+        void UpdateStudent(string id, UserCreatingModel model);
+
+        void UpdateProfessor(string id, UserCreatingModel model);
+
+        List<Guid> GetStudentFollowedCourses(string id);
+
+
     }
 }

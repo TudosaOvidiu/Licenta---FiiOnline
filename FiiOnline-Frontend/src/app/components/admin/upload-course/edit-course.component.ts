@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {CourseModel} from '../../../models/coursemodel';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -13,8 +14,10 @@ export class EditCourseComponent implements OnInit {
   public professors = new Array();
   public model = new CourseModel();
   public onEdit = true;
+  public showTeachersDropdown = false;
+  private courseId: string;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private route: ActivatedRoute) {
   }
 
 
@@ -26,28 +29,33 @@ export class EditCourseComponent implements OnInit {
             id: prof.id
           });
         }
+        this.showTeachersDropdown = true;
         console.log(this.professors);
       },
       err => {
         console.log(err);
       }
     );
-    this.dataService.fetchData('http://localhost:63944/Courses/02a69dc4-64fe-4cbc-85a4-6f207207a9fb').subscribe(response => {
-        this.model.name = response.name;
-        this.model.description = response.description;
-        this.model.year = response.year;
-        this.model.semester = response.semester;
-        this.model.professorsGUIDs = response.profGuids;
+    this.route.params.subscribe(params => {
+      this.courseId = params['id'];
+      this.dataService.fetchData(`http://localhost:63944/Courses/${this.courseId}`).subscribe(response => {
+          this.model.name = response.name;
+          this.model.description = response.description;
+          this.model.year = response.year;
+          this.model.semester = response.semester;
+          this.model.professorsGUIDs = response.profGuids;
 
-      },
-      err => {
-        console.log(err);
-      }
-    );
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    });
+
   }
 
   onSubmit(model: CourseModel) {
-    this.dataService.putData('http://localhost:63944/Courses/02a69dc4-64fe-4cbc-85a4-6f207207a9fb', model).subscribe(response => {
+    this.dataService.putData(`http://localhost:63944/Courses/${this.courseId}`, model).subscribe(response => {
       },
       err => {
       }

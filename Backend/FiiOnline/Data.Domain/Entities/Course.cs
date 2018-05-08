@@ -16,8 +16,9 @@ namespace Data.Domain.Entities
 
         public List<Week> Weeks { get; private set; }
         public ICollection<ProfessorCourse> UserCourses { get; private set; }
+        public ICollection<StudentCourse> StudentCourse { get; private set; }
 
-        public static Course Create(string name, string year, int semester, List<Week> weeks, List<User> professors, string description)
+        public static Course Create(string name, string year, int semester, List<Week> weeks, string description)
         {
             var instance = new Course { Id = Guid.NewGuid() };
             instance.Update(name, year, semester, weeks, description);
@@ -62,6 +63,18 @@ namespace Data.Domain.Entities
             }
         }
 
+        public void Update(StudentCourse studentCourse)
+        {
+            if (StudentCourse == null)
+            {
+                StudentCourse = new List<StudentCourse>() {studentCourse};
+            }
+            else
+            {
+                StudentCourse.Add(studentCourse);
+            }
+        }
+
         public void AddWeek(Week week)
         {
             if (Weeks == null)
@@ -79,6 +92,11 @@ namespace Data.Domain.Entities
         public void RemoveProfFromCourse(ProfessorCourse userCourse)
         {
             this.UserCourses.Remove(userCourse);
+        }
+
+        public void RemoveStudentFromCourse(StudentCourse studentCourse)
+        {
+            this.StudentCourse.Remove(studentCourse);
         }
 
     }

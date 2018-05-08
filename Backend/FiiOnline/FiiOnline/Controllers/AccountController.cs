@@ -10,6 +10,7 @@ using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,7 @@ namespace FiiOnline.Controllers
             _generator = generator;
         }
 
-
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserCreatingModel userModel)
         {
@@ -71,6 +72,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("ConfirmAccount", Name = "ConfirmAccountRoute")]
         public async Task<IActionResult> ConfirmEmail(string userId = "", string code = "")
@@ -87,6 +89,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("auth")]
         public async Task<object> Login([FromBody] LoginCreatingModel model)
         {
@@ -103,6 +106,7 @@ namespace FiiOnline.Controllers
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
         }
 
+        [AllowAnonymous]
         [HttpPost("forgotpassword")]
         public async Task<IActionResult> ForgotPassword([FromBody] LoginCreatingModel model)
         {
@@ -124,6 +128,7 @@ namespace FiiOnline.Controllers
             return StatusCode((int) HttpStatusCode.OK);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("ResetPassword", Name = "ResetPasswordRoute")]
         public async Task<IActionResult> ResetPassword([FromBody] LoginCreatingModel model, string userId = "", string code = "")

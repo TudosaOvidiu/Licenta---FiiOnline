@@ -70,7 +70,7 @@ export class LessonGenericComponent implements OnInit {
   showIndicator() {
     let li = document.getElementsByClassName('indicator')[this.index];
     li.setAttribute('style', 'display:default');
-    li.setAttribute('style', 'background-color: #3388cbb5');
+    li.setAttribute('style', 'background-color: #3388cbb5!important');
   }
 
   hideTab(elem_id) {
@@ -148,9 +148,10 @@ export class LessonGenericComponent implements OnInit {
   }
 
   addResource(weekId) {
-    console.log(weekId);
-    sessionStorage.setItem('weekId', weekId);
-    this.router.navigate([`/upload-material/`]);
+    if (!(this.lecture && this.seminar && this.homework)) {
+      sessionStorage.setItem('weekId', weekId);
+      this.router.navigate([`/upload-material/`]);
+    }
   }
 
 

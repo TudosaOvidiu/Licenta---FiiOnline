@@ -2,22 +2,105 @@ $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 $errorColor: #f44336;
 
-.register-form {
+.card {
   margin-top: 5%;
-  border: solid 1px $borderColor;
-  border-radius: 10px;
 
   .registration-title {
     color: $themeColor;
     margin-bottom: 35px;
+  }
+
+  .uploaded-image {
+    position: relative;
+    height: 142px;
+    width: 110px;
+    overflow: hidden;
+    .show-image {
+      height: 142px;
+      width: 110px;
+      object-fit: cover;
+    }
+
+    input[type="file"] {
+      font-size: 170px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .bottom {
+      transition: 0.3s;
+      position: absolute;
+      bottom: 0px;
+      margin-right: auto;
+      margin-left: auto;
+      background-color: black;
+      color: white;
+      z-index: 1;
+      width: 110px;
+      opacity: 0;
+      font-size: 11px;
+      p {
+        margin-top: 7px;
+        display: inline-block;
+      }
+      .fa-camera {
+        display: inline-block;
+        color: white;
+        margin-right: 5px;
+      }
+    }
+  }
+  .uploaded-image:hover {
+    .bottom {
+      opacity: 0.8;
+    }
+  }
+
+  .profile-picture {
+    position: relative;
+    height: 142px;
+    width: 115px;
+    border: 3px dashed $borderColor;
+    overflow: hidden;
+    display: inline-block;
+
+    input[type="file"] {
+      font-size: 170px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    p {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      margin-top: 0px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 140px;
+      color: $borderColor;
+    }
+  }
+
+  .profile-picture:hover {
+    border-color: #7C7C7C;
+    p {
+      color: #7C7C7C
+    }
+  ;
   }
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
   color: black !important;
 }
-
-
 
 @media (max-width: 992px) {
   .registration-title {

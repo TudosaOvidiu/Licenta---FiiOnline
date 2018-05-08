@@ -3,7 +3,8 @@ import {LessonModel} from '../../../models/lessonmodel';
 import {DataService} from '../../../services/data.service';
 import {Renderer2} from '@angular/core';
 import {MaterializeAction} from 'angular2-materialize';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -25,28 +26,27 @@ export class UploadLessonComponent implements OnInit {
   public seminarExists = false;
   public homeworkExists = false;
   public onEdit = false;
+  public onDelete = false;
+  public modalHeader: string;
+  public modalText: string;
 
   modalActions = new EventEmitter<string | MaterializeAction>();
   public toolbar = [
-        ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
-        ["fontName", "fontSize", "color"],
-        ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"],
-        ["cut", "copy", "delete", "removeFormat", "undo", "redo"],
-        ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
-        ["link", "unlink"],
-        ["code"]
-    ];
+    ['bold', 'italic', 'underline', 'strikeThrough', 'superscript', 'subscript'],
+    ['fontName', 'fontSize', 'color'],
+    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', 'indent', 'outdent'],
+    ['cut', 'copy', 'delete', 'removeFormat', 'undo', 'redo'],
+    ['paragraph', 'blockquote', 'removeBlockquote', 'horizontalLine', 'orderedList', 'unorderedList'],
+    ['link', 'unlink'],
+    ['code']
+  ];
 
-  constructor(private dataService: DataService, private renderer: Renderer2, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private renderer: Renderer2, private route: ActivatedRoute, private location: Location) {
   }
 
-  prepareEditor(){
-    let scisors = document.getElementsByClassName("fa-scissors")[0];
-    console.log(scisors);
-  }
+
 
   ngOnInit() {
-    this.prepareEditor();
     this.weekId = sessionStorage.getItem('weekId');
     if (this.weekId !== null) {
       this.setupRadioButtons(this.weekId);
@@ -100,7 +100,6 @@ export class UploadLessonComponent implements OnInit {
 
   setType(type) {
     this.model.type = type;
-    console.log(this.model.type);
   }
 
 
@@ -136,8 +135,8 @@ export class UploadLessonComponent implements OnInit {
     this.renderer.setAttribute(div, 'id', file);
 
     let p = this.renderer.createElement('p');
-    this.renderer.setAttribute(p, 'class', 'file-name tooltipped');
-    let p_content = document.createTextNode((file.length > 25) ? `${file.substring(0, 25)}...` : file);
+    this.renderer.setAttribute(p, 'class', 'file-name truncate');
+    let p_content = document.createTextNode(file);
     p.appendChild(p_content);
 
     let i = this.renderer.createElement('i');
@@ -172,6 +171,7 @@ export class UploadLessonComponent implements OnInit {
     let p_delete = this.renderer.createElement('p');
     this.renderer.setAttribute(p_delete, 'class', 'delete');
     this.renderer.listen(p_delete, 'click', (event) => {
+      this.onDelete = true;
       this.openModal(event);
     });
     let p_delete_text = document.createTextNode('Delete');
@@ -225,6 +225,7 @@ export class UploadLessonComponent implements OnInit {
   }
 
   onSubmit() {
+    this.onDelete = false;
     this.model.files.append('title', this.model.title);
     this.model.files.append('description', this.model.description);
     this.model.files.append('weekId', this.weekId);
@@ -239,16 +240,42 @@ export class UploadLessonComponent implements OnInit {
 
     if (this.onEdit) {
       this.dataService.putData(`http://localhost:63944/Lessons/${this.lesson_id}`, this.model.files).subscribe(response => {
+          this.modalHeader = 'Lesson updated!';
+          this.modalText = 'The lesson has been updated successfully';
+          this.modalActions.emit({action: 'modal', params: ['open']});
+          setTimeout((router: Router) => {
+            this.closeModal();
+            this.location.back();
+          }, 1500);
         },
         err => {
-          console.log(err);
+          this.modalHeader = 'Ooops, something went wrong!';
+          this.modalText = 'The lesson could not be updated. Please try again later!';
+          this.modalActions.emit({action: 'modal', params: ['open']});
+          setTimeout((router: Router) => {
+            this.closeModal();
+            this.location.back();
+          }, 1500);
         }
       );
     } else {
       this.dataService.postData('http://localhost:63944/Lessons', this.model.files).subscribe(response => {
+          this.modalHeader = 'Lesson created!';
+          this.modalText = 'The lesson has been created successfully';
+          this.modalActions.emit({action: 'modal', params: ['open']});
+          setTimeout((router: Router) => {
+            this.closeModal();
+            this.location.back();
+          }, 1500);
         },
         err => {
-          console.log(err);
+          this.modalHeader = 'Ooops, something went wrong!';
+          this.modalText = 'The lesson could not be created. Please try again later!';
+          this.modalActions.emit({action: 'modal', params: ['open']});
+          setTimeout((router: Router) => {
+            this.closeModal();
+            this.location.back();
+          }, 1500);
         }
       );
     }

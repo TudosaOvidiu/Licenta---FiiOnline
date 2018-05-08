@@ -16,6 +16,8 @@
 
         <div [hidden]="page!=='student'" class="card-action">
           <a routerLink="/lessons/{{course.id}}"  class="theme-color-btn">Lessons</a>
+          <a *ngIf="studentCourses.indexOf(course.id) == -1" class="theme-color-btn" (click)="followCourse(course.id, 'follow')">Follow course</a>
+          <a *ngIf="studentCourses.indexOf(course.id) > -1" class="theme-color-btn" (click)="followCourse(course.id, 'unfollow')">Unfollow course</a>
         </div>
 
         <div [hidden]="page!=='professor'" class="card-action">

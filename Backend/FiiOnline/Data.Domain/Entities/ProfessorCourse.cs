@@ -17,7 +17,7 @@ namespace Data.Domain.Entities
         {
             var instance = new ProfessorCourse
             {
-                Professor = professor
+                Professor = professor,
             };
             return instance;
         }
