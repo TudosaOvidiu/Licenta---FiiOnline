@@ -11,9 +11,13 @@ namespace Business.Repositories.Intefaces
 
         Course RemoveUserCoursesList(Course course);
 
-        IEnumerable<Course> GetCoursesByYearAndSemester(string year, int semester);
+        IEnumerable<Course> GetCoursesByYear(string year);
 
         void FollowCourse(string studentId, Guid courseId);
+
+        List<StudentCourse> GetCourseFollowers(int offset, int limit, Guid courseId);
+
+        List<StudentCourse> GetStudentCourses(string id);
 
     }
 }

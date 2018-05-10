@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Services.Interfaces;
 using CreatingModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.KeyVault.Models;
@@ -21,6 +22,7 @@ namespace FiiOnline.Controllers
             _postsService = postsService;
         }
 
+        [Authorize(Roles = "Professor, Administrator")]
         [HttpPost]
         public IActionResult PostPost([FromBody] PostCreatingModel postModel)
         {
@@ -35,6 +37,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Student")]
         [HttpGet("student-posts")]
         public IActionResult GetPostsForStudent(int offset = 0, int limit = 0, string studentId = "")
         {
@@ -49,6 +52,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Professor")]
         [HttpGet("professor-posts")]
         public IActionResult GetProfessorPosts(int offset = 0, int limit = 0, string id = "")
         {
@@ -63,6 +67,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet("admin-posts")]
         public IActionResult GetAdminPosts(int offset = 0, int limit = 0)
         {
@@ -77,6 +82,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetPostById([FromRoute] Guid id)
         {
@@ -91,6 +97,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator, Professor")]
         [HttpPut("{id}")]
         public IActionResult UpdatePost([FromRoute] Guid id, [FromBody] PostCreatingModel model)
         {
@@ -105,6 +112,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator, Professor")]
         [HttpDelete("{id}")]
         public IActionResult DeletePost([FromRoute] Guid id)
         {

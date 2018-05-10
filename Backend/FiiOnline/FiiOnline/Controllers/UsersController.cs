@@ -41,6 +41,7 @@ namespace FiiOnline.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetUser([FromRoute] string id)
         {
@@ -50,6 +51,7 @@ namespace FiiOnline.Controllers
             return Ok(user);
         }
 
+        [Authorize(Roles = "Student")]
         [HttpGet("followed-courses/{id}")]
         public IActionResult GetStudentFollowedCourses([FromRoute] string id)
         {
@@ -66,7 +68,7 @@ namespace FiiOnline.Controllers
 
 
 
-
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] string id)
         {
@@ -111,6 +113,7 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser([FromRoute] string id)
         {

@@ -1,10 +1,11 @@
 <app-sidebar></app-sidebar>
+
+<div class="row nav-title-div">
+  <p class="nav-title col s8 push-s2">Add Post</p>
+</div>
+
 <div class="content row">
-  <div class="center-align card col s8 offset-s2">
-    <div>
-      <h1 [hidden]="onEdit" class="title"> New Post</h1>
-      <h1 [hidden]="!onEdit" class="title"> Edit Post</h1>
-    </div>
+  <div class="center-align card col s8 offset-s2 post-card">
     <form method="post" #postForm="ngForm">
       <div class="row">
         <div class="input-field col s12" [class.m6]="!adminPage">

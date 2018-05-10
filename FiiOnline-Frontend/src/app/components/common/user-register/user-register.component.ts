@@ -162,23 +162,23 @@ export class UserRegisterComponent implements OnInit {
           this.openModal();
         });
     } else {
-
-      model.role = 'Student';
+      console.log("i'm in elese");
+      this.model.role = 'Student';
       if (this.register_professor) {
-        model.role = 'Professor';
-        model.year = '';
-        model.semester = 0;
+        this.model.role = 'Professor';
+        this.model.year = '';
+        this.model.semester = 0;
       }
       console.log(this.model);
       this.dataService.postData('http://localhost:63944/Account/register', this.model).subscribe(response => {
           this.modalHeader = 'Registration succeeded';
           this.modalText = 'Your account was created. Please check your email to confirm your account!';
-          this.openModal();
+          // this.openModal();
         },
         err => {
           this.modalHeader = 'Registration failed';
           this.modalText = 'Something went wrong! Please try again!';
-          this.openModal();
+          // this.openModal();
         }
       );
     }

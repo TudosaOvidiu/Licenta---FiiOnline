@@ -147,11 +147,9 @@ export class LessonGenericComponent implements OnInit {
     this.router.navigate([`/edit-lesson/${lesson_id}`]);
   }
 
-  addResource(weekId) {
-    if (!(this.lecture && this.seminar && this.homework)) {
-      sessionStorage.setItem('weekId', weekId);
-      this.router.navigate([`/upload-material/`]);
-    }
+  addResource(weekId, type) {
+    console.log(weekId);
+    this.router.navigate([`/upload-material/`], {queryParams: {id: weekId, type: type}});
   }
 
 

@@ -27,6 +27,8 @@ namespace Business.Repositories.Intefaces
 
         List<Guid> GetStudentFollowedCourses(string id);
 
+        Student GetStudentById(string id);
+
 
     }
 }

@@ -15,6 +15,7 @@ export class CoursesListComponent implements OnInit {
   public page: string;
   private user;
   public studentCourses = [];
+  public year: string;
 
   modalActions = new EventEmitter<string | MaterializeAction>();
 
@@ -44,6 +45,22 @@ export class CoursesListComponent implements OnInit {
           console.log(err);
         }
       );
+    } else if (this.router.url.includes('followed-courses')) {
+      this.dataService.fetchData(`http://localhost:63944/Courses/student-courses/${this.user.id}`).subscribe(response => {
+          this.courses = response;
+          console.log(this.courses);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      this.dataService.fetchData(`http://localhost:63944/Users/followed-courses/${this.user.id}`).subscribe(response => {
+            this.studentCourses = response;
+          },
+          err => {
+            console.log(err);
+          }
+        );
     } else {
 
       let year = this.route.snapshot.queryParams['year'];
@@ -51,6 +68,7 @@ export class CoursesListComponent implements OnInit {
 
       this.dataService.fetchData(`http://localhost:63944/Courses/course-by-semester?year=${year}&semester=${semester}`).subscribe(response => {
           this.courses = response;
+          this.year = this.courses[0].year;
           console.log(this.courses);
         },
         err => {
@@ -111,6 +129,17 @@ export class CoursesListComponent implements OnInit {
   saveCourseId(courseId) {
     sessionStorage.setItem('courseId', courseId);
     // this.router.navigate(['upload-lesson']);
+  }
+
+  goToLessons(courseId: string) {
+    switch (this.page){
+      case 'student':
+        this.router.navigate([`/lessons/${courseId}`]);
+        break;
+      case 'professor':
+        this.router.navigate([`professor-lessons/${courseId}`]);
+        break;
+    }
   }
 
 }

@@ -61,9 +61,9 @@ namespace Business.Services.Implementations
             return courseDtos;
         }
 
-        public IEnumerable<CourseDTO> GetCoursesByYearAndSemester(string year, int semester)
+        public IEnumerable<CourseDTO> GetCoursesByYear(string year)
         {
-            var courses = _coursesRepository.GetCoursesByYearAndSemester(year, semester);
+            var courses = _coursesRepository.GetCoursesByYear(year);
             List<CourseDTO> courseDtos = new List<CourseDTO>();
             foreach (var course in courses)
             {
@@ -99,6 +99,18 @@ namespace Business.Services.Implementations
             return courseDTO;
         }
 
+        public List<StudentDTO> GetCourseFollowers(int offset, int limit, Guid courseId)
+        {
+            var followersIds = _coursesRepository.GetCourseFollowers(offset, limit, courseId);
+            List<StudentDTO> followers = new List<StudentDTO>();
+            foreach (var follower in followersIds)
+            {
+                followers.Add(_usersService.GetStudentById(follower.StudentId));
+            }
+
+            return followers;
+        }
+
         public void FollowCourse(string studentId, Guid courseId)
         {
             _coursesRepository.FollowCourse(studentId, courseId);
@@ -114,6 +126,18 @@ namespace Business.Services.Implementations
             }
 
             return weeksDtos;
+        }
+
+        public List<CourseDTO> GetStudentCourses(string id)
+        {
+            var studCourses = _coursesRepository.GetStudentCourses(id);
+            List<CourseDTO> courseDtos = new List<CourseDTO>();
+            foreach (var studentCourse in studCourses)
+            {
+                courseDtos.Add(GetById(studentCourse.CourseId));
+            }
+
+            return courseDtos;
         }
 
         public void Delete(Guid id)

@@ -2,7 +2,7 @@
   <div class="card-content grey-text lesson-content">
           <span class="card-title grey-text text-darken-4 lesson-title">Week {{lesson.weekNr}}: {{lesson.title}}
             <div *ngIf="!studentPage"  class="lesson-menu right">
-              <div class="lesson-btn-div" (click)="addResource(lesson.id)">
+              <div class="lesson-btn-div">
               <i class="fas fa-plus lesson-button" [class.disabled]="lecture && homework && seminar"></i>
               </div>
 
@@ -24,11 +24,13 @@
     <ul class="tabs">
       <li *ngIf="lecture" class="tab col s4 m4 l4" (click)="hideLecture=false; showIndicator()" [class.removeBorder]="hideLecture"><a
         [attr.href]="'#'+lesson.resourcesDtos[0].id">Lecture</a></li>
+      <li *ngIf="!lecture && !studentPage" class="tab col s4 m4 l4"><a (click)="addResource(lesson.id, 'Lecture')">Add Lecture</a></li>
       <li *ngIf="seminar" class="tab col s4 m4 l4" (click)="hideSeminar=false; showIndicator()"><a
-        [attr.href]="'#'+lesson.resourcesDtos[1].id">Seminar</a>
-      </li>
+        [attr.href]="'#'+lesson.resourcesDtos[1].id">Seminar</a></li>
+      <li *ngIf="!seminar && !studentPage" class="tab col s4 m4 l4"><a (click)="addResource(lesson.id, 'Seminar')">Add Seminar</a></li>
       <li *ngIf="homework" class="tab col s4 m4 l4" (click)="hideHomework=false; showIndicator()"><a [attr.href]="'#'+lesson.resourcesDtos[2].id">Homework</a>
       </li>
+      <li *ngIf="!homework && !studentPage" class="tab col s4 m4 l4"><a (click)="addResource(lesson.id, 'Homework')">Add Homework</a></li>
       <li  class="tab show-nothing"><a class="active" [attr.href]="'#none'+lesson.id"></a></li>
     </ul>
   </div>

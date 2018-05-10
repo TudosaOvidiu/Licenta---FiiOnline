@@ -2,6 +2,13 @@
 .nav-wrapper{
   background-color: #3388cb;
 
+  .nav-logo{
+    width: 50px;
+    height: 50px;
+    margin-top: 14px;
+    margin-right: 7px;
+  }
+
 
   .dropdown-content li > a, .dropdown-content li > span{
     color: #3388cb;
@@ -9,7 +16,7 @@
 }
 
 .side-bar{
-  padding-top: 65px;
+  padding-top: 20px;
   border-right: 1px solid rgba(128, 128, 128, 0.36);
 
   .profile-picture{
@@ -35,6 +42,34 @@
       text-align: center;
       font-size: 50px;
     }
+  }
+
+  .user-name{
+    margin-left: 32px;
+    font-size: 25px;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+
+  .user-email{
+    margin-left: 32px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .logo-online{
+    position: fixed;
+    bottom: 8%;
+    width: 160px;
+    height: 190px;
+    margin-left: 32px;
+  }
+
+  li a{
+    font-size: 20px !important;
+    font-weight: 400;
   }
 }
 

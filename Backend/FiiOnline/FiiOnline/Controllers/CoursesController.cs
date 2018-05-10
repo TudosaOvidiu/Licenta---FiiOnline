@@ -69,11 +69,11 @@ namespace FiiOnline.Controllers
 
         [Authorize(Roles = "Administrator, Student")]
         [HttpGet("course-by-semester")]
-        public IActionResult GetCoursesBySemester(string year = "", int semester = 0)
+        public IActionResult GetCoursesBySemester(string year = "")
         {
             try
             {
-                var courses = _coursesService.GetCoursesByYearAndSemester(year, semester);
+                var courses = _coursesService.GetCoursesByYear(year);
                 return Ok(courses);
             }
             catch (Exception e)
@@ -154,6 +154,22 @@ namespace FiiOnline.Controllers
             }
         }
 
+        [Authorize(Roles = "Student")]
+        [HttpGet("student-courses/{id}")]
+        public IActionResult GetStudentCourses([FromRoute] string id)
+        {
+            try
+            {
+                var courses = _coursesService.GetStudentCourses(id);
+                return Ok(courses);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [Authorize(Roles = "Student")]
         [HttpPost("follower")]
         public IActionResult StudentFollowsCourse(string studentId = "", string courseId = "")
         {
@@ -161,6 +177,21 @@ namespace FiiOnline.Controllers
             {
                 _coursesService.FollowCourse(studentId, new Guid(courseId));
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [Authorize(Roles = "Professor")]
+        [HttpGet("course-follwers")]
+        public IActionResult GetCourseFollowers(int offset = 0, int limit = 0, string id = "")
+        {
+            try
+            {
+                var followers = _coursesService.GetCourseFollowers(offset, limit, new Guid(id));
+                return Ok(followers);
             }
             catch (Exception e)
             {

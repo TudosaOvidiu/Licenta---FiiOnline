@@ -29,6 +29,7 @@ export class UploadLessonComponent implements OnInit {
   public onDelete = false;
   public modalHeader: string;
   public modalText: string;
+  private materialType: string;
 
   modalActions = new EventEmitter<string | MaterializeAction>();
   public toolbar = [
@@ -45,62 +46,37 @@ export class UploadLessonComponent implements OnInit {
   }
 
 
-
   ngOnInit() {
-    this.weekId = sessionStorage.getItem('weekId');
-    if (this.weekId !== null) {
-      this.setupRadioButtons(this.weekId);
-    }
-    this.route.params.subscribe(params => {
-      this.lesson_id = params['id'];
-      if (this.lesson_id !== undefined) {
-        this.onEdit = true;
-        this.dataService.fetchData(`http://localhost:63944/Lessons/${this.lesson_id}`).subscribe(response => {
-            console.log(response);
-            this.model.title = response.title;
-            this.model.description = response.description;
-            this.weekId = response.weekId;
-            this.model.type = response.type;
-            this.setupRadioButtons(this.weekId);
-            for (let file of response.fileDtos) {
-              this.files_on_server[file.fileName] = file.filePath;
-              this.showFile(file.fileName);
+
+    this.weekId = this.route.snapshot.queryParams['id'];
+    this.materialType = this.route.snapshot.queryParams['type'];
+    this.model.type = this.materialType;
+    if (this.materialType === undefined) {
+      this.onEdit = true;
+      this.route.params.subscribe(params => {
+          this.lesson_id = params['id'];
+          this.dataService.fetchData(`http://localhost:63944/Lessons/${this.lesson_id}`).subscribe(response => {
+              console.log(response);
+              this.model.title = response.title;
+              this.model.description = response.description;
+              this.weekId = response.weekId;
+              this.model.type = response.type;
+              // this.setupRadioButtons(this.weekId);
+              for (let file of response.fileDtos) {
+                this.files_on_server[file.fileName] = file.filePath;
+                this.showFile(file.fileName);
+              }
+            },
+            err => {
+              console.log(err);
             }
-          },
-          err => {
-            console.log(err);
-          }
-        );
-      }
-      ;
-    });
-  }
+          );
+        }
+      );
 
-  setupRadioButtons(weekId) {
-    if (this.model.type !== '') {
-      this.renderer.setAttribute(document.getElementById(this.model.type), 'checked', '');
     }
-    this.dataService.fetchData(`http://localhost:63944/Weeks/${weekId}`).subscribe(response => {
-        console.log(response, this.model.type);
-        let resources = response.resourcesDtos;
-        if (resources[0] !== null && this.model.type !== 'Lecture') {
-          this.lectureExists = true;
-        }
-        if (resources[1] !== null && this.model.type !== 'Seminar') {
-          this.seminarExists = true;
-        }
-        if (resources[2] !== null && this.model.type !== 'Homework') {
-          this.homeworkExists = true;
-        }
-      },
-      err => {
-      }
-    );
   }
 
-  setType(type) {
-    this.model.type = type;
-  }
 
 
   onDragOver(event) {
@@ -225,6 +201,7 @@ export class UploadLessonComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.weekId);
     this.onDelete = false;
     this.model.files.append('title', this.model.title);
     this.model.files.append('description', this.model.description);

@@ -21,6 +21,7 @@ export class LessonListComponent implements OnInit {
   public resourceType: string;
   private resourceId: string;
   private lesson;
+  public courseName: string;
 
 
   modalActions = new EventEmitter<string | MaterializeAction>();
@@ -38,6 +39,7 @@ export class LessonListComponent implements OnInit {
       this.dataService.fetchData(`http://localhost:63944/Courses/course-weeks/${this.courseId}`).subscribe(response => {
           response.sort(function (a, b) {return a.weekNr - b.weekNr; });
           this.lessons = response;
+          this.courseName = this.lessons[0].courseName
           console.log(this.lessons);
         },
         err => {

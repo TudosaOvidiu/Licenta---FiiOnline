@@ -50,8 +50,14 @@ namespace Business.Services.Implementations
         public UserDTO GetById(string id)
         {
             var user = _usersRepository.GetById(id);
-            UserDTO userDto = new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email, user.Role);
+            UserDTO userDto = new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email, user.Role, user.ImageURL);
             return userDto;
+        }
+
+        public StudentDTO GetStudentById(string id)
+        {
+            var student = _usersRepository.GetStudentById(id);
+            return new StudentDTO(student.Id, student.UserName, student.FirstName, student.LastName, student.Email, student.Role, student.ImageURL, student.Year, student.Semester);
         }
 
         public void Update(UserCreatingModel model, string id)
@@ -60,6 +66,7 @@ namespace Business.Services.Implementations
             user.Update(model);
             _usersRepository.Update(user);
         }
+
 
         public void UpdateStudent(string id, UserCreatingModel model)
         {
@@ -84,7 +91,7 @@ namespace Business.Services.Implementations
             foreach (var user in users)
             {
                 userDTOs.Add(new UserDTO(user.Id, user.UserName, user.FirstName, user.LastName, user.Email,
-                    user.Role));
+                    user.Role, user.ImageURL));
             }
 
             return userDTOs;

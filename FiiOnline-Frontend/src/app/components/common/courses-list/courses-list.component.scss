@@ -21,3 +21,18 @@ a.theme-color-btn:hover{
   color: rgba(51, 136, 203, 0.54) !important;
   cursor: pointer;
 }
+
+.course-details{
+  display: inline-block;
+  color: #8d8d8d !important;
+  float: right;
+  font-size: 18px;
+}
+
+.author-paragraph{
+  display: inline-block;
+}
+
+.clickable-card:hover{
+  cursor: pointer;
+}

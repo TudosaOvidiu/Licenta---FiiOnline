@@ -25,6 +25,8 @@ namespace Business.Repositories.Implementations
         public Professor GetProfessorById(string id) => _databaseContext.Professors.Include(p => p.UserCourses)
             .ThenInclude(uc => uc.Course).FirstOrDefault(p => p.Id.Equals(id));
 
+        public Student GetStudentById(string id) => _databaseContext.Students.FirstOrDefault(s => s.Id.Equals(id));
+
         public async Task<IdentityResult> CreateAsync(UserCreatingModel model)
         {
             if (model.Role.Equals("Student"))

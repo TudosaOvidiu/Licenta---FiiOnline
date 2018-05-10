@@ -1,13 +1,48 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
+.effect {
+  position: relative;
+}
+
+.effect:before, .effect2:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.effect:after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
 .card {
   margin-top: 10%;
   padding: 0% 3%;
   .fii-img {
-    margin: 5% 0%;
+    height: auto;
+    margin-top: 35px;
+    margin-bottom: 20px;
   }
-
 
   .login-title {
     color: #3388cb;
@@ -15,7 +50,7 @@ $themeColor: #3388cb;
     margin-bottom: 10%;
   }
 
-  .waves-effect{
+  .waves-effect {
     margin-top: 5%;
     margin-bottom: 3%;
   }

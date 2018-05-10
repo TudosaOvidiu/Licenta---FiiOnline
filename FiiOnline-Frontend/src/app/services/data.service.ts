@@ -21,7 +21,7 @@ export class DataService {
 
   fetchFile(url) {
     let headers = new HttpHeaders();
-    if (sessionStorage.getItem('authorization') !== '') {
+    if (sessionStorage.getItem('authorization') !== '' && sessionStorage.getItem('authorization') !== null) {
       headers = headers.append('authorization', sessionStorage.getItem('authorization'));
     }
     return this.http.get(`${url}`, {
@@ -34,7 +34,7 @@ export class DataService {
 
   postData(url, jsonObject) {
     let headers = new HttpHeaders();
-    if (sessionStorage.getItem('authorization') !== '') {
+    if (sessionStorage.getItem('authorization') !== '' && sessionStorage.getItem('authorization') !== null) {
       headers = headers.append('authorization', sessionStorage.getItem('authorization'));
     }
     return this.http.post(url, jsonObject, {headers: headers}).catch((error: any) => Observable.throw(error || 'Server error'));
@@ -42,7 +42,7 @@ export class DataService {
 
   putData(url, jsonObject) {
     let headers = new HttpHeaders();
-    if (sessionStorage.getItem('authorization') !== '' || sessionStorage.getItem('authorization') !== null) {
+    if (sessionStorage.getItem('authorization') !== '' && sessionStorage.getItem('authorization') !== null) {
       headers = headers.append('authorization', sessionStorage.getItem('authorization'));
     }
     return this.http.put(url, jsonObject, {headers: headers}).catch((error: any) => Observable.throw(error || 'Server error'));
@@ -50,7 +50,7 @@ export class DataService {
 
   deleteData(url) {
     let headers = new HttpHeaders();
-    if (sessionStorage.getItem('authorization') !== '' || sessionStorage.getItem('authorization') !== null) {
+    if (sessionStorage.getItem('authorization') !== '' && sessionStorage.getItem('authorization') !== null) {
       headers = headers.append('authorization', sessionStorage.getItem('authorization'));
     }
     headers = headers.append('Content-Type', 'application/json');

@@ -1,6 +1,6 @@
-<nav>
+<nav class="z-depth-0">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo center">Logo</a>
+    <a href="#" class="brand-logo right"><img src="../../../../assets/img/LOGO_FII_LIGHT.png" class="nav-logo"></a>
     <a href='#' materialize="dropdown" data-activates="mobile-demo" class="hide-on-large-only"><i
       class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -33,6 +33,7 @@
 
   <div *ngIf="role === 'Student'">
     <li><a routerLink="/"> News</a></li>
+    <li><a routerLink="/student-followed-courses"> My Courses</a></li>
     <li><a routerLink="/courses"> Courses</a></li>
     <li><a routerLink="/edit-profile"> Edit profile</a></li>
     <li><a (click)="logout()">Log out</a></li>
@@ -40,15 +41,16 @@
   </div>
 </ul>
 
-<ul id="slide-out" class="side-nav fixed side-bar">
+<ul id="slide-out" class="side-nav fixed side-bar z-depth-0">
   <li *ngIf="this.user.imageURL !== '' && this.user.imageURL !== null"><img [src]="this.user.imageURL"
                                                                             class="profile-picture"></li>
+  <p class="user-name">{{this.user.firstName}} {{this.user.lastName}}</p>
+  <p class="user-email">{{this.user.email}}</p>
   <li *ngIf="this.user.imageURL === '' || this.user.imageURL === null">
     <div class="picture-replacemnt">
       <p>{{this.user.firstName[0]}}{{this.user.lastName[0]}}</p>
     </div>
   </li>
-  <hr>
   <div *ngIf="role === 'Administrator'">
     <li><a routerLink="/courses">Courses</a></li>
     <li><a routerLink="/admin-posts">Posts</a></li>
@@ -68,10 +70,12 @@
 
   <div *ngIf="role === 'Student'">
     <li><a routerLink="/"> News</a></li>
+    <li><a routerLink="/student-followed-courses"> My Courses</a></li>
     <li><a routerLink="/courses"> Courses</a></li>
     <li><a routerLink="/edit-profile"> Edit profile</a></li>
     <li><a (click)="logout()">Log out</a></li>
   </div>
+  <img src="../../../../assets/img/logo_online.png" class="logo-online">
 </ul>
 <a materialize="sideNav" [materializeParams]="[{edge:'left'}]" href="#" data-activates="slide-out"
    class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>

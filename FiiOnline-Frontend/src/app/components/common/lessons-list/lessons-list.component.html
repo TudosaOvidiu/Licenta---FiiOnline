@@ -1,5 +1,9 @@
 <app-sidebar></app-sidebar>
 
+<div class="row nav-title-div">
+  <p class="nav-title col s10 push-s1">{{this.courseName}}</p>
+</div>
+
 <div class="content">
   <div class="row">
     <div *ngFor="let lesson of lessons" class="card col s10 offset-s1 " [attr.id]="lesson.id">

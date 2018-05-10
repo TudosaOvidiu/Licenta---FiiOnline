@@ -1,13 +1,12 @@
 <app-sidebar></app-sidebar>
+<div class="row nav-title-div">
+  <p class="nav-title col s10 push-s1">Courses</p>
+</div>
+<div class="content row">
 
-<div class="content">
-
-  <ul class="collapsible" data-collapsible="accordion" materialize="collapsible">
+  <ul class="collapsible col s1- push-s1" data-collapsible="accordion" materialize="collapsible">
     <li *ngFor="let degree of degrees">
-      <div class="collapsible-header">{{degree}}</div>
-      <div class="collapsible-body">
-        <a [routerLink]="['/courses-list']" [queryParams]="{year: degree, semester: 1}"><p>Semester 1</p></a>
-        <a [routerLink]="['/courses-list']" [queryParams]="{year: degree, semester: 2}"><p>Semester 2</p></a></div>
+      <a [routerLink]="['/courses-list']" [queryParams]="{year: degree}"><div class="collapsible-header">{{degree}}</div></a>
     </li>
   </ul>
 </div>

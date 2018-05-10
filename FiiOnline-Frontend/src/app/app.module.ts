@@ -24,7 +24,10 @@ import { MaterialGenericComponent } from './components/common/material-generic/m
 import { LessonGenericComponent } from './components/common/lesson-generic/lesson-generic.component';
 import { CoursesMenuComponent } from './components/common/courses-menu/courses-menu.component';
 import {NgxEditorModule} from 'ngx-editor';
-import {AdminGuard, AdminStudentGuard, LoginGuard, NotLoggedGuard, ProfessorGuard, StudentGuard} from './services/guards.service';
+import {
+  AdminGuard, AdminProfessorGuard, AdminStudentGuard, LoginGuard, NotLoggedGuard, ProfessorGuard,
+  StudentGuard
+} from './services/guards.service';
 import { PostComponent } from './components/common/post/post.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { PostsListComponent } from './components/common/posts-list/posts-list.component';
@@ -33,6 +36,7 @@ import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireStorageModule} from 'angularfire2/storage';
+import { FollowersListComponent } from './components/professor/followers-list/followers-list.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +59,7 @@ import {AngularFireStorageModule} from 'angularfire2/storage';
     CoursesMenuComponent,
     PostComponent,
     PostsListComponent,
+    FollowersListComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +74,7 @@ import {AngularFireStorageModule} from 'angularfire2/storage';
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],
-  providers: [AuthenticationService, DataService, AdminGuard, ProfessorGuard, StudentGuard, NotLoggedGuard, AdminStudentGuard, LoginGuard],
+  providers: [AuthenticationService, DataService, AdminGuard, ProfessorGuard, StudentGuard, NotLoggedGuard, AdminStudentGuard, LoginGuard, AdminProfessorGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

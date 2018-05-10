@@ -68,7 +68,8 @@ namespace Business.Services.Implementations
             resourceDtos.Add(seminar);
             resourceDtos.Add(homework);
 
-            return  new WeekDTO(week.Id, week.Title,week.Date, week.WeekNr, week.Description, resourceDtos, week.CourseId);
+            var courseName = _weeksRepository.GetCourseName(week.CourseId);
+            return  new WeekDTO(week.Id, week.Title,week.Date, week.WeekNr, week.Description, resourceDtos, week.CourseId, courseName);
         }
 
         public void Delete(Guid id)

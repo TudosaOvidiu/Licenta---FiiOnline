@@ -1,12 +1,19 @@
 <app-sidebar></app-sidebar>
 
+<div class="row nav-title-div">
+  <p class="nav-title col s10 push-s1 truncate">Courses {{this.year}}</p>
+</div>
+
 <div class="content">
   <div class="row">
-    <div *ngFor="let course of courses" class="col s12 m10 l10 offset-m1 offset-l1">
+    <div *ngFor="let course of courses" class="col s10 offset-s1">
       <div class="card sticky-action">
-        <div class="card-content grey-text">
-          <span class="card-title grey-text text-darken-4 activator">{{course.name}}<i class="material-icons right">more_vert</i></span>
-          <p class="truncate">{{course.description}} </p>
+        <div class="card-content grey-text clickable-card" (click)="goToLessons(course.id)">
+          <span class="card-title grey-text text-darken-4 activator">{{course.name}}
+            <p class="course-details">{{course.year}} Semester {{course.semester}}</p>
+          </span>
+          <p class="author-paragraph">{{course.description}} Authors: </p>
+          <p *ngFor="let prof of course.professors" class="author-paragraph">{{prof.firstName}} {{prof.lastName}}&nbsp;</p>
         </div>
 
         <div [hidden]="page!=='admin'" class="card-action">
@@ -15,20 +22,17 @@
         </div>
 
         <div [hidden]="page!=='student'" class="card-action">
-          <a routerLink="/lessons/{{course.id}}"  class="theme-color-btn">Lessons</a>
+          <!--<a routerLink="/lessons/{{course.id}}"  class="theme-color-btn">Lessons</a>-->
           <a *ngIf="studentCourses.indexOf(course.id) == -1" class="theme-color-btn" (click)="followCourse(course.id, 'follow')">Follow course</a>
           <a *ngIf="studentCourses.indexOf(course.id) > -1" class="theme-color-btn" (click)="followCourse(course.id, 'unfollow')">Unfollow course</a>
         </div>
 
         <div [hidden]="page!=='professor'" class="card-action">
-          <a routerLink="/professor-lessons/{{course.id}}" class="theme-color-btn">Lessons</a>
+          <!--<a routerLink="/professor-lessons/{{course.id}}" class="theme-color-btn">Lessons</a>-->
           <a routerLink="/create-lesson" (click)="saveCourseId(course.id)" class="theme-color-btn">Create Lesson</a>
+          <a routerLink="/followers/{{course.id}}" class="theme-color-btn">Followers</a>
         </div>
 
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Authors<i class="material-icons right">close</i></span>
-          <p *ngFor="let prof of course.professors">{{prof.firstName}} {{prof.lastName}}</p>
-        </div>
       </div>
     </div>
   </div>

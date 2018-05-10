@@ -19,24 +19,25 @@ $errorColor: #f44336;
 //  box-shadow: 0 0px 0 0 $themeColor;
 //}
 
-.materialize-textarea:focus{
+.materialize-textarea:focus {
   border-bottom: 1px solid $themeColor !important;
   box-shadow: 0 1px 0 0 $themeColor !important;
 }
 
-.materialize-textarea:focus + label{
+.materialize-textarea:focus + label {
   color: $borderColor;
 }
+
 .waves-effect {
   background-color: $themeColor;
 }
 
-.error-border{
+.error-border {
   border-bottom: 1px solid $errorColor !important;
   box-shadow: 0 1px 0 0 $errorColor !important;
 }
 
-.error{
+.error {
   font-size: 12px;
   color: $errorColor;
   margin-top: -15px;
@@ -47,14 +48,14 @@ $errorColor: #f44336;
     font-size: 8px;
     margin-bottom: 5px;
   }
-    button {
+  button {
     height: 24px;
     line-height: 24px;
     padding: 0 0.8rem;
     font-size: 10px;
   }
 
-  .title{
+  .title {
     font-size: 30px;
   }
 }
@@ -68,21 +69,21 @@ label {
 
 }
 
-.modal{
+.modal {
   border-radius: 10px;
 }
 
-.content{
-  margin-top: 5%;
+.content {
   margin-left: 310px;
 }
+
 @media only screen and (max-width: 992px) {
   .content {
     margin-left: 0;
   }
 }
 
-.title{
+.title {
   color: $themeColor;
 }
 
@@ -102,4 +103,42 @@ a.theme-color-btn {
 a.theme-color-btn:hover {
   color: rgba(51, 136, 203, 0.54) !important;
   cursor: pointer;
+}
+
+.nav-title-div {
+  margin-left: 310px;
+  position: relative;
+  top: -72px;
+  margin-bottom: 0px;
+
+  .nav-title {
+    top: 0px;
+    padding-left: 0px;
+    z-index: 1;
+    font-size: 66px;
+    color: #f2f5f8;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-title-div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    text-align: center;
+
+  }
+
+}
+
+@media (max-width: 600px) {
+  .nav-title-div {
+    top: -35px;
+    width: 80%;
+    .nav-title {
+      font-size: 33px;
+    }
+  }
 }

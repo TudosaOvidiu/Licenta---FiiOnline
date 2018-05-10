@@ -91,3 +91,18 @@ export class AdminStudentGuard implements CanActivate {
     return false;
   }
 }
+
+@Injectable()
+export class AdminProfessorGuard implements CanActivate {
+  constructor(private location: Location) {
+  }
+
+  canActivate() {
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    if (user.role === 'Professor' || user.role === 'Administrator') {
+      return true;
+    }
+    this.location.back();
+    return false;
+  }
+}

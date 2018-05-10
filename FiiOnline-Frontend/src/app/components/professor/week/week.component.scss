@@ -5,6 +5,10 @@ $themeColor: #3388cb;
   color: $themeColor;
 }
 
+.week-card{
+  padding-top: 5%;
+}
+
 @media (max-width: 600px) {
   .title{
     font-size: 30px;

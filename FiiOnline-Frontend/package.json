@@ -43,6 +43,7 @@
     "rxjs": "^5.5.10",
     "to": "^0.2.9",
     "update": "^0.7.4",
+    "vivus": "^0.4.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

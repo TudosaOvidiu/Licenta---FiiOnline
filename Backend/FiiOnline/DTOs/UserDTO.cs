@@ -17,7 +17,9 @@ namespace DTOs
 
         public String Role { get; set; }
 
-        public UserDTO(String id, String username, String firstName, String lastName, String email, String role)
+        public String ImageURL { get; set; }
+
+        public UserDTO(String id, String username, String firstName, String lastName, String email, String role, String imageUrl)
         {
             Id = id;
             Username = username;
@@ -25,6 +27,7 @@ namespace DTOs
             LastName = lastName;
             Email = email;
             Role = role;
+            ImageURL = imageUrl;
         }
 
     }

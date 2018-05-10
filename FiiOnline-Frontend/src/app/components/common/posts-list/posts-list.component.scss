@@ -1,6 +1,9 @@
-.custom-content{
+
+
+.custom-content {
   padding-bottom: 10px;
 }
+
 .info {
   .picture-replacemnt {
     float: right;
@@ -24,8 +27,8 @@
     }
   }
 
-  .picture-container{
-    img{
+  .picture-container {
+    img {
       float: right;
     }
   }
@@ -39,37 +42,36 @@
   object-fit: cover;
 }
 
-
 @media (max-width: 600px) {
-  .card-picture{
+  .card-picture {
     width: 30px;
     height: 30px;
   }
 
-  .card-details{
-    margin-left: 3%!important;
-    .card-author{
+  .card-details {
+    margin-left: 3% !important;
+    .card-author {
       font-size: 12px;
     }
-    .card-date{
+    .card-date {
       font-size: 8px !important;
     }
   }
 
-  .picture-replacemnt{
+  .picture-replacemnt {
     width: 30px !important;
     height: 30px !important;
   }
-  .picture-container{
+  .picture-container {
     padding: 2px;
-    width: 30px!important;
+    width: 30px !important;
   }
 
-  .custom-title{
+  .custom-title {
     font-size: 20px;
   }
 
-  .custom-description{
+  .custom-description {
     font-size: 13px;
   }
 }

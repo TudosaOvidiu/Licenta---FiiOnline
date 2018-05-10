@@ -1,11 +1,11 @@
 <app-sidebar></app-sidebar>
+<div class="row nav-title-div">
+  <p *ngIf="!onEdit" class="nav-title col s10 push-s1">Upload {{model.type}}</p>
+  <p *ngIf="onEdit" class="nav-title col s10 push-s1">Edit {{model.type}}</p>
+</div>
 
 <div class="content row">
-  <div class="card col s8 offset-s2">
-    <div class="center-align">
-      <h1 [hidden]="onEdit" class="title"> Upload material</h1>
-      <h1 [hidden]="!onEdit" class="title"> Edit material</h1>
-    </div>
+  <div class="card col s8 offset-s2 upload-material-card">
     <form method="post" #uploadLessonForm="ngForm">
 
 
@@ -24,23 +24,7 @@
         </div>
 
       </div>
-      <div class="row">
-        <div class="col s12 radio">
-          <p>This is a:</p>
-          <input [disabled]="lectureExists" class="with-gap" name="group1" type="radio" id="Lecture"
-                 (click)="setType('Lecture')"/>
-          <label for="Lecture">Lecture</label>
 
-          <input [disabled]="seminarExists" class="with-gap" name="group1" type="radio" id="Seminar"
-                 (click)="setType('Seminar')"/>
-          <label for="Seminar">Seminar</label>
-
-          <input [disabled]="homeworkExists" class="with-gap" name="group1" type="radio" id="Homework"
-                 (click)="setType('Homework')"/>
-          <label for="Homework">Homework</label>
-        </div>
-
-      </div>
 
 
       <div class="row">

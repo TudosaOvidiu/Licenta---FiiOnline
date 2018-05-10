@@ -1,12 +1,12 @@
 <app-sidebar></app-sidebar>
 
+<div class="row nav-title-div">
+  <p *ngIf="!onEdit" class="nav-title col s8 push-s2">Create Course</p>
+  <p *ngIf="onEdit" class="nav-title col s8 push-s2">Edit Course</p>
+</div>
 
 <div class="content row">
-  <div class="card center-align col s8 push-s2">
-    <div>
-      <h1 [hidden]="onEdit" class="title"> Create course</h1>
-      <h1 [hidden]="!onEdit" class="title"> Edit course</h1>
-    </div>
+  <div class="card center-align col s8 push-s2 course-card">
     <form method="post" #courseForm="ngForm">
       <div class="row">
         <div class="input-field col s12">
@@ -30,31 +30,31 @@
       <div class="row">
         <div class="input-field col s12 m6 l6">
           <select  materialize="material_select" name="year" [(ngModel)]="model.year" #year="ngModel" required>
-            <option value="" disabled selected>The course is meant for</option>
-            <option  class="blue-text darken-1" [value]="'Bachelor\'s degree year 1'">Bachelor's degree year 1</option>
-            <option [value]="'Bachelor\'s degree year 2'">Bachelor's degree year 2</option>
-            <option [value]="'Bachelor\'s degree year 3'">Bachelor's degree year 3</option>
-            <option [value]="'Masters: Systems software engineering year 1'">Masters: Systems software engineering year
+            <option value="" disabled selected>Choose year</option>
+            <option  class="blue-text darken-1" [value]="'BSc Year 1'">BSc Year 1</option>
+            <option [value]="'BSc Year 2'">BSc Year 2</option>
+            <option [value]="'BSc Year 3'">BSc Year 3</option>
+            <option [value]="'MSc Systems Software Eng Year 1'">MSc Systems Software Eng Year
               1
             </option>
-            <option [value]="'Masters: Systems software engineering year 2'">Masters: Systems software engineering year
+            <option [value]="'MSc Systems Software Eng Year 2'">MSc Systems Software Eng Year
               2
             </option>
-            <option [value]="'Masters: Computational optimization year 1'">Masters: Computational optimization year 1
+            <option [value]="'MSc Computational Optimization Year 1'">MSc Computational Optimization Year 1
             </option>
-            <option [value]="'Masters: Computational optimization year 2'">Masters: Computational optimization year 2
+            <option [value]="'MSc Computational Optimization Year 2'">MSc Computational Optimization Year 2
             </option>
-            <option [value]="'Masters: Distributed systems year 1'">Masters: Distributed systems year 1</option>
-            <option [value]="'Masters: Distributed systems year 2'">Masters: Distributed systems year 2</option>
-            <option [value]="'Masters: Information security year 1'">Masters: Information security year 1</option>
-            <option [value]="'Masters: Information security year 2'">Masters: Information security year 2</option>
+            <option [value]="'MSc Distributed Systems Year 1'">MSc Distributed Systems Year 1</option>
+            <option [value]="'MSc Distributed Systems Year 2'">MSc Distributed Systems Year 2</option>
+            <option [value]="'MSc Information Security Year 1'">MSc Information Security Year 1</option>
+            <option [value]="'MSc Information Security Year 2'">MSc Information Security Year 2</option>
           </select>
           <label>Year</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <select materialize="material_select" name="semester" [(ngModel)]="model.semester" #semester="ngModel" required>
-            <option value="" disabled selected>In semester</option>
+            <option value="" disabled selected>Choose semester</option>
             <option [value]=1>1</option>
             <option [value]=2>2</option>
           </select>

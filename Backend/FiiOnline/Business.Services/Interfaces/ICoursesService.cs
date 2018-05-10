@@ -12,12 +12,14 @@ namespace Business.Services.Interfaces
 
         List<WeekDTO> GetCourseWeeks(Guid id);
 
-        IEnumerable<CourseDTO> GetCoursesByYearAndSemester(string year, int semester);
+        IEnumerable<CourseDTO> GetCoursesByYear(string year);
 
         IEnumerable<CourseDTO> GetProfessorCourses(string id);
 
         void FollowCourse(string studentId, Guid courseId);
 
+        List<StudentDTO> GetCourseFollowers(int offset, int limit, Guid courseId);
 
+        List<CourseDTO> GetStudentCourses(string id);
     }
 }

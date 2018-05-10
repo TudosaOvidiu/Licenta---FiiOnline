@@ -36,5 +36,6 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
+        public string GetCourseName(Guid id) => _databaseContext.Courses.FirstOrDefault(c => c.Id.Equals(id)).Name;
     }
 }

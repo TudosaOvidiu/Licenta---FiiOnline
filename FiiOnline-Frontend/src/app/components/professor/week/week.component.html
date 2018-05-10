@@ -1,10 +1,16 @@
 <app-sidebar></app-sidebar>
+
+<div class="row nav-title-div">
+  <p *ngIf="!onEdit" class="nav-title col s10 push-s1">Create Lesson</p>
+  <p *ngIf="onEdit" class="nav-title col s10 push-s1">Edit Lesson</p>
+</div>
+
 <div class="content row">
-  <div class="center-align card col s8 offset-s2">
-    <div>
-      <h1 [hidden]="onEdit" class="title"> Create lesson</h1>
-      <h1 [hidden]="!onEdit" class="title"> Edit lesson</h1>
-    </div>
+  <div class="center-align card col s8 offset-s2 week-card">
+    <!--<div>-->
+      <!--<h1 [hidden]="onEdit" class="title"> Create lesson</h1>-->
+      <!--<h1 [hidden]="!onEdit" class="title"> Edit lesson</h1>-->
+    <!--</div>-->
     <form method="post" #weekForm="ngForm">
       <div class="row">
         <div class="input-field col s12">

@@ -1,0 +1,23 @@
+<app-sidebar></app-sidebar>
+
+<div class="row nav-title-div">
+  <p class="nav-title col s10 push-s1">Followers</p>
+</div>
+
+<div class="content row">
+  <div class="card followers-card">
+    <div *ngFor="let follower of followers | async" class="follower-container">
+      <img *ngIf="follower.imageURL !== '' && follower.imageURL !== null" [src]="follower.imageURL" class="follower-image">
+      <div *ngIf="follower.imageURL == '' || follower.imageURL === null" class="image-alternative center">
+        <p>{{follower.firstName[0]}}{{follower.lastName[0]}}</p>
+      </div>
+      <div class="follower-details">
+        <p class="grey-text text-darken-4 follower-name">{{follower.firstName}} {{follower.lastName}}</p>
+        <p class="grey-text text-darken-1 follower-year"> {{follower.year}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+  </div>
+</div>

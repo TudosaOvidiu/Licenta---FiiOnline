@@ -24,5 +24,7 @@ namespace Business.Services.Interfaces
 
         List<Guid> GetStudentFollowedCourses(string id);
 
+        StudentDTO GetStudentById(string id);
+
     }
 }

@@ -16,9 +16,9 @@ export class PostsListComponent implements OnInit {
   private limit = 10;
   private user;
   public professorPage = false;
-  private adminPage = false;
-  private studentPage = false;
-  private selectedPost: string;
+  public adminPage = false;
+  public studentPage = false;
+  public selectedPost: string;
 
   public modalActions = new EventEmitter<string | MaterializeAction>();
 

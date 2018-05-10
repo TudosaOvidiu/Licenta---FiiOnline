@@ -12,9 +12,13 @@ import {CoursesListComponent} from '../components/common/courses-list/courses-li
 import {LessonListComponent} from '../components/common/lessons-list/lessons-list.component';
 import {WeekComponent} from '../components/professor/week/week.component';
 import {CoursesMenuComponent} from '../components/common/courses-menu/courses-menu.component';
-import {AdminGuard, AdminStudentGuard, LoginGuard, NotLoggedGuard, ProfessorGuard, StudentGuard} from '../services/guards.service';
+import {
+  AdminGuard, AdminProfessorGuard, AdminStudentGuard, LoginGuard, NotLoggedGuard, ProfessorGuard,
+  StudentGuard
+} from '../services/guards.service';
 import {PostComponent} from '../components/common/post/post.component';
 import {PostsListComponent} from '../components/common/posts-list/posts-list.component';
+import {FollowersListComponent} from '../components/professor/followers-list/followers-list.component';
 
 
 const routes: Routes = [
@@ -38,11 +42,13 @@ const routes: Routes = [
   {path: 'courses-list', component: CoursesListComponent, canActivate: [AdminStudentGuard, LoginGuard]},
   {path: 'edit-profile', component: UserRegisterComponent, canActivate: [StudentGuard, LoginGuard]},
   {path: 'edit-prof-profile', component: UserRegisterComponent, canActivate: [ProfessorGuard, LoginGuard]},
-  {path: 'add-post', component: PostComponent, canActivate: [LoginGuard]},
-  {path: '', component: PostsListComponent, canActivate: [LoginGuard]},
+  {path: 'add-post', component: PostComponent, canActivate: [AdminProfessorGuard, LoginGuard]},
+  {path: '', component: PostsListComponent, canActivate: [StudentGuard, LoginGuard]},
   {path: 'professor-posts', component: PostsListComponent, canActivate: [ProfessorGuard, LoginGuard]},
   {path: 'admin-posts', component: PostsListComponent, canActivate: [AdminGuard, LoginGuard]},
-  {path: 'edit-post/:id', component: PostComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'edit-post/:id', component: PostComponent, canActivate: [AdminProfessorGuard, LoginGuard]},
+  {path: 'followers/:id', component: FollowersListComponent, canActivate: [ProfessorGuard, LoginGuard]},
+  {path: 'student-followed-courses', component: CoursesListComponent, canActivate: [StudentGuard, LoginGuard]},
 ];
 
 @NgModule({

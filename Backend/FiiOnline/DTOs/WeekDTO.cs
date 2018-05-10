@@ -12,8 +12,9 @@ namespace DTOs
         public string Description { get; set; }
         public List<ResourceDTO> ResourcesDtos{get; set; }
         public Guid CourseId { get; set; }
+        public string CourseName { get; set; }
 
-        public WeekDTO(Guid id, string title, DateTime date, int weekNr, string description, List<ResourceDTO> resourcesDtos, Guid courseId)
+        public WeekDTO(Guid id, string title, DateTime date, int weekNr, string description, List<ResourceDTO> resourcesDtos, Guid courseId, string courseName)
         {
             Id = id;
             Title = title;
@@ -22,6 +23,7 @@ namespace DTOs
             Description = description;
             ResourcesDtos = resourcesDtos;
             CourseId = courseId;
+            CourseName = courseName;
         }
     }
 }
