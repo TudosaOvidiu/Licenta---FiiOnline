@@ -1,43 +1,18 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.effect {
-  position: relative;
+.card-container{
+  width: 70vw;
 }
 
-.effect:before, .effect2:after {
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 15px;
-  left: 10px;
-  width: 50%;
-  top: 80%;
-  max-width: 300px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  -moz-box-shadow: 0 15px 10px #777;
-  box-shadow: 0 15px 10px #777;
-  -webkit-transform: rotate(-3deg);
-  -moz-transform: rotate(-3deg);
-  -o-transform: rotate(-3deg);
-  -ms-transform: rotate(-3deg);
-  transform: rotate(-3deg);
-}
 
-.effect:after {
-  -webkit-transform: rotate(3deg);
-  -moz-transform: rotate(3deg);
-  -o-transform: rotate(3deg);
-  -ms-transform: rotate(3deg);
-  transform: rotate(3deg);
-  right: 10px;
-  left: auto;
-}
 
 .card {
   margin-top: 10%;
-  padding: 0% 3%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0% 3% 1%;
+  width: 25vw;
   .fii-img {
     height: auto;
     margin-top: 35px;
@@ -97,3 +72,33 @@ div .text-center button {
 .login-footer a {
   display: inline-block;
 }
+
+
+.building{
+  background: url('../../../../assets/img/Blueprint_Background.jpg');
+  background-size: cover;
+  height: 100vh;
+  padding-top: 5vh;
+  display: inline-block;
+  right: 0;
+  top: 0;
+  position: absolute;
+  svg{
+    float: right;
+    stroke: white;
+  }
+}
+
+@media (max-width: 600px) {
+  .building{
+    display: none;
+  }
+  .card-container{
+    width: 100vw;
+  }
+
+  .card{
+    width: 70%;
+  }
+}
+

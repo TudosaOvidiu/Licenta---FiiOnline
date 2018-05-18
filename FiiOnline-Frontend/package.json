@@ -23,6 +23,7 @@
     "@angular/platform-browser": "5.2.5",
     "@angular/platform-browser-dynamic": "5.2.5",
     "@angular/router": "5.2.5",
+    "@angular/service-worker": "^6.0.2",
     "@types/lodash": "^4.14.108",
     "angular2-materialize": "^15.1.10",
     "angularfire2": "^5.0.0-rc.7",

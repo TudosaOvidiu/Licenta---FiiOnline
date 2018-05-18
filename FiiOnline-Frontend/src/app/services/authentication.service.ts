@@ -18,7 +18,7 @@ export class AuthenticationService {
     console.log(loginModel);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/javascript');
-    return this.http.post(`http://localhost:63944/Account/auth`, loginModel, {headers: headers})
+    return this.http.get(`http://localhost:63944/Account/auth?email=${loginModel.email}&password=${loginModel.password}`, {headers: headers})
       .map((response: HttpResponse<string>) => {
         console.log('response:', response);
         // login successful if there's a jwt token in the response

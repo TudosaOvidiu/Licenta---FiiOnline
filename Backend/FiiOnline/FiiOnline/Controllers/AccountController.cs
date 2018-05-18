@@ -90,17 +90,17 @@ namespace FiiOnline.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("auth")]
-        public async Task<object> Login([FromBody] LoginCreatingModel model)
+        [HttpGet("auth")]
+        public async Task<object> Login(string email="", string password ="")
         {
-            var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
+            var appUser = _userManager.Users.SingleOrDefault(r => r.Email == email);
 
-            var result = await _signInManager.PasswordSignInAsync(appUser.UserName, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(appUser.UserName, password, false, false);
 
 
             if (result.Succeeded)
             {
-                return Json(new {token = _generator.GenerateJwtToken(model.Email, appUser), appUser});
+                return Json(new {token = _generator.GenerateJwtToken(email, appUser), appUser});
             }
 
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");

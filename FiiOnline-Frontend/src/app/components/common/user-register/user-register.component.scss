@@ -2,9 +2,10 @@ $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 $errorColor: #f44336;
 
-.edit-card{
+.edit-card {
   padding-top: 5%;
 }
+
 .card {
   margin-top: 5%;
 
@@ -94,10 +95,10 @@ $errorColor: #f44336;
 
   .profile-picture:hover {
     border-color: #7C7C7C;
+    background-color: rgba(218, 218, 218, 0.11);
     p {
       color: #7C7C7C
     }
-  ;
   }
 }
 

@@ -13,31 +13,39 @@ import * as vivus from 'vivus';
 export class LoginComponent implements OnInit {
   public model = new Credentials();
   error = false;
+  label_up = true;
+
+  public svg_height;
+  public svg_y_point;
 
   constructor(private authService: AuthenticationService, private router: Router, private renderer: Renderer2) {
   }
 
   ngOnInit() {
-    // const x = new vivus('my-svg', {
-    //   duration: 200,
-    //   animTimingFunction: vivus.EASE_OUT_BOUNCE
-    // });
-    //
-    // const y = new vivus('my-svg2', {
-    //   duration: 200,
-    //   animTimingFunction: vivus.EASE_OUT_BOUNCE
-    // });
+
+    const animation = new vivus('my-svg', {
+      type: 'scenario',
+      // duration: 2000,
+      animTimingFunction: vivus.EASE_OUT
+    });
+
     let width = document.getElementsByTagName('input')[0].clientWidth;
     this.renderer.setAttribute(document.getElementById('fii-img'), 'width', `${width.toString()}px!important`);
-    // let height = width - (width * 0.3);
-    // this.renderer.setAttribute(document.getElementById('fii-img'), 'height', `${height.toString()}px!important`);
+
+    let x = document.getElementById('building').clientHeight;
+    console.log(x);
+    this.svg_height = -7.31304267 * Math.pow(10, -3) * Math.pow(x, 2) + 9.566873937 * x - 2089.755761;
+    this.svg_y_point = 3.946548001 * Math.pow(10, -3) * Math.pow(x, 2) - 5.070685004 * x + 1645.199674;
+    let svg = document.getElementsByTagName('svg')[0];
+
+
   }
 
-  onResize(event){
+
+  onResize(event) {
     let width = document.getElementsByTagName('input')[0].clientWidth;
     this.renderer.setAttribute(document.getElementById('fii-img'), 'width', `${width.toString()}px!important`);
-    // let height = width - width * 3.0;
-    // this.renderer.setAttribute(document.getElementById('fii-img'), 'height', `${height.toString()}px!important`);
+
   }
 
   onSubmit(loginModel: Credentials) {

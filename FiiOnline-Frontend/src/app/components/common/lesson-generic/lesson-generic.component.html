@@ -2,9 +2,9 @@
   <div class="card-content grey-text lesson-content">
           <span class="card-title grey-text text-darken-4 lesson-title">Week {{lesson.weekNr}}: {{lesson.title}}
             <div *ngIf="!studentPage"  class="lesson-menu right">
-              <div class="lesson-btn-div">
-              <i class="fas fa-plus lesson-button" [class.disabled]="lecture && homework && seminar"></i>
-              </div>
+              <!--<div class="lesson-btn-div">-->
+              <!--<i class="fas fa-plus lesson-button" [class.disabled]="lecture && homework && seminar"></i>-->
+              <!--</div>-->
 
               <div class="lesson-btn-div" (click)="goToEdit(lesson.id)">
               <i class="far fa-edit lesson-button"></i>
