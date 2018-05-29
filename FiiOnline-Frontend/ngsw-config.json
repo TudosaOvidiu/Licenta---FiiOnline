@@ -1,0 +1,51 @@
+
+{
+  "index": "/index.html",
+  "assetGroups": [{
+    "name": "app",
+    "installMode": "prefetch",
+    "resources": {
+      "files": [
+        "/favicon.ico",
+        "/index.html"
+      ],
+      "versionedFiles": [
+        "/*.bundle.css",
+        "/*.bundle.js",
+        "/*.chunk.js"
+      ]
+    }
+  }, {
+    "name": "assets",
+    "installMode": "lazy",
+    "updateMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/**"
+      ],
+      "urls": ["http://fonts.googleapis,com./**"]
+    }
+  }],
+  "dataGroups": [
+    {
+      "name": "fii-online-api",
+      "urls":["http://localhost:63944/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "365d",
+        "timeout": "5s"
+      }
+    },
+    {
+      "name": "users-pictures",
+      "urls":["https://firebasestorage.googleapis.com/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "7d",
+        "timeout": "5s"
+      }
+    }
+  ]
+}

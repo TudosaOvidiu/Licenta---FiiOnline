@@ -15,7 +15,6 @@ export class AuthenticationService {
   }
 
   login(loginModel: any) {
-    console.log(loginModel);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/javascript');
     return this.http.get(`http://localhost:63944/Account/auth?email=${loginModel.email}&password=${loginModel.password}`, {headers: headers})
@@ -51,6 +50,6 @@ export class AuthenticationService {
       .forEach(function (k) {
         sessionStorage.removeItem(k);
       });
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 }

@@ -22,7 +22,7 @@ import {FollowersListComponent} from '../components/professor/followers-list/fol
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent, canActivate: [NotLoggedGuard]},
+  {path: '', component: LoginComponent, canActivate: [NotLoggedGuard]},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'register', component: UserRegisterComponent},
@@ -43,7 +43,7 @@ const routes: Routes = [
   {path: 'edit-profile', component: UserRegisterComponent, canActivate: [StudentGuard, LoginGuard]},
   {path: 'edit-prof-profile', component: UserRegisterComponent, canActivate: [ProfessorGuard, LoginGuard]},
   {path: 'add-post', component: PostComponent, canActivate: [AdminProfessorGuard, LoginGuard]},
-  {path: '', component: PostsListComponent, canActivate: [StudentGuard, LoginGuard]},
+  {path: 'news', component: PostsListComponent, canActivate: [StudentGuard, LoginGuard]},
   {path: 'professor-posts', component: PostsListComponent, canActivate: [ProfessorGuard, LoginGuard]},
   {path: 'admin-posts', component: PostsListComponent, canActivate: [AdminGuard, LoginGuard]},
   {path: 'edit-post/:id', component: PostComponent, canActivate: [AdminProfessorGuard, LoginGuard]},

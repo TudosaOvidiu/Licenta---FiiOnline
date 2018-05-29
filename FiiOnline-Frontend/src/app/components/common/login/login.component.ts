@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.error = false;
         switch (response.role) {
           case 'Student':
-            this.router.navigate(['']);
+            this.router.navigate(['news']);
             break;
           case 'Professor':
             this.router.navigate(['professor-courses']);

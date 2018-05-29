@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
 import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
 import {Observable} from 'rxjs/Observable';
 import {async} from 'rxjs/scheduler/async';
+import {finalize} from 'rxjs/operators';
 
 
 declare var jquery: any;
@@ -34,7 +35,7 @@ export class UserRegisterComponent implements OnInit {
   public imageStored = false;
 
   private task: AngularFireUploadTask;
-  public downloadURL: Observable<string>;
+  public image: Observable<string>;
 
   constructor(private dataService: DataService, private router: Router, private location: Location, private storage: AngularFireStorage) {
   }
@@ -108,11 +109,18 @@ export class UserRegisterComponent implements OnInit {
     reader.readAsDataURL(this.file);
 
     const path = `pictures/${new Date().getTime()}_${this.file.name}`;
-    this.task = this.storage.upload(path, this.file);
-    this.task.downloadURL().subscribe(async url => {
-      console.log('asserting image');
-      this.model.imageURL = await url;
-    });
+    const fileRef = this.storage.ref(path);
+
+    const task = this.storage.upload(path, this.file);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL()
+          .subscribe(imageUrl => {
+            this.model.imageURL = imageUrl;
+          });
+      })
+    ).subscribe();
 
 
   }
@@ -162,7 +170,7 @@ export class UserRegisterComponent implements OnInit {
           this.openModal();
         });
     } else {
-      console.log("i'm in elese");
+      console.log('i\'m in elese');
       this.model.role = 'Student';
       if (this.register_professor) {
         this.model.role = 'Professor';
