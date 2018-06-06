@@ -21,6 +21,7 @@ export class WeekComponent implements OnInit {
   public modal_header: string;
   public modal_content: string;
 
+
   public modalActions = new EventEmitter<string | MaterializeAction>();
 
 
@@ -31,10 +32,13 @@ export class WeekComponent implements OnInit {
   ngOnInit() {
     this.courseId = sessionStorage.getItem('courseId');
     this.dataService.fetchData(`http://localhost:63944/Courses/course-weeks/${this.courseId}`).subscribe(response => {
+        console.log(response);
         this.week_number = Array.from({length: 16}, (v, k) => k + 1);
         for (let lesson of response) {
-          let li = document.getElementsByTagName("li")[lesson.weekNr];
+          let li = document.getElementsByTagName('li')[lesson.weekNr + 11];
+          console.log(lesson.weekNr + 10);
           this.renderer.setAttribute(li, 'class', 'disabled');
+          console.log(li);
         }
       },
       err => {
@@ -103,5 +107,6 @@ export class WeekComponent implements OnInit {
       );
     }
   }
+
 }
 

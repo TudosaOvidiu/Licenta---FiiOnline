@@ -11,6 +11,8 @@ import {saveAs} from 'file-saver/FileSaver';
 })
 export class MaterialGenericComponent implements OnInit {
 
+  private browserCantOpen = ['ppt', 'pptx', 'doc', 'docx', 'zip', 'xslx', 'xlsm'];
+
   constructor(private renderer: Renderer2, private dataService: DataService) {
   }
 
@@ -68,30 +70,36 @@ export class MaterialGenericComponent implements OnInit {
         break;
     }
     // ----------------------
-    let p_preview = this.renderer.createElement('p');
-    this.renderer.setAttribute(p_preview, 'class', 'file_button');
-    this.renderer.listen(p_preview, 'click', (event) => {
-      this.dataService.fetchFile(`http://localhost:63944/Lessons/download-file/${file_id}`).subscribe(response => {
-          console.log(event);
-          console.log(file);
+    let p_preview;
+    let preview = false;
+    if (!(this.browserCantOpen.indexOf(file_extension) > -1)) {
+      preview = true;
+      p_preview = this.renderer.createElement('p');
+      this.renderer.setAttribute(p_preview, 'class', 'file_button');
+      this.renderer.listen(p_preview, 'click', (event) => {
+        this.dataService.fetchFile(`http://localhost:63944/Lessons/download-file/${file_id}`).subscribe(response => {
+            console.log(event);
+            console.log(file);
 
-          if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(response, file);
-          } else {
-            // let file_name = event.path[1].id;
-            let fileURL = URL.createObjectURL(response);
-            window.open(fileURL);
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+              window.navigator.msSaveOrOpenBlob(response, file);
+            } else {
+              // let file_name = event.path[1].id;
+              let fileURL = URL.createObjectURL(response);
+              window.open(fileURL);
+            }
+
+            // saveAs(response, file_name);
+          },
+          err => {
+            console.log(err);
           }
+        );
+      });
+      const p_preview_text = document.createTextNode('PREVIEW');
+      p_preview.appendChild(p_preview_text);
+    }
 
-          // saveAs(response, file_name);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    });
-    let p_preview_text = document.createTextNode('PREVIEW');
-    p_preview.appendChild(p_preview_text);
     // -------------------------
 
     let p_download = this.renderer.createElement('p');
@@ -110,7 +118,9 @@ export class MaterialGenericComponent implements OnInit {
 
     div.appendChild(i);
     div.appendChild(p);
-    div.appendChild(p_preview);
+    if(preview) {
+      div.appendChild(p_preview);
+    }
     div.appendChild(p_download);
     document.getElementById(this.material.id).appendChild(div);
 

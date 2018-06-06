@@ -69,15 +69,15 @@ namespace FiiOnline
 
 
 
-//            services.AddMvc();
+            //            services.AddMvc();
             services.AddMvc().AddJsonOptions(o =>
-                    {
-                        o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                        o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    }
+            {
+                o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            }
                 );
 
-                
+
 
             // Add ASP.NET Identity support
             services.AddIdentity<User, IdentityRole>(
@@ -95,11 +95,11 @@ namespace FiiOnline
 
             // Add Authentication
             services.AddAuthentication(opts =>
-                {
-                    opts.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
+            {
+                opts.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 // Add Jwt token support
                 .AddJwtBearer(cfg =>
                 {
@@ -156,7 +156,7 @@ namespace FiiOnline
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
 
                 //Coment this when adding migration
-//                DbSeeder.Seed(dbContext, roleManager, userManager);
+                //                DbSeeder.Seed(dbContext, roleManager, userManager);
             }
 
             app.UseAuthentication();

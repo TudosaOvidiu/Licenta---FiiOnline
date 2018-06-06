@@ -44,13 +44,14 @@
 <ul id="slide-out" class="side-nav fixed side-bar z-depth-0">
   <li *ngIf="this.user.imageURL !== '' && this.user.imageURL !== null"><img [src]="this.user.imageURL"
                                                                             class="profile-picture"></li>
-  <p class="user-name">{{this.user.firstName}} {{this.user.lastName}}</p>
-  <p class="user-email">{{this.user.email}}</p>
   <li *ngIf="this.user.imageURL === '' || this.user.imageURL === null">
     <div class="picture-replacemnt">
       <p>{{this.user.firstName[0]}}{{this.user.lastName[0]}}</p>
     </div>
   </li>
+  <p class="user-name">{{this.user.firstName}} {{this.user.lastName}}</p>
+  <p class="user-email">{{this.user.email}}</p>
+
   <div *ngIf="role === 'Administrator'">
     <li><a routerLink="/courses">Courses</a></li>
     <li><a routerLink="/admin-posts">Posts</a></li>
