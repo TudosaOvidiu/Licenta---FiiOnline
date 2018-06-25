@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DataService} from '../../../services/data.service';
 import * as _ from 'lodash';
 import {ActivatedRoute} from '@angular/router';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-followers-list',
@@ -32,13 +33,11 @@ export class FollowersListComponent implements OnInit {
   }
 
   getFollowers(offset: number, limit: number, courseId: string) {
-    this.dataService.fetchData(`http://localhost:63944/Courses/course-follwers?offset=${offset}&limit=${limit}&id=${courseId}`)
+    this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/course-follwers?offset=${offset}&limit=${limit}&id=${courseId}`)
       .subscribe(response => {
-          console.log(response);
           const currentFollowers = this.followers.getValue();
           this.followers.next(_.concat(currentFollowers, response));
 
-          console.log(this.followers);
         },
         err => {
           console.log(err);

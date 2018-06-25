@@ -3,10 +3,29 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
+html {
+  //position: relative;
+  //min-height: 100%;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), local('sans-serif'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu7GxKKTU1Kvnz.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    font-display: swap;
+  }
   background-color: #f2f5f8;
 
+
+}
+
+.background {
+  height: 100vh;
+  background: url('/assets/img/background-pagini.jpg');
+  background-size: cover;
 }
 
 .active {

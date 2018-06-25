@@ -56,7 +56,6 @@ export class ProfessorGuard implements CanActivate {
     if (user.role === 'Professor') {
       return true;
     }
-    console.log('should go back');
     this.location.back();
     return false;
   }

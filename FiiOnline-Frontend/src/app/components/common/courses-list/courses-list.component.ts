@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {MaterializeAction} from 'angular2-materialize';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-courses',
@@ -37,24 +38,22 @@ export class CoursesListComponent implements OnInit {
     }
 
     if (this.page === 'professor') {
-      this.dataService.fetchData(`http://localhost:63944/Courses/professor-courses/${this.user.id}`).subscribe(response => {
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/professor-courses/${this.user.id}`).subscribe(response => {
           this.courses = response;
-          console.log(this.courses);
         },
         err => {
           console.log(err);
         }
       );
     } else if (this.router.url.includes('followed-courses')) {
-      this.dataService.fetchData(`http://localhost:63944/Courses/student-courses/${this.user.id}`).subscribe(response => {
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/student-courses/${this.user.id}`).subscribe(response => {
           this.courses = response;
-          console.log(this.courses);
         },
         err => {
           console.log(err);
         }
       );
-      this.dataService.fetchData(`http://localhost:63944/Users/followed-courses/${this.user.id}`).subscribe(response => {
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Users/followed-courses/${this.user.id}`).subscribe(response => {
             this.studentCourses = response;
           },
           err => {
@@ -66,17 +65,16 @@ export class CoursesListComponent implements OnInit {
       let year = this.route.snapshot.queryParams['year'];
       let semester = this.route.snapshot.queryParams['semester'];
 
-      this.dataService.fetchData(`http://localhost:63944/Courses/course-by-semester?year=${year}&semester=${semester}`).subscribe(response => {
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/course-by-semester?year=${year}&semester=${semester}`).subscribe(response => {
           this.courses = response;
           this.year = this.courses[0].year;
-          console.log(this.courses);
         },
         err => {
           console.log(err);
         }
       );
       if (this.page === 'student') {
-        this.dataService.fetchData(`http://localhost:63944/Users/followed-courses/${this.user.id}`).subscribe(response => {
+        this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Users/followed-courses/${this.user.id}`).subscribe(response => {
             this.studentCourses = response;
           },
           err => {
@@ -90,8 +88,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   followCourse(courseId: string, functionCase: string) {
-    console.log(courseId);
-    this.dataService.postData(`http://localhost:63944/Courses/follower?studentId=${this.user.id}&courseId=${courseId}`, {courseId: courseId}).subscribe(response => {
+    this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Courses/follower?studentId=${this.user.id}&courseId=${courseId}`, {courseId: courseId}).subscribe(response => {
       },
       err => {
         console.log(err);
@@ -106,8 +103,7 @@ export class CoursesListComponent implements OnInit {
 
   deleteCourse(courseName) {
     let courseId = this.courses.filter(c => c.name === courseName).map(c => c.id);
-    this.dataService.deleteData(`http://localhost:63944/Courses/${courseId}`).subscribe(response => {
-        console.log(response);
+    this.dataService.deleteData(`${GlobalVariable.BASE_API_URL}/Courses/${courseId}`).subscribe(response => {
       },
       err => {
         console.log(err);

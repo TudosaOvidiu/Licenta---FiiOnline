@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Renderer2} from '@angular/core';
 import {Credentials} from '../../../models/credentials';
 import {DataService} from '../../../services/data.service';
 import {MaterializeAction} from 'angular2-materialize';
 import {Router} from '@angular/router';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,18 +12,18 @@ import {Router} from '@angular/router';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router,  private renderer: Renderer2) { }
   public model = new Credentials();
   modalActions = new EventEmitter<string | MaterializeAction>();
 
   ngOnInit() {
   }
   onSubmit(forgotPassModel: Credentials) {
-    this.dataService.postData('http://localhost:63944/Account/forgotpassword', {
+    this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Account/forgotpassword`, {
       email: forgotPassModel.email,
       password: 'somePass'
     }).subscribe(response => {
-        this.router.navigate(['login']);
+        this.router.navigate(['/']);
       },
       err => {
         this.openModal();
@@ -35,7 +36,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.modalActions.emit({action: 'modal', params: ['open']});
     setTimeout((router: Router) => {
       this.closeModal();
-      this.router.navigate(['login']);
+      this.router.navigate(['/']);
     }, 3000);
   }
 

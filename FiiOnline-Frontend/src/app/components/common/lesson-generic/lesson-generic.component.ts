@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MaterializeAction} from 'angular2-materialize';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-lesson-generic',
@@ -41,7 +42,6 @@ export class LessonGenericComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.courseId = params['id'];
     });
-    console.log(this.lesson);
     for (let resource of this.lesson.resourcesDtos) {
       if (resource !== null) {
         switch (resource.type) {
@@ -79,8 +79,7 @@ export class LessonGenericComponent implements OnInit {
   }
 
   deleteResource() {
-    this.dataService.deleteData(`http://localhost:63944/Lessons/${this.resourceId}`).subscribe(response => {
-        console.log(response);
+    this.dataService.deleteData(`${GlobalVariable.BASE_API_URL}/Lessons/${this.resourceId}`).subscribe(response => {
       },
       err => {
         console.log(err);
@@ -88,7 +87,6 @@ export class LessonGenericComponent implements OnInit {
     );
     for (let resource of this.lesson.resourcesDtos) {
       if (resource !== null && resource.id === this.resourceId) {
-        console.log(resource);
         this.lesson.resourcesDtos[this.lesson.resourcesDtos.indexOf(resource)] = null;
         this.hideIndicator();
         switch (resource.type) {
@@ -106,7 +104,6 @@ export class LessonGenericComponent implements OnInit {
           }
         }
 
-        console.log(this.lesson);
       }
     }
     this.closeModal();
@@ -114,10 +111,8 @@ export class LessonGenericComponent implements OnInit {
 
   openModalResource(resources, resourceType) {
     this.delete_lesson = false;
-    console.log(resources);
     this.resourceType = resourceType;
     this.resourceId = resources.filter(r => r !== null).filter(r => r.type.toLowerCase() === resourceType).map(r => r.id)[0];
-    console.log(this.resourceId);
     this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
@@ -131,8 +126,7 @@ export class LessonGenericComponent implements OnInit {
   }
 
   deleteLesson() {
-    this.dataService.deleteData(`http://localhost:63944/Weeks/${this.lesson.id}`).subscribe(response => {
-        console.log(response);
+    this.dataService.deleteData(`${GlobalVariable.BASE_API_URL}/Weeks/${this.lesson.id}`).subscribe(response => {
       },
       err => {
         console.log(err);
@@ -143,12 +137,10 @@ export class LessonGenericComponent implements OnInit {
   }
 
   goToEdit(lesson_id: string) {
-    console.log('clicked');
     this.router.navigate([`/edit-lesson/${lesson_id}`]);
   }
 
   addResource(weekId, type) {
-    console.log(weekId);
     this.router.navigate([`/upload-material/`], {queryParams: {id: weekId, type: type}});
   }
 

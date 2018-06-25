@@ -3,6 +3,7 @@ import {MaterializeAction} from 'angular2-materialize';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-lesson-list',
@@ -32,16 +33,13 @@ export class LessonListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.courseId = params['id'];
-      console.log(this.courseId);
       if (this.router.url === '/courses') {
         this.studentPage = true;
       }
-      this.dataService.fetchData(`http://localhost:63944/Courses/course-weeks/${this.courseId}`).subscribe(response => {
-          console.log(response);
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/course-weeks/${this.courseId}`).subscribe(response => {
           response.sort(function (a, b) {return a.weekNr - b.weekNr; });
           this.lessons = response;
           this.courseName = this.lessons[0].courseName
-          console.log(this.lessons);
         },
         err => {
           console.log(err);
@@ -53,7 +51,7 @@ export class LessonListComponent implements OnInit {
 
 
   deleteResource() {
-    // this.dataService.deleteData(`http://localhost:63944/Lessons/${this.resourceId}`).subscribe(response => {
+    // this.dataService.deleteData(`${GlobalVariable.BASE_API_URL}/Lessons/${this.resourceId}`).subscribe(response => {
     //     console.log(response);
     //   },
     //   err => {
@@ -61,14 +59,11 @@ export class LessonListComponent implements OnInit {
     //   }
     // );
     let index = this.lessons.indexOf(this.lesson);
-    console.log(index);
     for (let i = 0; i < 3; i++) {
       if (this.lessons[index].resourcesDtos[i].id === this.resourceId) {
         this.lessons[index].resourcesDtos[i] = undefined;
-        console.log(this.lessons[index]);
       }
     }
-    console.log(this.lessons);
     this.closeModal();
   }
 
@@ -76,7 +71,6 @@ export class LessonListComponent implements OnInit {
     this.lesson = lesson;
     this.resourceType = resourceType;
     this.resourceId = resources.filter(r => r.type.toLowerCase() === resourceType).map(r => r.id)[0];
-    console.log(this.resourceId);
     this.modalActions.emit({action: 'modal', params: ['open']});
   }
 

@@ -1,10 +1,10 @@
 {
-  "name": "FiiOnline",
+  "name": "Fii Online",
   "short_name": "FiiOnline",
   "theme_color": "#3388cb",
   "background_color": "#f2f5f8",
   "display": "standalone",
-  "start_url": ".",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "assets/manifest/images/icons/icon-72x72.png",

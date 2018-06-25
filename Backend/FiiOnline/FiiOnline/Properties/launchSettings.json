@@ -16,6 +16,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "NgrokTEST": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:63944/"
+    },
     "FiiOnline": {
       "commandName": "Project",
       "launchBrowser": true,

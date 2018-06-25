@@ -3,6 +3,7 @@ import {DataService} from '../../../services/data.service';
 import {WeekModel} from '../../../models/weekmodel';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MaterializeAction} from 'angular2-materialize';
+import {GlobalVariable} from '../../../config/global';
 
 
 @Component({
@@ -31,14 +32,11 @@ export class WeekComponent implements OnInit {
 
   ngOnInit() {
     this.courseId = sessionStorage.getItem('courseId');
-    this.dataService.fetchData(`http://localhost:63944/Courses/course-weeks/${this.courseId}`).subscribe(response => {
-        console.log(response);
+    this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/course-weeks/${this.courseId}`).subscribe(response => {
         this.week_number = Array.from({length: 16}, (v, k) => k + 1);
         for (let lesson of response) {
           let li = document.getElementsByTagName('li')[lesson.weekNr + 11];
-          console.log(lesson.weekNr + 10);
           this.renderer.setAttribute(li, 'class', 'disabled');
-          console.log(li);
         }
       },
       err => {
@@ -48,8 +46,7 @@ export class WeekComponent implements OnInit {
       this.lesson_id = params['id'];
       if (this.lesson_id !== undefined) {
         this.onEdit = true;
-        this.dataService.fetchData(`http://localhost:63944/Weeks/${this.lesson_id}`).subscribe(response => {
-            console.log(response);
+        this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Weeks/${this.lesson_id}`).subscribe(response => {
             this.model.title = response.title;
             this.model.description = response.description;
             this.model.date = response.date;
@@ -81,7 +78,7 @@ export class WeekComponent implements OnInit {
   onSubmit(model: WeekModel) {
     if (!this.onEdit) {
       model.courseId = this.courseId;
-      this.dataService.postData('http://localhost:63944/Weeks', model).subscribe(response => {
+      this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Weeks`, model).subscribe(response => {
           this.modal_header = 'Lesson created!';
           this.modal_content = `${model.title} has been created`;
           this.openModal();
@@ -94,7 +91,7 @@ export class WeekComponent implements OnInit {
       );
     }
     else {
-      this.dataService.putData(`http://localhost:63944/Weeks/${this.lesson_id}`, this.model).subscribe(response => {
+      this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Weeks/${this.lesson_id}`, this.model).subscribe(response => {
           this.modal_header = 'Lesson updated!';
           this.modal_content = `${model.title} has been updated`;
           this.openModal();

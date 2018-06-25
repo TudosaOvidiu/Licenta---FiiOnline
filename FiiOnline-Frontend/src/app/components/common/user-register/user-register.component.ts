@@ -9,6 +9,7 @@ import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
 import {Observable} from 'rxjs/Observable';
 import {async} from 'rxjs/scheduler/async';
 import {finalize} from 'rxjs/operators';
+import {GlobalVariable} from '../../../config/global';
 
 
 declare var jquery: any;
@@ -59,7 +60,6 @@ export class UserRegisterComponent implements OnInit {
       this.model.year = this.user.year;
       this.model.semester = this.user.semester;
       this.model.imageURL = this.user.imageURL;
-      console.log(this.model.imageURL);
       if (this.model.imageURL !== '' && this.model.imageURL !== null) {
         this.imageStored = true;
       }
@@ -128,9 +128,8 @@ export class UserRegisterComponent implements OnInit {
 
   onSubmit(model: UserModel) {
 
-    console.log(this.model.imageURL);
     if (this.editStudent) {
-      this.dataService.putData(`http://localhost:63944/Users/update-student/${this.user.id}`, this.model).subscribe(response => {
+      this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Users/update-student/${this.user.id}`, this.model).subscribe(response => {
           this.user.firstName = this.model.firstName;
           this.user.lastName = this.model.lastName;
           this.user.email = this.model.email;
@@ -151,8 +150,7 @@ export class UserRegisterComponent implements OnInit {
         });
     } else if (this.editProf) {
       this.model.semester = 2;
-      console.log(this.model);
-      this.dataService.putData(`http://localhost:63944/Users/update-professor/${this.user.id}`, this.model).subscribe(response => {
+      this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Users/update-professor/${this.user.id}`, this.model).subscribe(response => {
           this.user.firstName = this.model.firstName;
           this.user.lastName = this.model.lastName;
           this.user.email = this.model.email;
@@ -170,23 +168,26 @@ export class UserRegisterComponent implements OnInit {
           this.openModal();
         });
     } else {
-      console.log('i\'m in elese');
       this.model.role = 'Student';
       if (this.register_professor) {
         this.model.role = 'Professor';
         this.model.year = '';
         this.model.semester = 0;
       }
-      console.log(this.model);
-      this.dataService.postData('http://localhost:63944/Account/register', this.model).subscribe(response => {
+      this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Account/register`, this.model).subscribe(response => {
           this.modalHeader = 'Registration succeeded';
-          this.modalText = 'Your account was created. Please check your email to confirm your account!';
-          // this.openModal();
+          if (this.model.role === 'student') {
+            this.modalText = 'Your account was created. Please check your email to confirm your account!';
+          }
+          else{
+            this.modalText = 'The account has been created';
+          }
+          this.openModal();
         },
         err => {
           this.modalHeader = 'Registration failed';
           this.modalText = 'Something went wrong! Please try again!';
-          // this.openModal();
+          this.openModal();
         }
       );
     }

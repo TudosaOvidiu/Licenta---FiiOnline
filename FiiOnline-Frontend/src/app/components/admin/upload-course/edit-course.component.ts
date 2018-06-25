@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {CourseModel} from '../../../models/coursemodel';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MaterializeAction} from 'angular2-materialize';
+import {GlobalVariable} from '../../../config/global';
 
 
 @Component({
@@ -17,12 +19,16 @@ export class EditCourseComponent implements OnInit {
   public showTeachersDropdown = false;
   private courseId: string;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
+  public modalHeader: string;
+  public modalText: string;
+  modalActions = new EventEmitter<string | MaterializeAction>();
+
+  constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) {
   }
 
 
   ngOnInit() {
-    this.dataService.fetchData('http://localhost:63944/Users/professors').subscribe(response => {
+    this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Users/professors`).subscribe(response => {
         for (let prof of response) {
           this.professors.push({
             name: `${prof.firstName} ${prof.lastName}`,
@@ -30,7 +36,6 @@ export class EditCourseComponent implements OnInit {
           });
         }
         this.showTeachersDropdown = true;
-        console.log(this.professors);
       },
       err => {
         console.log(err);
@@ -38,7 +43,7 @@ export class EditCourseComponent implements OnInit {
     );
     this.route.params.subscribe(params => {
       this.courseId = params['id'];
-      this.dataService.fetchData(`http://localhost:63944/Courses/${this.courseId}`).subscribe(response => {
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/${this.courseId}`).subscribe(response => {
           this.model.name = response.name;
           this.model.description = response.description;
           this.model.year = response.year;
@@ -54,10 +59,28 @@ export class EditCourseComponent implements OnInit {
 
   }
 
+  openModal() {
+    this.modalActions.emit({action: 'modal', params: ['open']});
+    setTimeout((router: Router) => {
+      this.closeModal();
+      this.router.navigate(['courses']);
+    }, 2000);
+  }
+
+  closeModal() {
+    this.modalActions.emit({action: 'modal', params: ['close']});
+  }
+
   onSubmit(model: CourseModel) {
-    this.dataService.putData(`http://localhost:63944/Courses/${this.courseId}`, model).subscribe(response => {
+    this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Courses/${this.courseId}`, model).subscribe(response => {
+        this.modalHeader = 'Course edited';
+        this.modalText = 'The course has been successfully edited';
+        this.openModal();
       },
       err => {
+        this.modalHeader = 'Ooops! Something went wrong!';
+        this.modalText = 'Unfortunately something went wrong. Please try again later!';
+        this.openModal();
       }
     );
   }

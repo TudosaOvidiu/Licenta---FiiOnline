@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {ChangePassword} from '../../../models/changepassword';
 import {MaterializeAction} from 'angular2-materialize';
+import {GlobalVariable} from '../../../config/global';
 
 // import {Server} from 'http';
 
@@ -39,11 +40,9 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit(model: ChangePassword) {
-    console.log(model);
 
     this.sub = this.route.queryParams.subscribe(params => {
-      console.log(params);
-      this.dataService.postData(`http://localhost:63944/Account/ResetPassword?userId=` + encodeURIComponent(`${params.userId}`) + '&code=' + encodeURIComponent(`${params.code}`),
+      this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Account/ResetPassword?userId=` + encodeURIComponent(`${params.userId}`) + '&code=' + encodeURIComponent(`${params.code}`),
         {
           Email: 'someEmail',
           Password: model.password
@@ -67,7 +66,7 @@ export class ResetPasswordComponent implements OnInit {
     this.modalActions.emit({action: 'modal', params: ['open']});
     setTimeout((router: Router) => {
       this.closeModal();
-      this.router.navigate(['login']);
+      this.router.navigate(['/']);
     }, 3000);
   }
 

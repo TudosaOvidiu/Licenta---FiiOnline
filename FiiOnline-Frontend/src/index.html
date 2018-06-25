@@ -2,31 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Frontend</title>
+  <title>FiiOnline</title>
   <base href="/">
 
+  <meta name=”description” content=”This is the website of Faculty of Computer Science Iasi. Here students can find all
+        the courses”>
+  <meta name="theme-color" content="rgba(51, 136, 203, 1)">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="apple-touch-icon" href="assets/manifest/images/icons/apple-icon-152x152.png">
+
+  <link rel="icon" type="image/x-icon" href="assets/manifest/images/icons/icon-72x72.png">
+  <link rel="preload" as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        onload="this.rel ='stylesheet'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        onload="this.rel ='stylesheet'">
   <link rel="manifest" href="/manifest.json">
 
 
 </head>
+
 <body>
 <app-root></app-root>
 
-<script>
-// Check that service workers are registered
-// if ('serviceWorker' in navigator) {
-//   // Use the window load event to keep the page load performant
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker.register('/service-worker.js');
-//   });
-// }
-</script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js" async></script>
+
+<noscript>
+  <h3 style="color: #673ab7; font-family: Helvetica; margin: 2rem;">
+    Sorry, but app is not available without javascript
+  </h3>
+</noscript>
+
 
 </body>
+
 </html>
+

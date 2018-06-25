@@ -1,13 +1,25 @@
 $borderColor: #aaaaaa;
 $themeColor: #3388cb;
 
-.confirmation-panel {
-  border: 1px solid $borderColor;
-  border-radius: 10px;
-  margin: auto;
-  margin-top: 5%;
+.card {
+  margin-top: 15%;
+  margin-left: 200px!important;
 
+  .logo{
+    img {
+      margin-top: 20px;
+      width: 200px;
+      height: 135px;
+    }
+  }
 }
+
+.background {
+  height: 100vh;
+  background: url('../../../../assets/img/background-pagini.jpg');
+  background-size: cover;
+}
+
 @media (max-width: 600px) {
   .panel-title{
     font-size: 25px;

@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
     this.renderer.setAttribute(document.getElementById('fii-img'), 'width', `${width.toString()}px!important`);
 
     let x = document.getElementById('building').clientHeight;
-    console.log(x);
     this.svg_height = -7.31304267 * Math.pow(10, -3) * Math.pow(x, 2) + 9.566873937 * x - 2089.755761;
+    this.svg_height = this.svg_height < 0 ? 0 : this.svg_height;
     this.svg_y_point = 3.946548001 * Math.pow(10, -3) * Math.pow(x, 2) - 5.070685004 * x + 1645.199674;
     let svg = document.getElementsByTagName('svg')[0];
 
@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(loginModel: Credentials) {
     this.authService.login(loginModel).subscribe(response => {
-        console.log(response);
         this.error = false;
         switch (response.role) {
           case 'Student':

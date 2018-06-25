@@ -12,7 +12,12 @@
       "versionedFiles": [
         "/*.bundle.css",
         "/*.bundle.js",
-        "/*.chunk.js"
+        "/*.chunk.js",
+        "/*.css",
+        "/*.js",
+        "/*.woff",
+        "/*.woff2",
+        "/*.jpg"
       ]
     }
   }, {
@@ -23,7 +28,7 @@
       "files": [
         "/assets/**"
       ],
-      "urls": ["http://fonts.googleapis,com./**"]
+      "urls": ["http://fonts.googleapis,com./**", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", "https://fonts.googleapis.com/icon?family=Material+Icons", "https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
     }
   }],
   "dataGroups": [
@@ -34,16 +39,6 @@
         "strategy": "freshness",
         "maxSize": 100,
         "maxAge": "365d",
-        "timeout": "5s"
-      }
-    },
-    {
-      "name": "users-pictures",
-      "urls":["https://firebasestorage.googleapis.com/**"],
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 20,
-        "maxAge": "7d",
         "timeout": "5s"
       }
     }

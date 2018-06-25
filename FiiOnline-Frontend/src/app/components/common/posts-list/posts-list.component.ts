@@ -3,6 +3,7 @@ import {DataService} from '../../../services/data.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import * as _ from 'lodash';
 import {MaterializeAction} from 'angular2-materialize';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-posts-list',
@@ -39,7 +40,6 @@ export class PostsListComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('on scroll');
     this.offset += this.limit;
     this.getPosts(this.offset, this.limit, this.user.id);
   }
@@ -47,19 +47,17 @@ export class PostsListComponent implements OnInit {
   getPosts(offset: number, limit: number, userId: string) {
     let url: string;
     if (this.professorPage) {
-      url = `http://localhost:63944/Posts/professor-posts?offset=${offset}&limit=${limit}&id=${userId}`;
+      url = `${GlobalVariable.BASE_API_URL}/Posts/professor-posts?offset=${offset}&limit=${limit}&id=${userId}`;
     } else if (this.studentPage) {
-      url = `http://localhost:63944/Posts/student-posts?offset=${offset}&limit=${limit}&studentId=${userId}`;
+      url = `${GlobalVariable.BASE_API_URL}/Posts/student-posts?offset=${offset}&limit=${limit}&studentId=${userId}`;
     } else {
-      url = `http://localhost:63944/Posts/admin-posts?offset=${offset}&limit=${limit}`;
+      url = `${GlobalVariable.BASE_API_URL}/Posts/admin-posts?offset=${offset}&limit=${limit}`;
     }
     this.dataService.fetchData(url)
       .subscribe(response => {
-          console.log(response);
           const currentPosts = this.posts.getValue();
           this.posts.next(_.concat(currentPosts, response));
 
-          console.log(this.posts);
         },
         err => {
           console.log(err);
@@ -81,8 +79,7 @@ export class PostsListComponent implements OnInit {
     posts = posts.filter(p => p.id !== this.selectedPost);
     this.posts.next(posts);
 
-    this.dataService.deleteData(`http://localhost:63944/Posts/${this.selectedPost}`).subscribe(response => {
-        console.log(response);
+    this.dataService.deleteData(`${GlobalVariable.BASE_API_URL}/Posts/${this.selectedPost}`).subscribe(response => {
       },
       err => {
         console.log(err);

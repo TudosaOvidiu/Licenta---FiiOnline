@@ -18,6 +18,11 @@ export class DataService {
       .map((res) => res)
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
+  getData(url){
+    return this.http.get(`${url}`).catch((error: any) => Observable.throw(error || 'Server error'))
+      .map((res) => res)
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
   fetchFile(url) {
     let headers = new HttpHeaders();

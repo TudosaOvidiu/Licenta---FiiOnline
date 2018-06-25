@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-account-confirmation',
@@ -9,26 +10,30 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AccountConfirmationComponent implements OnInit {
 
+  public titleMessage: string;
   public panelMessage: string;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.dataService.fetchData(`http://localhost:63944/Account/ConfirmAccount?userId=` + encodeURIComponent(`${params.userId}`) + '&code=' + encodeURIComponent(`${params.code}`))
-      .subscribe(response => {
-          console.log(response);
-          this.panelMessage = "Your account was successfully created. You can now log into your account.";
-          console.log("intra aici");
-        },
-        err => {
-          this.panelMessage = "Something went wrong! Please try again later!";
-          console.log("intra in errir");
-          console.log(err.toString());
-        }
-      );
+      this.dataService.getData(`${GlobalVariable.BASE_API_URL}/Account/ConfirmAccount?userId=${encodeURIComponent(`${params.userId}`)}&code=${encodeURIComponent(`${params.code}`)}`)
+        .subscribe(response => {
+            this.titleMessage = 'Account has been created';
+            this.panelMessage = 'Your account was successfully created. You can now log into your account.';
+          },
+          err => {
+            this.titleMessage = 'Something went wrong';
+            this.panelMessage = 'Something went wrong! Please try again later!';
+            console.log(err.toString());
+          }
+        );
     });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/']);
   }
 }
 

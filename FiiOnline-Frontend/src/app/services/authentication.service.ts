@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {DataService} from './data.service';
 import {Observable} from 'rxjs/Observable';
+import {GlobalVariable} from '../config/global';
 
 @Injectable()
 export class AuthenticationService {
@@ -17,13 +18,11 @@ export class AuthenticationService {
   login(loginModel: any) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/javascript');
-    return this.http.get(`http://localhost:63944/Account/auth?email=${loginModel.email}&password=${loginModel.password}`, {headers: headers})
+    return this.http.get(`${GlobalVariable.BASE_API_URL}/Account/auth?email=${loginModel.email}&password=${loginModel.password}`, {headers: headers})
       .map((response: HttpResponse<string>) => {
-        console.log('response:', response);
         // login successful if there's a jwt token in the response
         const token = 'Bearer ' + response['token'];
         let user = response['appUser'];
-        console.log(user);
         if (token) {
           // set token property
           this.token = token;

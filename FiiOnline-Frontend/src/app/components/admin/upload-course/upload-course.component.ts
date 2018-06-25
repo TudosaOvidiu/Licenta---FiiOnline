@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {CourseModel} from '../../../models/coursemodel';
+import {MaterializeAction} from 'angular2-materialize';
+import {Router} from '@angular/router';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-upload-course',
@@ -13,12 +16,16 @@ export class UploadCourseComponent implements OnInit {
   public onEdit = false;
   public showTeachersDropdown = false;
 
-  constructor(private dataService: DataService) {
+  public modalHeader: string;
+  public modalText: string;
+  modalActions = new EventEmitter<string | MaterializeAction>();
+
+  constructor(private dataService: DataService, private router: Router) {
   }
 
 
   ngOnInit() {
-    this.dataService.fetchData('http://localhost:63944/Users/professors').subscribe(response => {
+    this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Users/professors`).subscribe(response => {
         response.forEach((prof) => {
           this.professors.push({
             name: `${prof.firstName} ${prof.lastName}`,
@@ -27,7 +34,6 @@ export class UploadCourseComponent implements OnInit {
         });
 
         this.showTeachersDropdown = true;
-        console.log(this.professors);
       },
       err => {
         console.log(err);
@@ -35,10 +41,29 @@ export class UploadCourseComponent implements OnInit {
     );
   }
 
+
+  openModal() {
+    this.modalActions.emit({action: 'modal', params: ['open']});
+    setTimeout((router: Router) => {
+      this.closeModal();
+      this.router.navigate(['courses']);
+    }, 2000);
+  }
+
+  closeModal() {
+    this.modalActions.emit({action: 'modal', params: ['close']});
+  }
+
   onSubmit(model: CourseModel) {
-    this.dataService.postData('http://localhost:63944/Courses', model).subscribe(response => {
+    this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Courses`, model).subscribe(response => {
+        this.modalHeader = 'Course created';
+        this.modalText = 'The course has been successfully created';
+        this.openModal();
       },
       err => {
+        this.modalHeader = 'Ooops! Something went wrong!';
+        this.modalText = 'Unfortunately something went wrong. Please try again later!';
+        this.openModal();
       }
     );
   }

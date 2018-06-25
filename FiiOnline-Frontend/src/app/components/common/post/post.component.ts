@@ -4,6 +4,7 @@ import {DataService} from '../../../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MaterializeAction} from 'angular2-materialize';
 import {Location} from '@angular/common';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-post',
@@ -45,8 +46,7 @@ export class PostComponent implements OnInit {
     }
     if (this.user.role === 'Professor') {
       this.adminPage = false;
-      this.dataService.fetchData(`http://localhost:63944/Courses/professor-courses/${this.user.id}`).subscribe(response => {
-          console.log(response);
+      this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Courses/professor-courses/${this.user.id}`).subscribe(response => {
           response.forEach((course) => {
             this.courses.push({
               title: course.name,
@@ -55,7 +55,6 @@ export class PostComponent implements OnInit {
           });
 
           this.showCoursesDropdown = true;
-          console.log(this.courses);
         },
         err => {
           console.log(err);
@@ -66,8 +65,7 @@ export class PostComponent implements OnInit {
     if (this.onEdit) {
       this.route.params.subscribe(params => {
         this.postId = params['id'];
-        this.dataService.fetchData(`http://localhost:63944/Posts/${this.postId}`).subscribe(response => {
-            console.log(response);
+        this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Posts/${this.postId}`).subscribe(response => {
             this.model.title = response.title;
             this.model.courseGuid = response.courseGuid;
             this.model.description = response.description;
@@ -102,7 +100,7 @@ export class PostComponent implements OnInit {
       } else {
         this.model.title = `Administrative: ${this.model.title}`;
       }
-      this.dataService.postData('http://localhost:63944/Posts', this.model).subscribe(response => {
+      this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Posts`, this.model).subscribe(response => {
           this.modal_header = 'Post created!';
           this.modal_content = 'The post has been created successfully!';
           this.openModal();
@@ -114,7 +112,7 @@ export class PostComponent implements OnInit {
         }
       );
     } else {
-      this.dataService.putData(`http://localhost:63944/Posts/${this.postId}`, this.model).subscribe(response => {
+      this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Posts/${this.postId}`, this.model).subscribe(response => {
           this.modal_header = 'Post updated!';
           this.modal_content = 'The post has been updated successfully!';
           this.openModal();

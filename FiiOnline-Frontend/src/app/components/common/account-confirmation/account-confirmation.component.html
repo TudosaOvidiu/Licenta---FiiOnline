@@ -1,14 +1,18 @@
-<div class="row">
-  <div class="confirmation-panel center-align col s8 m6 l4  push-s2 push-m3 push-l4" >
-    <div class="row">
-      <h3 class="panel-title"> Account created</h3>
-      <p>{{panelMessage}}</p>
-    </div>
-    <div class="row">
-      <a routerLink="/login">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Back to Log In</button>
-      </a>
-    </div>
+<div class="background">
+  <div class="row">
+    <div class="card center-align col s8 m6 l4">
+      <div class="logo">
+        <img class="fii-img" id="fii-img" src="../../../../assets/img/logo_complet_compressed.png" alt="logo">
+      </div>
+      <div class="row">
+        <h3 class="panel-title">{{titleMessage}}</h3>
+        <p>{{panelMessage}}</p>
+      </div>
+      <div class="row">
+        <button class="btn waves-effect waves-light" name="action" (click)="goToLogin()">Back to Log In</button>
+      </div>
 
+    </div>
   </div>
 </div>
+

@@ -3,6 +3,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {DataService} from '../../../services/data.service';
 import {HttpHeaders} from '@angular/common/http';
 import {saveAs} from 'file-saver/FileSaver';
+import {GlobalVariable} from '../../../config/global';
 
 @Component({
   selector: 'app-material-generic',
@@ -19,7 +20,6 @@ export class MaterialGenericComponent implements OnInit {
   @Input() material;
 
   ngOnInit() {
-    console.log(this.material.id);
     let div = document.getElementById('files');
     this.renderer.removeAttribute(div, 'id');
     this.renderer.setAttribute(div, 'id', this.material.id);
@@ -77,9 +77,7 @@ export class MaterialGenericComponent implements OnInit {
       p_preview = this.renderer.createElement('p');
       this.renderer.setAttribute(p_preview, 'class', 'file_button');
       this.renderer.listen(p_preview, 'click', (event) => {
-        this.dataService.fetchFile(`http://localhost:63944/Lessons/download-file/${file_id}`).subscribe(response => {
-            console.log(event);
-            console.log(file);
+        this.dataService.fetchFile(`${GlobalVariable.BASE_API_URL}/Lessons/download-file/${file_id}`).subscribe(response => {
 
             if (window.navigator && window.navigator.msSaveOrOpenBlob) {
               window.navigator.msSaveOrOpenBlob(response, file);
@@ -105,7 +103,7 @@ export class MaterialGenericComponent implements OnInit {
     let p_download = this.renderer.createElement('p');
     this.renderer.setAttribute(p_download, 'class', 'file_button');
     this.renderer.listen(p_download, 'click', (event) => {
-      this.dataService.fetchFile(`http://localhost:63944/Lessons/download-file/${file_id}`).subscribe(response => {
+      this.dataService.fetchFile(`${GlobalVariable.BASE_API_URL}/Lessons/download-file/${file_id}`).subscribe(response => {
           saveAs(response, file);
         },
         err => {

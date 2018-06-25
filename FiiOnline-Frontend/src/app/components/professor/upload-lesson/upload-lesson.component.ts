@@ -5,6 +5,7 @@ import {Renderer2} from '@angular/core';
 import {MaterializeAction} from 'angular2-materialize';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {GlobalVariable} from '../../../config/global';
 
 
 @Component({
@@ -55,8 +56,7 @@ export class UploadLessonComponent implements OnInit {
       this.onEdit = true;
       this.route.params.subscribe(params => {
           this.lesson_id = params['id'];
-          this.dataService.fetchData(`http://localhost:63944/Lessons/${this.lesson_id}`).subscribe(response => {
-              console.log(response);
+          this.dataService.fetchData(`${GlobalVariable.BASE_API_URL}/Lessons/${this.lesson_id}`).subscribe(response => {
               this.model.title = response.title;
               this.model.description = response.description;
               this.weekId = response.weekId;
@@ -86,15 +86,12 @@ export class UploadLessonComponent implements OnInit {
 
   onDragLeave(event) {
     event.preventDefault();
-    console.log(event);
     document.getElementById('drop-zone').classList.remove('drop-zone-hover');
   }
 
   onDrop(event) {
-    console.log('am dat drop');
     event.preventDefault();
     event.stopPropagation();
-    console.log(event);
     document.getElementById('drop-zone').classList.remove('file-drag-over');
     document.getElementById('drop-zone').classList.add('file-dropped');
     let files = event.target.files || (event.dataTransfer ? event.dataTransfer.files : event.originalEvent.dataTransfer.files);
@@ -165,14 +162,13 @@ export class UploadLessonComponent implements OnInit {
     let files_uploaded_now = this.allFiles.map(function (element) {
       return element.name;
     });
-    console.log(files_uploaded_now);
     if (files_uploaded_now.includes(filename)) {
       this.allFiles = this.allFiles.filter(function (element) {
         return element.name !== filename;
       });
 
     } else {
-      this.dataService.putData('http://localhost:63944/Lessons/delete-file', {
+      this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Lessons/delete-file`, {
         fileName: filename,
         filePath: this.files_on_server[filename],
         lessonId: this.lesson_id
@@ -201,7 +197,6 @@ export class UploadLessonComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.weekId);
     this.onDelete = false;
     this.model.files.append('title', this.model.title);
     this.model.files.append('description', this.model.description);
@@ -209,14 +204,13 @@ export class UploadLessonComponent implements OnInit {
     this.model.files.append('type', this.model.type);
 
 
-    console.log(this.model);
 
     for (let file of this.allFiles) {
       this.model.files.append('files', file);
     }
 
     if (this.onEdit) {
-      this.dataService.putData(`http://localhost:63944/Lessons/${this.lesson_id}`, this.model.files).subscribe(response => {
+      this.dataService.putData(`${GlobalVariable.BASE_API_URL}/Lessons/${this.lesson_id}`, this.model.files).subscribe(response => {
           this.modalHeader = 'Lesson updated!';
           this.modalText = 'The lesson has been updated successfully';
           this.modalActions.emit({action: 'modal', params: ['open']});
@@ -236,7 +230,7 @@ export class UploadLessonComponent implements OnInit {
         }
       );
     } else {
-      this.dataService.postData('http://localhost:63944/Lessons', this.model.files).subscribe(response => {
+      this.dataService.postData(`${GlobalVariable.BASE_API_URL}/Lessons`, this.model.files).subscribe(response => {
           this.modalHeader = 'Lesson created!';
           this.modalText = 'The lesson has been created successfully';
           this.modalActions.emit({action: 'modal', params: ['open']});
